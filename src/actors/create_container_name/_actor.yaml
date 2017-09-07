@@ -1,0 +1,14 @@
+---
+inputs:
+  - name: user_container_name
+    type: OptionalContainerName
+  - name: hostnameinfo
+    type: HostnameInfo
+
+outputs:
+  - name: container_name
+    type: BaseTypeString
+
+executor:
+  type: python
+  script-file: create_container_name.py

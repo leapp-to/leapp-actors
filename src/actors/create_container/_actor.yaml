@@ -1,0 +1,21 @@
+---
+inputs:
+  - name: container_directory
+    type: BaseTypeString
+  - name: container_name
+    type: ContainerName
+  - name: image
+    type: BaseTypeString
+  - name: init_bin
+    type: BaseTypeString
+  - name: exposed_ports
+    type: ExposedPorts
+outputs:
+  - name: container_id
+    type: BaseTypeString
+  - name: error
+    type: BaseTypeString
+executor:
+  type: python
+  script-file: create_container.py
+

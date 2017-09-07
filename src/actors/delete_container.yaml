@@ -1,0 +1,11 @@
+---
+inputs:
+  - name: container_name
+    type: ContainerName
+
+executor:
+  type: bash
+  arguments:
+    - "@container_name.value@"
+  payload: |
+    docker rm -fv $1 2>&1 > /dev/null

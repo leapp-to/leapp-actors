@@ -1,0 +1,57 @@
+---
+inputs:
+  - name: source_host
+    type: BaseTypeString
+  
+  - name: target_host
+    type: BaseTypeString
+
+  - name: storage_path
+    type: BaseTypeString
+
+  - name: csv_excluded_paths
+    type: BaseTypeString
+
+  - name: ssh_options 
+    type: BaseTypeString
+
+executor:
+  type: bash
+  arguments:
+    - "@source_host.value@"
+    - "@target_host.value@"
+    - "@storage_path.value@"
+    - "@ssh_options.value@"
+    - "@csv_excluded_paths.value@"
+  payload: |
+    SOURCE_HOST=$1
+    TARGET_HOST=$2
+    STORAGE_PATH=$3
+    SSH_OPTIONS=$4
+    EXCLUDED_PATHS=$5
+    
+    # Target check
+    if [ "localhost" != $TARGET_HOST ] && [ "127.0.0.1" != $TARGET_HOST ]; then
+        >&2 echo "Unsupported target"
+        exit 1
+    fi
+
+    # Check path
+    if [ -z $STORAGE_PATH ]; then
+        >&2 echo "Storage path must be set"
+        exit 1
+    fi
+
+    EXCLUDED_PATHS=$(echo $EXCLUDED_PATHS | tr ',' "\n" | sed -e 's/^\s*\(.*\)\s*$/\1/')
+    EXCLUDE_OPTIONS=""
+
+    for path in $EXCLUDED_PATHS; do
+        EXCLUDE_OPTIONS="--exclude=$path $EXCLUDE_OPTIONS"
+    done
+
+    # Setting up the SSH options parameter
+    if [ ! -z $SSH_OPTIONS ]; then
+        SSH_OPTIONS=" -o $SSH_OPTIONS" 
+    fi
+
+    rsync -aAX -r $EXCLUDE_OPTIONS -e \"ssh${SSH_OPTIONS}\" ${SOURCE_HOST}:/ $STORAGE_PATH

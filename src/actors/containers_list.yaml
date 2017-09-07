@@ -1,0 +1,35 @@
+---
+tags:
+  - check_target
+outputs:
+  - name: containerslist
+    type: ContainersList
+executor:
+  type: python
+  payload: |
+    import json
+    import os
+    from subprocess import Popen, PIPE
+
+    def run_cmd(cmd):
+        proc = Popen(cmd.split(), stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        out, err = proc.communicate()
+        return (proc.returncode, out, err)
+
+    containerslist = {'retcode': None,
+                      'containers': []}
+
+    retcode, out, err = run_cmd('docker ps -a --format "{{.Names}}"')
+    
+    containerslist['retcode'] = retcode
+    if retcode == 0:
+        containerslist['containers'] = out.splitlines()
+
+    macrocontainers = '/var/lib/leapp/macrocontainers/'
+    if os.path.isdir(macrocontainers):
+        retcode, out, err = run_cmd('ls -l "{}"'.format(macrocontainers))
+        if retcode == 0:
+            containerslist['containers'].extend(out.splitlines())
+
+    containerslist['containers'].sort()
+    print(json.dumps({'containerslist': containerslist}))
