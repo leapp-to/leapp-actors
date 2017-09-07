@@ -1,0 +1,12 @@
+---
+tags:
+  - inspect_machine
+outputs:
+  - name: hostnameinfo
+    type: HostnameInfo
+executor:
+  type: python
+  payload: |
+    import json
+    import socket
+    print(json.dumps({'hostnameinfo': {'hostname': socket.gethostname()}}))

@@ -1,0 +1,20 @@
+---
+inputs:
+  - name: container_directory
+    type: BaseTypeString
+extends:
+  name: post_configure_upstart
+  inputs:
+    - name: container_directory
+      source: '@container_directory@'
+    - name: upstart_service_blacklist
+      value:
+        value:
+          - cloud-config
+          - cloud-final
+          - cloud-init
+          - cloud-init-local
+          - ip6tables
+          - iptables
+          - lvm2-monitor
+          - network

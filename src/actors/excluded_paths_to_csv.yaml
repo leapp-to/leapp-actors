@@ -1,0 +1,18 @@
+---
+inputs:
+  - name: excluded_paths
+    type: TypeStringList
+  
+outputs:
+  - name: csv_excluded_paths
+    type: BaseTypeString
+
+extends:
+  name: array_to_csv
+  inputs:
+    - name: string_list 
+      source: "@excluded_paths@" 
+
+  outputs:
+    - name: csv_excluded_paths
+      source: "@csv_string@"  

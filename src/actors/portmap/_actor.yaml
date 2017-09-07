@@ -1,0 +1,21 @@
+---
+inputs:
+  - name: source_system_ports
+    type: TypePortScan
+
+  - name: target_system_ports
+    type: TypePortScan
+
+  - name: user_mapping
+    type: TypePortMap
+
+  - name: excluded_ports
+    type: TypePortScan
+
+outputs:
+  - name: exposed_ports
+    type: ExposedPorts
+
+executor:
+  type: python
+  script-file: portmap.py
