@@ -7,7 +7,7 @@ container_dir = data["container_directory"]["value"]
 blacklist = data["upstart_service_blacklist"]["value"]
 
 for level in range(0, 7):
-    p = os.path.join(container_dir, 'etc', 'rc{}'.format(level))
+    p = os.path.join(container_dir, 'etc', 'rc{}.d'.format(level))
     for entry in os.listdir(p):
         link = os.path.join(p, entry)
         name = os.path.basename(os.readlink(link))

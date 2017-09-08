@@ -1,7 +1,7 @@
 ---
-#outputs:
-#    - name: ansible_setup
-#      type: AnsibleSetupModuleFacts
+outputs:
+    - name: ansible_setup
+      type: AnsibleSetupModuleFacts
 executor:
     type: ansible-module
     host: localhost

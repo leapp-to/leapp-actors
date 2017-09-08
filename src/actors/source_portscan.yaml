@@ -4,8 +4,8 @@ inputs:
     type: BaseTypeString
 
 outputs:
-  name: source_system_ports
-  type: TypePortScan
+  - name: source_system_ports
+    type: TypePortScan
 
 extends:
   name: portscan
