@@ -1,0 +1,40 @@
+---
+inputs:
+  - name: target_host
+    type: BaseTypeString
+  - name: source_host
+    type: BaseTypeString
+  - name: target_user_name
+    type: BaseTypeString
+  - name: source_user_name
+    type: BaseTypeString
+  - name: start_container
+    type: BaseTypeBool
+  - name: force_create
+    type: BaseTypeBool
+  - name: user_container_name
+    type: OptionalContainerName
+  - name: excluded_paths
+    type: TypeStringList
+  - name: tcp_port_list
+    type: BaseTypeString
+  - name: tcp_ports_user_mapping
+    type: ExposedPorts
+  - name: excluded_tcp_ports
+    type: TypePortScan
+executor:
+  type: group
+  actors:
+    - source_ansible_setup
+    - source_ansible_setup_converter
+    - source_portscan
+    - target_portscan
+    - portmap
+    - create_container_name
+    - set_container_directory
+    - create_container_dir
+    - excluded_paths_to_csv
+    - rsync
+    - post_configure_upstart_default
+    - create_container
+    - start_container
