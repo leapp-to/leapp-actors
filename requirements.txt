@@ -1,1 +1,7 @@
+flake8
 jsl == 0.2.4
+jsonschema
+PyYAML
+
+## GitHub links
+git+https://github.com/leapp-to/snactor.git
