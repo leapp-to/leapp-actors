@@ -27,7 +27,7 @@ def _build_cmd(source_path, name, version, force, exposed_ports):
         else:
             cmd += ' -p {:d}:{:d}/{p}'.format(port['exposed_port'], port['port'], p=port['protocol'])
 
-    cmd += ' --name ' + name + ' leapp/leapp-scratch:' + version + ' /sbin/init'
+    cmd += ' --name ' + name + ' leapp/leapp-scratch:' + version + ' /.leapp/leapp-init'
 
     return cmd
 
