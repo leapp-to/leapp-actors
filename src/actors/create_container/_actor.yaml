@@ -4,12 +4,12 @@ inputs:
     type: BaseTypeString
   - name: container_name
     type: ContainerName
-  - name: image
-    type: BaseTypeString
-  - name: init_bin
-    type: BaseTypeString
+  - name: osversion
+    type: OSVersion
   - name: exposed_ports
     type: ExposedPorts
+  - name: force_create
+    type: BaseTypeBool
 outputs:
   - name: container_id
     type: BaseTypeString
