@@ -6,10 +6,10 @@ inputs:
   - name: target_system_ports
     type: TypePortScan
 
-  - name: user_mapping
-    type: TypePortMap
+  - name: tcp_ports_user_mapping
+    type: ExposedPorts
 
-  - name: excluded_ports
+  - name: excluded_tcp_ports
     type: TypePortScan
 
 outputs:

@@ -1,0 +1,20 @@
+---
+tags:
+  - inspect_machine
+inputs:
+  - name: source_host
+    type: BaseTypeString
+  - name: source_user_name
+    type: BaseTypeString
+outputs:
+  - name: osversion
+    type: OSVersion
+  - name: hostnameinfo
+    type: HostnameInfo
+  - name: ip_list
+    type: IPList
+executor:
+  type: group
+  actors:
+    - source_ansible_setup
+    - source_ansible_setup_converter

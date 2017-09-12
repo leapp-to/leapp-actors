@@ -66,7 +66,10 @@ if __name__ == '__main__':
     port_range = inputs.get("scan_options").get("port_range", None)
 
     port_list = PortList()
-    print(json.dumps({"port_scan_result": port_scan(host,
-                                                    shallow=shallow,
-                                                    force_nmap=force_nmap,
-                                                    port_range=port_range)}))
+    result = port_scan(host, shallow=shallow, force_nmap=force_nmap, port_range=port_range)
+    for ports in result.values():
+        for item in ports.values():
+            remove = [key for key in item.keys() if key not in ("name", "product")]
+            for key in remove:
+                del item[key]
+    print(json.dumps({"port_scan_result": result}))
