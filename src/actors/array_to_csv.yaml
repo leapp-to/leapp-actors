@@ -2,10 +2,18 @@
 inputs:
   - name: string_list
     type: TypeStringList
-  
+
 outputs:
-  - name: csv_string 
+  - name: csv_string
     type: BaseTypeString
+
+description: |
+  Convert array of strings to the CSV
+
+  Inputs:
+    string_list - Array of strings
+  Outputs:
+    csv_string  - CSV record
 
 executor:
   type: python
@@ -15,7 +23,7 @@ executor:
 
     inputs = load(sys.stdin)["string_list"]["value"]
     output_str = ""
-    
+
 
     for item in inputs:
         if len(output_str):

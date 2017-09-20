@@ -7,6 +7,14 @@ outputs:
   - name: csv_excluded_paths
     type: BaseTypeString
 
+description: |
+  Defines excluded paths for array_to_csv
+
+  Inputs:
+    excluded_paths     - paths to be excluded
+  Outputs:
+    csv_excluded_paths - final csv with excluded paths
+
 extends:
   name: array_to_csv
   inputs:

@@ -1,0 +1,45 @@
+---
+inputs:
+  - name: check_target_service_status
+    type: BaseTypeBool
+  - name: containerslist
+    type: ContainersList
+  - name: rsyncinfo
+    type: RSyncInfo
+  - name: dockerinfo
+    type: DockerInfo
+
+description: |
+  Send information about the services (Docker, Rsync) to a socket
+
+  Inputs:
+    check_tartget_service_status - status of services
+    containerslist               - list of containers
+    rsyncinfo                    - Rsync information (path to bin, version)
+    dockerinfo                   - docker information
+  Outputs:
+    None (sending the result to a socket)
+
+executor:
+  type: python
+  payload: |
+    import json
+    import socket
+    import sys
+    import os
+    data = json.load(sys.stdin)
+    s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    s.connect(os.environ['LEAPP_ACTOR_STDOUT_SOCK'])
+    containers = [container.strip('"') for container in data['containerslist']['containers']]
+    if data['check_target_service_status']['value']:
+        rsync_status = 'error'
+        docker_status = 'error'
+        if all([value[0] == 0 for value in data['rsyncinfo'].values()]):
+            rsync_status = 'ok'
+        if all([value[0] == 0 for value in data['dockerinfo'].values()]):
+            docker_status = 'ok'
+        output = json.dumps({'docker': docker_status, 'rsync': rsync_status, 'containers': containers})
+    else:
+        output = '\n'.join(containers) + '\n'
+    s.sendall(output)
+    s.close()

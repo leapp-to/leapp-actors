@@ -1,0 +1,17 @@
+---
+inputs:
+  - name: exposed_ports
+    type: ExposedPorts
+
+description: |
+  Print port mapping to an output
+
+  Inputs:
+    exposed_ports - list of exposed ports
+  Outputs:
+    Print the port mapping to $LEAPP_ACTOR_OUTPUT
+
+executor:
+  type: bash
+  payload: |
+    $LEAPP_ACTOR_OUTPUT '[{{range $index, $element := .exposed_ports.ports}}{{if $index}},{{end}}[{{$element.exposed_port}}, {{$element.port}}]{{end}}]'

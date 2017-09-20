@@ -1,0 +1,19 @@
+---
+tags:
+  - check_target
+  - depsolver
+outputs:
+  - name: rsyncinfo
+    type: RSyncInfo
+
+description: |
+  Collect information about Rsync on a system
+
+  Inputs:
+    None
+  Outputs:
+    rsyncinfo - collected information about Rsync
+
+executor:
+  type: python
+  script-file: rsync-info.py

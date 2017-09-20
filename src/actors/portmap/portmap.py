@@ -90,20 +90,39 @@ def map_ports(source_ports, target_ports, user_mapped_ports=None, user_excluded_
     return remapped_ports
 
 
+def from_user(user_mapping):
+    mapping = {}
+    for entry in user_mapping.get("ports", ()):
+        proto = mapping.get(entry["protocol"], {})
+        item = proto.get(entry["port"], [])
+        item.append(entry["exposed_port"])
+        proto[entry["port"]] = item
+        mapping[entry["protocol"]] = proto
+    result = {}
+    for proto in mapping.keys():
+        result[proto] = {}
+        for port, exposed_ports in mapping[proto].items():
+            result[proto][port] = list(set(exposed_ports))
+            result[proto][port].sort()
+    return result
+
+
 if __name__ == '__main__':
     inputs = load(sys.stdin)
+
+    use_default_port_map = inputs["use_default_port_map"]["value"]
 
     # Required arguments
     src_dict = inputs["source_system_ports"]
     tgt_dict = inputs["target_system_ports"]
 
     # Optional arguments
-    usr_dict = inputs.get("user_mapping", {})
-    exc_dict = inputs.get("excluded_ports", {})
+    usr_dict = inputs.get("tcp_ports_user_mapping", {})
+    exc_dict = inputs.get("excluded_tcp_ports", {})
 
-    src = PortList(src_dict)
+    src = PortList(src_dict) if use_default_port_map else PortList()
     tgt = PortList(tgt_dict)
     exc = PortList(exc_dict)
-    usr = PortMap(usr_dict)
+    usr = PortMap(from_user(usr_dict))
 
     print(dumps({"exposed_ports": {"ports": map_ports(src, tgt, usr, exc)}}))

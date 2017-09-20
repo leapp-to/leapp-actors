@@ -9,6 +9,16 @@ inputs:
 outputs:
   - name: filtered_packages
     type: RPMPackages
+
+description: |
+  Filter RPM packages by name
+
+  Inputs:
+    filter            - specific name of package(s) that user wants to filter out
+    rpm_packages      - all RPM packages
+  Outputs:
+    filtered_packages - filtered package(s) by given name
+
 executor:
   type: python
   arguments:

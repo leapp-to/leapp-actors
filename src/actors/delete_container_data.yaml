@@ -3,6 +3,14 @@ inputs:
   - name: container_directory
     type: BaseTypeString
 
+description: |
+  Delete a container directory
+
+  Inputs:
+    container_directory - path to a container directory
+  Outputs:
+    None (container directory deleted)
+
 executor:
   type: bash
   arguments:

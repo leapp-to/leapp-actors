@@ -1,0 +1,31 @@
+---
+inputs:
+  - name: target_host
+    type: BaseTypeString
+  - name: target_user_name
+    type: BaseTypeString
+outputs:
+  - name: containerslist
+    type: ContainersList
+  - name: rsyncinfo
+    type: RSyncInfo
+  - name: dockerinfo
+    type: DockerInfo
+
+description: |
+  Collect information about Docker, Rsync and containers list on a target system
+
+  Inputs:
+    target_host      - target system hostname
+    target_user_name - username on target system
+  Outputs:
+    containerslist   - list of containers on target system
+    rsyncinfo        - collected Rsync information
+    dockerinfo       - collected Docker information
+
+executor:
+  type: ansible-script-module
+  host: '@target_host.value@'
+  user: '@target_user_name.value@'
+  script-file: ./scripts/remote-target-check.py
+

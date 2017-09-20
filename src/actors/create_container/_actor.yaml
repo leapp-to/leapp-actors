@@ -10,12 +10,40 @@ inputs:
     type: ExposedPorts
   - name: force_create
     type: BaseTypeBool
+  - name: target_host
+    type: BaseTypeString
+  - name: target_user_name
+    type: BaseTypeString
 outputs:
   - name: container_id
     type: BaseTypeString
   - name: error
     type: BaseTypeString
-executor:
-  type: python
-  script-file: create_container.py
 
+description: |
+  Create a new container (but has not started yet) based on an image
+
+  Inputs:
+    container_directory - directory where a new container is going to be created
+    container_name      - name of a new container
+    osversion           - information about Operating System
+    exposed_ports       - publish a container port(s) to host port(s)
+    force_create        - option to create container when the container exists
+                          with given name - remove the old one and create the new one
+    target_host         - hostname of the target system
+    target_user_name    - username on the target system
+  Outputs:
+    container_id        - ID of the new container
+    error               - any error returned by 'docker create'
+
+executor:
+  type: ansible-script-module
+  host: '@target_host.value@'
+  user: '@target_user_name.value@'
+  script-file: create_container.py
+  arguments:
+    - '@container_directory@'
+    - '@container_name@'
+    - '@osversion@'
+    - '@exposed_ports@'
+    - '@force_create@'

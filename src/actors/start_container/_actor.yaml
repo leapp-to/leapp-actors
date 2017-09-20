@@ -1,0 +1,30 @@
+---
+inputs:
+  - name: container_name
+    type: ContainerName
+  - name: start_container
+    type: BaseTypeBool
+  - name: target_host
+    type: BaseTypeString
+  - name: target_user_name
+    type: BaseTypeString
+
+description: |
+  Start container with given name
+
+  Inputs:
+    container_name - name of the container (must be existing one?)
+    start_container - option to explicit start the container
+  Outputs:
+    None (starting the container)
+
+executor:
+  type: bash
+  type: ansible-script-module
+  host: '@target_host.value@'
+  user: '@target_user_name.value@'
+  script-file: start.sh
+  arguments:
+    - "@container_name.value@"
+    - "@start_container.value@"
+

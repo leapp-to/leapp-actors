@@ -3,12 +3,25 @@ inputs:
   - name: host
     type: BaseTypeString
 
-  - name: scan_options 
+  - name: scan_options
     type: TypePortScanOptions
 
 outputs:
   - name: port_scan_result
     type: TypePortScan
+
+description: |
+  Scan ports on a system
+
+  Inputs:
+    host             - hostname or IP
+    scan_options     - shallow_scan - 'nmap -sS' if option is set to `true`,
+                                      otherwise 'nmap -sV' (default: false)
+                       force_nmap   - on the localhost, force using 'nmap' (if true),
+                                      otherwise use 'netstat' (default: false)
+                       port_range   - specify port range to scan
+  Outputs:
+    port_scan_result - ports on a system
 
 executor:
   type: python

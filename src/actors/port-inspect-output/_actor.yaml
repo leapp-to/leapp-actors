@@ -1,0 +1,17 @@
+---
+inputs:
+  - name: port_scan_result
+    type: TypePortScan
+
+description: |
+  Print port scan output
+
+  Inputs:
+    port_scan_result - scanned port list
+  Outputs:
+    Print the port scan result to $LEAPP_ACTOR_OUTPUT
+
+executor:
+  type: bash
+  payload: |
+    $LEAPP_ACTOR_OUTPUT '{"status": "success", "err_msg": "", "ports": {{json .port_scan_result}} }'
