@@ -1,0 +1,16 @@
+tags:
+- check_target
+- depsolver
+outputs:
+- name: containerslist
+  type: ContainersList
+description: |
+  Returns list of containers on a system
+
+  Inputs:
+    None
+  Outputs:
+    contianerslist - list of containers
+executor:
+  script-file: containers_list.py
+  type: python

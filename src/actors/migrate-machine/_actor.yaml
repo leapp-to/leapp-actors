@@ -1,0 +1,61 @@
+inputs:
+- name: target_host
+  type: BaseTypeString
+- name: source_host
+  type: BaseTypeString
+- name: target_user_name
+  type: BaseTypeString
+- name: source_user_name
+  type: BaseTypeString
+- name: start_container
+  type: BaseTypeBool
+- name: force_create
+  type: BaseTypeBool
+- name: user_container_name
+  type: OptionalContainerName
+- name: excluded_paths
+  type: TypeStringList
+- name: tcp_port_list
+  type: BaseTypeString
+- name: tcp_ports_user_mapping
+  type: ExposedPorts
+- name: excluded_tcp_ports
+  type: TypePortScan
+- name: use_default_port_map
+  type: BaseTypeBool
+description: |
+  Main group actor that provides whole workflow to migrate source system to a macrocontainer
+
+  Inputs:
+    source_host            - source system hostname
+    source_user_name       - username for source system
+    target_host            - target system hostname
+    target_user_name       - username on target system
+    tcp_port_list          - list of TCP ports
+    tcp_ports_user_mapping - user ports mapping
+    excluded_tcp_ports     - excluded ports mapping
+    excluded_paths         - excluded file paths
+    user_container_name    - container name defined by user
+    force_create           - option to create container when the container exists
+                             with given name - remove the old one and create the new one
+    start_container        - option to explicit start the container
+  Outputs:
+    None
+executor:
+  actors:
+  - source_ansible_setup
+  - source_ansible_setup_converter
+  - create_container_name
+  - remote-target-check
+  - verify-target-container
+  - source_portscan
+  - target_portscan
+  - portmap
+  - set_container_directory
+  - create_container_dir
+  - excluded_paths_to_csv
+  - rsync
+  - post_configure_upstart_default
+  - create_container
+  - start_container
+  type: group

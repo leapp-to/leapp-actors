@@ -1,14 +1,11 @@
----
 inputs:
-  - name: user_container_name
-    type: OptionalContainerName
-  - name: hostnameinfo
-    type: HostnameInfo
-
+- name: user_container_name
+  type: OptionalContainerName
+- name: hostnameinfo
+  type: HostnameInfo
 outputs:
-  - name: container_name
-    type: BaseTypeString
-
+- name: container_name
+  type: BaseTypeString
 description: |
   Create a container name based on user input or generate the name with hostname
 
@@ -17,7 +14,6 @@ description: |
     hostnameinfo        - the hostname
   Outputs:
     container_name      - user defined name (if user_container_name is provided) or 'container_<hostname>'
-
 executor:
-  type: python
   script-file: create_container_name.py
+  type: python

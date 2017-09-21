@@ -1,0 +1,24 @@
+inputs:
+- name: source_host
+  type: BaseTypeString
+outputs:
+- name: source_system_ports
+  type: TypePortScan
+description: |
+  Scan ports on source system
+
+  Inputs:
+    source_host         - source system hostname
+  Outputs:
+    source_system_ports - found ports on source system
+extends:
+  inputs:
+  - name: host
+    source: '@source_host@'
+  - name: scan_options
+    value:
+      shallow_scan: true
+  name: portscan
+  outputs:
+  - name: source_system_ports
+    source: '@port_scan_result@'

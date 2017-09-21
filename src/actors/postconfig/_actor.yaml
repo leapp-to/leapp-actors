@@ -1,0 +1,15 @@
+inputs:
+- name: container_directory
+  type: BaseTypeString
+description: |
+  Move etc/hosts and link it to etc/hosts.source, so it can be used in Docker
+
+  Inputs:
+    container_directory - name of the container directory
+  Outputs:
+    None
+executor:
+  arguments:
+  - '@container_directory.value@'
+  script-file: postconfig.sh
+  type: bash

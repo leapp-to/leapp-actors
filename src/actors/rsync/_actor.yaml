@@ -1,0 +1,34 @@
+inputs:
+- name: source_host
+  type: BaseTypeString
+- name: source_user_name
+  type: BaseTypeString
+- name: target_host
+  type: BaseTypeString
+- name: target_user_name
+  type: BaseTypeString
+- name: container_directory
+  type: BaseTypeString
+- name: csv_excluded_paths
+  type: BaseTypeString
+description: |
+  Copy the files from a source to a target host by using Rsync
+
+  Inputs:
+    source_host         - source system hostname
+    source_user_name    - source system username
+    target_host         - target system hostname
+    container_directory - name of the container directory
+    csv_excluded_paths  - excluded file paths from copying
+  Outputs:
+    None
+executor:
+  arguments:
+  - '@source_host.value@'
+  - '@source_user_name.value@'
+  - '@target_host.value@'
+  - '@target_user_name.value@'
+  - '@container_directory.value@'
+  - '@csv_excluded_paths.value@'
+  script-file: rsync.sh
+  type: bash

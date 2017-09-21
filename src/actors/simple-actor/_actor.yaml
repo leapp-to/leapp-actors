@@ -1,0 +1,14 @@
+outputs:
+- name: message
+  type: Message
+- name: message2
+  type: Message
+description: |
+  This is a simple actor example
+executor:
+  arguments:
+  - -c
+  - 'echo {\"message\": {\"value\": \"All your actor are belong to us!\"}, \"message2\":
+    {\"value\": \"what ever\"}}'
+  executable: /bin/bash
+  type: default

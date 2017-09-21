@@ -1,0 +1,15 @@
+inputs:
+- name: container_directory
+  type: BaseTypeString
+description: |
+  Delete a container directory
+
+  Inputs:
+    container_directory - path to a container directory
+  Outputs:
+    None (container directory deleted)
+executor:
+  arguments:
+  - '@container_directory.value@'
+  script-file: delete_container_data.sh
+  type: bash

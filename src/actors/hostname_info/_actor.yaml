@@ -1,0 +1,14 @@
+tags:
+- inspect_machine
+outputs:
+- name: hostnameinfo
+  type: HostnameInfo
+description: |
+  Get hostname info from a system
+  Inputs:
+    None
+  Outputs:
+    hostnameinfo - hostname
+executor:
+  script-file: hostname_info.py
+  type: python

@@ -1,0 +1,19 @@
+outputs:
+- name: ansible_setup
+  type: AnsibleSetupModuleFacts
+description: |
+  Run Ansible to gather system information
+
+  Inputs:
+    None
+  Outputs:
+    ansible_setup - gathered facts about the system
+executor:
+  host: localhost
+  module:
+    arguments:
+    - gather_subset=!hardware,!virtual,!ohai,!facter
+    name: setup
+  output: ansible_setup
+  type: ansible-module
+  user: root

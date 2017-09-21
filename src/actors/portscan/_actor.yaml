@@ -1,15 +1,11 @@
----
 inputs:
-  - name: host
-    type: BaseTypeString
-
-  - name: scan_options
-    type: TypePortScanOptions
-
+- name: host
+  type: BaseTypeString
+- name: scan_options
+  type: TypePortScanOptions
 outputs:
-  - name: port_scan_result
-    type: TypePortScan
-
+- name: port_scan_result
+  type: TypePortScan
 description: |
   Scan ports on a system
 
@@ -22,7 +18,6 @@ description: |
                        port_range   - specify port range to scan
   Outputs:
     port_scan_result - ports on a system
-
 executor:
-  type: python
   script-file: portscan.py
+  type: python

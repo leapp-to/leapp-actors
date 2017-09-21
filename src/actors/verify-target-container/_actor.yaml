@@ -1,12 +1,10 @@
----
 inputs:
-  - name: force_create
-    type: BaseTypeBool
-  - name: containerslist
-    type: ContainersList
-  - name: container_name
-    type: BaseTypeString
-
+- name: force_create
+  type: BaseTypeBool
+- name: containerslist
+  type: ContainersList
+- name: container_name
+  type: BaseTypeString
 description: |
   Check if the target container is not already running
 
@@ -17,7 +15,6 @@ description: |
     container_name - name of the container
   Outputs:
     None
-
 executor:
-  type: python
   script-file: verify-target-container.py
+  type: python

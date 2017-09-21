@@ -1,0 +1,28 @@
+tags:
+- inspect_machine
+inputs:
+- name: osversion
+  type: OSVersion
+- name: hostnameinfo
+  type: HostnameInfo
+- name: ip_list
+  type: IPList
+- name: rpm_packages
+  type: RPMPackages
+outputs:
+- name: machineinfo
+  type: MachineInfo
+description: |
+  Process information about a system (like OS version, hostname, IP list and RPM packages)
+  to one JSON file
+
+  Inputs:
+    osversion    - version of Operation System
+    hostnameinfo - hostname of a system
+    ip_list      - IP list
+    rpm_packages - RPM packages on a system
+  Outputs:
+    machineinfo  - all inputs together
+executor:
+  script-file: inspect_machine_ansible.py
+  type: python

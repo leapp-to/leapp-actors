@@ -1,11 +1,8 @@
----
 inputs:
-  - name: host
-    type: BaseTypeString
-
-  - name: scan_options
-    type: TypePortScanOptions
-
+- name: host
+  type: BaseTypeString
+- name: scan_options
+  type: TypePortScanOptions
 description: |
   Group actor that scans ports on a target system a print the results out
 
@@ -14,9 +11,8 @@ description: |
     scan_options - options for scanning (for more info check `description` in portscan/_actor.yaml)
   Outputs:
     Print the port scan result to $LEAPP_ACTOR_OUTPUT
-
 executor:
-  type: group
   actors:
-    - portscan
-    - port-inspect-output
+  - portscan
+  - port-inspect-output
+  type: group
