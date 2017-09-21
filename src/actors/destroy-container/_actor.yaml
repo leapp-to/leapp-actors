@@ -1,12 +1,10 @@
----
 inputs:
-  - name: container_name
-    type: BaseTypeString
-  - name: target_host
-    type: BaseTypeString
-  - name: target_user_name
-    type: BaseTypeString
-
+- name: container_name
+  type: BaseTypeString
+- name: target_host
+  type: BaseTypeString
+- name: target_user_name
+  type: BaseTypeString
 description: |
   Group actor to remote destroy of a container
 
@@ -16,9 +14,8 @@ description: |
     target_user_name - username for the remote system
   Outputs:
     None
-
 executor:
-  type: group
   actors:
-    - set_container_directory
-    - remote-destroy-container
+  - set_container_directory
+  - remote-destroy-container
+  type: group

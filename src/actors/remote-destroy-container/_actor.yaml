@@ -1,14 +1,12 @@
----
 inputs:
-  - name: target_host
-    type: BaseTypeString
-  - name: target_user_name
-    type: BaseTypeString
-  - name: container_name
-    type: BaseTypeString
-  - name: container_directory
-    type: BaseTypeString
-
+- name: target_host
+  type: BaseTypeString
+- name: target_user_name
+  type: BaseTypeString
+- name: container_name
+  type: BaseTypeString
+- name: container_directory
+  type: BaseTypeString
 description: |
   Delete a container on the target system
 
@@ -18,12 +16,11 @@ description: |
     container_name   - container name to delete
   Outputs:
     None (Deleted container)
-
 executor:
-  type: ansible-script-module
-  host: '@target_host.value@'
-  user: '@target_user_name.value@'
-  script-file: ./scripts/delete-containers.py
   arguments:
-    - '@container_directory.value@'
-    - '@container_name.value@'
+  - '@container_directory.value@'
+  - '@container_name.value@'
+  host: '@target_host.value@'
+  script-file: ./scripts/delete-containers.py
+  type: ansible-script-module
+  user: '@target_user_name.value@'

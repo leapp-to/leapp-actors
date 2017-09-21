@@ -1,0 +1,15 @@
+inputs:
+- name: container_name
+  type: ContainerName
+description: |
+  Delete container with a given name
+
+  Inputs:
+    container_name - name of the container to be deleted
+  Outputs:
+    None (container deleted)
+executor:
+  arguments:
+  - '@container_name.value@'
+  script-file: delete_container.sh
+  type: bash

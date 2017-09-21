@@ -1,0 +1,23 @@
+tags:
+- packages
+inputs:
+- name: filter
+  type: BaseTypeString
+- name: rpm_packages
+  type: RPMPackages
+outputs:
+- name: filtered_packages
+  type: RPMPackages
+description: |
+  Filter RPM packages by name
+
+  Inputs:
+    filter            - specific name of package(s) that user wants to filter out
+    rpm_packages      - all RPM packages
+  Outputs:
+    filtered_packages - filtered package(s) by given name
+executor:
+  arguments:
+  - '@filter.value@'
+  script-file: filter_packages.py
+  type: python

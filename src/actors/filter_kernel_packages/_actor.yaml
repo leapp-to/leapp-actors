@@ -1,0 +1,26 @@
+tags:
+- packages
+inputs:
+- name: rpm_packages
+  type: RPMPackages
+outputs:
+- name: kernel_packages
+  type: RPMPackages
+description: |
+  Filter kernel specific RPM packages
+
+  Inputs:
+    rpm_packages    - all RPM packages
+  Outputs:
+    kernel_packages - filtred kernel RPM packages
+extends:
+  inputs:
+  - name: filter
+    value:
+      value: kernel
+  - name: rpm_packages
+    source: '@rpm_packages@'
+  name: filter_packages
+  outputs:
+  - name: kernel_packages
+    source: '@filtered_packages@'

@@ -1,0 +1,27 @@
+inputs:
+- name: container_directory
+  type: BaseTypeString
+description: |
+  Blacklist some of upstart services in container directory by default
+  (list of them - below in "extends" part as "value")
+
+  Inputs:
+    container_directory - name of the container directory
+  Outputs:
+    None
+extends:
+  inputs:
+  - name: container_directory
+    source: '@container_directory@'
+  - name: upstart_service_blacklist
+    value:
+      value:
+      - cloud-config
+      - cloud-final
+      - cloud-init
+      - cloud-init-local
+      - ip6tables
+      - iptables
+      - lvm2-monitor
+      - network
+  name: post_configure_upstart

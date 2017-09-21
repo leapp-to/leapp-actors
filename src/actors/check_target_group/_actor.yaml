@@ -1,0 +1,29 @@
+tags:
+- check_target
+inputs:
+- name: check_target_service_status
+  type: BaseTypeBool
+outputs:
+- name: rsyncinfo
+  type: RSyncInfo
+- name: dockerinfo
+  type: DockerInfo
+- name: containerslist
+  type: ContainersList
+description: |
+  Group actor that collect the information about services (Docker, Rsync and container list) on a target system
+  and send the result information to the output (socket).
+
+  Inputs:
+    check_target_service_status - status of the services on target system
+  Outputs:
+    rsyncinfo                   - Rsync information
+    dockerinfo                  - Docker information
+    containerslist              - List of the containers
+executor:
+  actors:
+  - docker_info
+  - rsync_info
+  - containers_list
+  - check-target-output
+  type: group

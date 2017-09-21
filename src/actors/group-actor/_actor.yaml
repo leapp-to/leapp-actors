@@ -1,0 +1,18 @@
+outputs:
+- name: message
+  type: Message
+- name: osversion
+  type: OSVersion
+description: |
+  Example of the group actor that calls 2 actors
+
+  Inputs:
+    None
+  Outputs:
+    message   - a message that returned by simple-actor
+    osversion - OS version information
+executor:
+  actors:
+  - simple-actor
+  - osversion
+  type: group
