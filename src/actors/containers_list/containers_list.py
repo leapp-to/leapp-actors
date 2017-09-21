@@ -2,10 +2,12 @@ import json
 import os
 from subprocess import Popen, PIPE
 
+
 def run_cmd(cmd):
     proc = Popen(cmd.split(), stdin=PIPE, stdout=PIPE, stderr=PIPE)
     out, err = proc.communicate()
     return (proc.returncode, out, err)
+
 
 containerslist = {'retcode': None,
                   'containers': []}

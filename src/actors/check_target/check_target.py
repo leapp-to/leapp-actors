@@ -20,8 +20,8 @@ for check in data['rsyncinfo'].keys():
         break
 
 if data['containerslist']['retcode']:
-   targetinfo['containers'] = ('ERROR', data['containerslist']['containers'])
+    targetinfo['containers'] = ('ERROR', data['containerslist']['containers'])
 else:
-   targetinfo['containers'] = ('OK', data['containerslist']['containers'])
+    targetinfo['containers'] = ('OK', data['containerslist']['containers'])
 
 print json.dumps({"targetinfo": targetinfo})
