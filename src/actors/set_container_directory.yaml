@@ -5,6 +5,15 @@ inputs:
 outputs:
   - name: container_directory
     type: BaseTypeString
+
+description: |
+  Set directory path for a container
+
+  Inputs:
+    container_name      - name of a container
+  Outputs:
+    container_directory - container directory full path
+
 executor:
   type: python
   payload: |

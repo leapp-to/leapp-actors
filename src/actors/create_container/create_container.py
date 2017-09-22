@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import sys
 import json
 import shlex
@@ -5,14 +6,19 @@ from subprocess import Popen, PIPE
 
 
 def _execute(cmd):
-    return Popen(shlex.split(cmd), stdout=PIPE, stderr=PIPE).communicate()
+    p = Popen(shlex.split(cmd), stdout=PIPE, stderr=PIPE)
+    out, err = p.communicate()
+    return out, err, p.returncode
 
 
-def _build_cmd(source_path, name, version, exposed_ports):
+def _build_cmd(source_path, name, version, force, exposed_ports):
     good_mounts = ['bin', 'etc', 'home', 'lib', 'lib64', 'media',
                    'opt', 'root', 'sbin', 'srv', 'usr', 'var']
 
-    cmd = 'docker create --restart always -ti -v /sys/fs/cgroup:/sys/fs/cgroup:ro'
+    if force:
+        _execute('sudo docker rm -f {}'.format(name))
+
+    cmd = 'sudo docker create --restart always -ti -v /sys/fs/cgroup:/sys/fs/cgroup:ro'
 
     for mount in good_mounts:
         cmd += ' -v {d}/{m}:/{m}:Z'.format(d=source_path, m=mount)
@@ -23,27 +29,22 @@ def _build_cmd(source_path, name, version, exposed_ports):
         else:
             cmd += ' -p {:d}:{:d}/{p}'.format(port['exposed_port'], port['port'], p=port['protocol'])
 
-    cmd += ' --name {n} leapp/leapp-scratch:{v} /.leapp/leapp-init'.format(n=name, v=version)
+    cmd += ' --name ' + name + ' leapp/leapp-scratch:' + version + ' /.leapp/leapp-init'
 
     return cmd
 
 
 if __name__ == "__main__":
-    inputs = json.load(sys.stdin)
+    cmd = _build_cmd(json.loads(sys.argv[1])['value'],
+                     json.loads(sys.argv[2])['value'],
+                     json.loads(sys.argv[3])["version"].split(".")[0],
+                     json.loads(sys.argv[5])['value'],
+                     json.loads(sys.argv[4])['ports'])
 
-    cmd = _build_cmd(inputs['container_directory']['value'],
-                     inputs['container_name']['value'],
-                     inputs['osversion']["version"].split(".")[0],
-                     inputs['exposed_ports']['ports'])
-
-    force = inputs['force_create']['value']
-
-    if force:
-        _execute('docker rm -f {}'.format(name))
-
-    out, err = _execute(cmd)
+    out, err, return_code = _execute(cmd)
     outputs = {
         'container_id': dict(value=out),
         'error': dict(value=err)
     }
     print(json.dumps(outputs))
+    sys.exit(return_code)

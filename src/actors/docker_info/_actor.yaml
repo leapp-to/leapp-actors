@@ -1,0 +1,20 @@
+---
+tags:
+  - check_target
+  - depsolver
+outputs:
+  - name: dockerinfo
+    type: DockerInfo
+
+description: |
+  Collect information about Docker on the system
+
+  Inputs:
+    None
+  Outputs:
+    dockerinfo - collected Docker information (like Docker bin path, its systemd state and general available Docker information)
+
+executor:
+  type: python
+  script-file: docker-info.py
+

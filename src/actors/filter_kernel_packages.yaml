@@ -7,6 +7,15 @@ inputs:
 outputs:
   - name: kernel_packages
     type: RPMPackages
+
+description: |
+  Filter kernel specific RPM packages
+
+  Inputs:
+    rpm_packages    - all RPM packages
+  Outputs:
+    kernel_packages - filtred kernel RPM packages
+
 extends:
   name: filter_packages
   inputs:

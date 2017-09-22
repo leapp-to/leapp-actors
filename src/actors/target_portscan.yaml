@@ -4,8 +4,16 @@ inputs:
     type: BaseTypeString
 
 outputs:
-  name: target_system_ports
-  type: TypePortScan
+  - name: target_system_ports
+    type: TypePortScan
+
+description: |
+  Scan the ports on a target system
+
+  Inputs:
+    target_host - hostname of a target system
+  Outputs:
+    target_system_ports - list of found ports on a target system
 
 extends:
   name: portscan
@@ -16,7 +24,7 @@ extends:
     - name: scan_options
       value:
         shallow_scan: True
-      
+
   outputs:
     - name: target_system_ports
       source: '@port_scan_result@'

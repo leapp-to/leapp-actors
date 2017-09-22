@@ -4,6 +4,15 @@ tags:
 outputs:
   - name: ip_list
     type: IPList
+
+description: |
+  Get the system IP addresses
+
+  Inputs:
+    None
+  Outputs:
+    ip_list - List of IPs
+
 executor:
   type: bash
   output-processor:

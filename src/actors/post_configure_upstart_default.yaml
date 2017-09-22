@@ -2,6 +2,16 @@
 inputs:
   - name: container_directory
     type: BaseTypeString
+
+description: |
+  Blacklist some of upstart services in container directory by default
+  (list of them - below in "extends" part as "value")
+
+  Inputs:
+    container_directory - name of the container directory
+  Outputs:
+    None
+
 extends:
   name: post_configure_upstart
   inputs:

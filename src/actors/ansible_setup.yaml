@@ -1,7 +1,16 @@
 ---
-#outputs:
-#    - name: ansible_setup
-#      type: AnsibleSetupModuleFacts
+outputs:
+    - name: ansible_setup
+      type: AnsibleSetupModuleFacts
+
+description: |
+  Run Ansible to gather system information
+
+  Inputs:
+    None
+  Outputs:
+    ansible_setup - gathered facts about the system
+
 executor:
     type: ansible-module
     host: localhost

@@ -3,6 +3,14 @@ inputs:
   - name: container_directory
     type: BaseTypeString
 
+description: |
+  Create container directory
+
+  Inputs:
+    container_directory - name of the container directory
+  Outputs:
+    None or exception (in case of error when creating directory)
+
 executor:
   type: python
   payload: |

@@ -8,6 +8,17 @@ outputs:
     type: HostnameInfo
   - name: ip_list
     type: IPList
+
+description: |
+  Gather source system information like OS version, hostname and IP addresses
+
+  Inputs:
+    None
+  Outputs:
+    osversion        - information about Operating System
+    hostnameinfo     - hostname
+    ip_list          - list of IP addresses
+
 executor:
   type: group
   actors:

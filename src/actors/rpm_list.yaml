@@ -5,6 +5,15 @@ tags:
 outputs:
   - name: rpm_packages
     type: RPMPackages
+
+description: |
+  List RPM packages
+
+  Inputs:
+    None
+  Outputs:
+    rpm_packages - list of the packages
+
 executor:
   type: python
   payload: |
