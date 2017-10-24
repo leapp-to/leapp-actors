@@ -1,8 +1,10 @@
 inputs:
 - name: container_directory
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 - name: upstart_service_blacklist
-  type: TypeStringList
+  type:
+    name: TypeStringList
 description: |
   Blacklist upstart services in container directory
 
@@ -11,6 +13,6 @@ description: |
     upstart_service_blacklist - services to blacklist
   Outputs:
     None
-executor:
+execute:
   script-file: post_configure_upstart.py
-  type: python
+  executable: /usr/bin/python

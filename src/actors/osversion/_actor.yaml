@@ -2,7 +2,8 @@ tags:
 - inspect_machine
 outputs:
 - name: osversion
-  type: OSVersion
+  type:
+    name: OSVersion
 description: |
   Get the Operating System name and version number
 
@@ -10,6 +11,6 @@ description: |
     None
   Outputs:
     osversion - Operating System information (name and version number)
-executor:
+execute:
   script-file: osversion.py
-  type: python
+  executable: /usr/bin/python

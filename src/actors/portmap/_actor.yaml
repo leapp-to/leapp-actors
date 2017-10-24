@@ -1,17 +1,23 @@
 inputs:
 - name: source_system_ports
-  type: TypePortScan
+  type:
+    name: TypePortScan
 - name: target_system_ports
-  type: TypePortScan
+  type:
+    name: TypePortScan
 - name: tcp_ports_user_mapping
-  type: ExposedPorts
+  type:
+    name: ExposedPorts
 - name: excluded_tcp_ports
-  type: TypePortScan
+  type:
+    name: TypePortScan
 - name: use_default_port_map
-  type: BaseTypeBool
+  type:
+    name: BaseTypeBool
 outputs:
 - name: exposed_ports
-  type: ExposedPorts
+  type:
+    name: ExposedPorts
 description: |
   Map source system ports to the target system ports according to user ports mapping (user can exclude some port(s)) or using default mapping port(s) (SSH 22/tcp -> 9022/tcp for now only)
 
@@ -22,6 +28,6 @@ description: |
     excluded_tcp_ports      - excluded ports mapping
   Outputs:
     exposed_ports           - final ports mapping
-executor:
+execute:
   script-file: portmap.py
-  type: python
+  executable: /usr/bin/python

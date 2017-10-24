@@ -1,12 +1,16 @@
 inputs:
 - name: check_target_service_status
-  type: BaseTypeBool
+  type:
+    name: BaseTypeBool
 - name: containerslist
-  type: ContainersList
+  type:
+    name: ContainersList
 - name: rsyncinfo
-  type: RSyncInfo
+  type:
+    name: RSyncInfo
 - name: dockerinfo
-  type: DockerInfo
+  type:
+    name: DockerInfo
 description: |
   Send information about the services (Docker, Rsync) to a socket
 
@@ -17,6 +21,6 @@ description: |
     dockerinfo                   - docker information
   Outputs:
     None (sending the result to a socket)
-executor:
+execute:
   script-file: check-target-output.py
-  type: python
+  executable: /usr/bin/python

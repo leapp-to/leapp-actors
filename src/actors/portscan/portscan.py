@@ -57,13 +57,28 @@ def port_scan(ip_or_fqdn, port_range=None, shallow=False, force_nmap=False):
 if __name__ == '__main__':
     inputs = json.load(sys.stdin)
 
-    # Required
-    host = inputs.get("host").get("value")
+    keys = {
+        'host': 'host',
+        'output': 'port_scan_result',
+        'options': 'scan_options'}
+    for arg in sys.argv[1:]:
+        try:
+            akey, value = arg.split('=')
+            keys[akey] = value
+        except ValueError:
+            pass
 
+    # Required
+    host = inputs[keys["host"]].get("value")
+    inputs.setdefault(keys["options"], {})
     # Optional
-    shallow = inputs.get("scan_options").get("shallow_scan", True)
-    force_nmap = inputs.get("scan_options").get("force_nmap", False)
-    port_range = inputs.get("scan_options").get("port_range", None)
+    shallow = inputs[keys["options"]].get("shallow_scan", True)
+    force_nmap = inputs[keys["options"]].get("force_nmap", False)
+    port_range = inputs[keys["options"]].get("port_range", None)
+
+    # Set port_range to None if it is empty string or null in input JSON
+    if not port_range:
+        port_range = None
 
     port_list = PortList()
     result = port_scan(host, shallow=shallow, force_nmap=force_nmap, port_range=port_range)
@@ -72,4 +87,4 @@ if __name__ == '__main__':
             remove = [key for key in item.keys() if key not in ("name", "product")]
             for key in remove:
                 del item[key]
-    print(json.dumps({"port_scan_result": result}))
+    print(json.dumps({keys["output"]: result}))

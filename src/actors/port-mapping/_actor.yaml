@@ -1,14 +1,23 @@
 inputs:
 - name: source_host
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 - name: target_host
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 - name: tcp_ports_user_mapping
-  type: ExposedPorts
+  type:
+    name: ExposedPorts
 - name: excluded_tcp_ports
-  type: TypePortScan
+  type:
+    name: TypePortScan
 - name: use_default_port_map
-  type: BaseTypeBool
+  type:
+    name: BaseTypeBool
+outputs:
+- name: exposed_ports
+  type:
+    name: ExposedPorts
 description: |
   Group actor that scan ports on source and target system, create an port mapping and print out
   the result of port mapping
@@ -20,10 +29,8 @@ description: |
     excluded_tcp_ports     - excluded ports mapping
   Outputs:
     Print the port mapping to $LEAPP_ACTOR_OUTPUT
-executor:
-  actors:
-  - source_portscan
-  - target_portscan
-  - portmap
-  - port-mapping-output
-  type: group
+group:
+- source_portscan
+- target_portscan
+- portmap
+- port-mapping-output

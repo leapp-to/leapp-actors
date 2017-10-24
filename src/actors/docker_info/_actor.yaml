@@ -3,7 +3,8 @@ tags:
 - depsolver
 outputs:
 - name: dockerinfo
-  type: DockerInfo
+  type:
+    name: DockerInfo
 description: |
   Collect information about Docker on the system
 
@@ -11,6 +12,6 @@ description: |
     None
   Outputs:
     dockerinfo - collected Docker information (like Docker bin path, its systemd state and general available Docker information)
-executor:
+execute:
   script-file: docker-info.py
-  type: python
+  executable: /usr/bin/python

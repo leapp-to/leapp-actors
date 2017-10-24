@@ -2,14 +2,18 @@ tags:
 - inspect_machine
 inputs:
 - name: source_ansible_setup
-  type: AnsibleSetupModuleFacts
+  type:
+    name: AnsibleSetupModuleFacts
 outputs:
 - name: hostnameinfo
-  type: HostnameInfo
+  type:
+    name: HostnameInfo
 - name: ip_list
-  type: IPList
+  type:
+    name: IPList
 - name: osversion
-  type: OSVersion
+  type:
+    name: OSVersion
 description: |
   Process Ansible Facts (system information) for further usage
 
@@ -19,6 +23,6 @@ description: |
     hostnameinfo         - hostname
     ip_list              - list of IP addresses
     osversion            - information about Operating System
-executor:
+execute:
   script-file: source_ansible_setup_converter.py
-  type: python
+  executable: /usr/bin/python

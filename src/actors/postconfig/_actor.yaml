@@ -1,6 +1,7 @@
 inputs:
 - name: container_directory
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 description: |
   Move etc/hosts and link it to etc/hosts.source, so it can be used in Docker
 
@@ -8,8 +9,8 @@ description: |
     container_directory - name of the container directory
   Outputs:
     None
-executor:
+execute:
   arguments:
   - '@container_directory.value@'
   script-file: postconfig.sh
-  type: bash
+  executable: /bin/bash

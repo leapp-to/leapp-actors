@@ -35,16 +35,18 @@ def _build_cmd(source_path, name, version, force, exposed_ports):
 
 
 if __name__ == "__main__":
-    cmd = _build_cmd(json.loads(sys.argv[1])['value'],
-                     json.loads(sys.argv[2])['value'],
-                     json.loads(sys.argv[3])["version"].split(".")[0],
-                     json.loads(sys.argv[5])['value'],
-                     json.loads(sys.argv[4])['ports'])
+    inputs = json.load(sys.stdin)
+
+    cmd = _build_cmd(inputs['container_directory']['value'],
+                     inputs['container_name']['value'],
+                     inputs['osversion']["version"].split(".")[0],
+                     inputs['force_create']['value'],
+                     inputs['exposed_ports']['ports'])
 
     out, err, return_code = _execute(cmd)
     outputs = {
-        'container_id': dict(value=out),
-        'error': dict(value=err)
+        'container_id': {'value': out},
+        'error': {'value': err}
     }
     print(json.dumps(outputs))
     sys.exit(return_code)

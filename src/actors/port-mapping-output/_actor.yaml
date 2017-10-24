@@ -1,6 +1,7 @@
 inputs:
 - name: exposed_ports
-  type: ExposedPorts
+  type:
+    name: ExposedPorts
 description: |
   Print port mapping to an output
 
@@ -8,6 +9,6 @@ description: |
     exposed_ports - list of exposed ports
   Outputs:
     Print the port mapping to $LEAPP_ACTOR_OUTPUT
-executor:
+execute:
   script-file: port-mapping-output.sh
-  type: bash
+  executable: /bin/bash

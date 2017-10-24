@@ -24,4 +24,4 @@ if data['containerslist']['retcode']:
 else:
     targetinfo['containers'] = ('OK', data['containerslist']['containers'])
 
-print json.dumps({"targetinfo": targetinfo})
+sys.stdout.write(json.dumps({"targetinfo": targetinfo}) + '\n')

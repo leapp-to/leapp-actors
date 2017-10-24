@@ -1,6 +1,7 @@
 outputs:
 - name: ansible_setup
-  type: AnsibleSetupModuleFacts
+  type:
+    name: AnsibleSetupModuleFacts
 description: |
   Run Ansible to gather system information
 
@@ -8,12 +9,8 @@ description: |
     None
   Outputs:
     ansible_setup - gathered facts about the system
-executor:
-  host: localhost
-  module:
+execute:
+    executable: /usr/bin/python
+    script-file: ansible_setup.py
     arguments:
-    - gather_subset=!hardware,!virtual,!ohai,!facter
-    name: setup
-  output: ansible_setup
-  type: ansible-module
-  user: root
+        - output=ansible_setup

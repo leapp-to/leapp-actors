@@ -1,12 +1,16 @@
 inputs:
 - name: container_name
-  type: ContainerName
+  type:
+    name: ContainerName
 - name: start_container
-  type: BaseTypeBool
+  type:
+    name: BaseTypeBool
 - name: target_host
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 - name: target_user_name
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 description: |
   Start container with given name
 
@@ -14,12 +18,13 @@ description: |
     container_name - name of the container (must be existing one?)
     start_container - option to explicit start the container
   Outputs:
-    None (starting the container)
-executor:
+    None (starting the conainer)
+execute:
+  remote:
+    host: '@target_host.value@'
+    user: '@target_user_name.value@'
+  executable: /bin/bash
+  script-file: start.sh
   arguments:
   - '@container_name.value@'
   - '@start_container.value@'
-  host: '@target_host.value@'
-  script-file: start.sh
-  type: ansible-script-module
-  user: '@target_user_name.value@'

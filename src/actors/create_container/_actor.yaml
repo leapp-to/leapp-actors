@@ -1,23 +1,32 @@
 inputs:
 - name: container_directory
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 - name: container_name
-  type: ContainerName
+  type:
+    name: ContainerName
 - name: osversion
-  type: OSVersion
+  type:
+    name: OSVersion
 - name: exposed_ports
-  type: ExposedPorts
+  type:
+    name: ExposedPorts
 - name: force_create
-  type: BaseTypeBool
+  type:
+    name: BaseTypeBool
 - name: target_host
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 - name: target_user_name
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 outputs:
 - name: container_id
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 - name: error
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 description: |
   Create a new container (but has not started yet) based on an image
 
@@ -33,14 +42,9 @@ description: |
   Outputs:
     container_id        - ID of the new container
     error               - any error returned by 'docker create'
-executor:
-  arguments:
-  - '@container_directory@'
-  - '@container_name@'
-  - '@osversion@'
-  - '@exposed_ports@'
-  - '@force_create@'
-  host: '@target_host.value@'
+execute:
+  remote:
+    host: '@target_host.value@'
+    user: '@target_user_name.value@'
+  executable: /usr/bin/python
   script-file: create_container.py
-  type: ansible-script-module
-  user: '@target_user_name.value@'

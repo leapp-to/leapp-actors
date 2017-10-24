@@ -2,7 +2,8 @@ tags:
 - inspect_machine
 outputs:
 - name: ip_list
-  type: IPList
+  type:
+    name: IPList
 description: |
   Get the system IP addresses
 
@@ -10,9 +11,9 @@ description: |
     None
   Outputs:
     ip_list - List of IPs
-executor:
+execute:
   output-processor:
     target: '@ip_list.ips@'
     type: string-list
   script-file: iplist.sh
-  type: bash
+  executable: /bin/bash

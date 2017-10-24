@@ -2,13 +2,14 @@ tags:
 - inspect_machine
 outputs:
 - name: hostnameinfo
-  type: HostnameInfo
+  type:
+    name: HostnameInfo
 description: |
   Get hostname info from a system
   Inputs:
     None
   Outputs:
     hostnameinfo - hostname
-executor:
+execute:
   script-file: hostname_info.py
-  type: python
+  executable: /usr/bin/python
