@@ -1,6 +1,7 @@
 inputs:
 - name: container_name
-  type: ContainerName
+  type:
+    name: ContainerName
 description: |
   Delete container with a given name
 
@@ -8,8 +9,8 @@ description: |
     container_name - name of the container to be deleted
   Outputs:
     None (container deleted)
-executor:
+execute:
   arguments:
   - '@container_name.value@'
   script-file: delete_container.sh
-  type: bash
+  executable: /bin/bash

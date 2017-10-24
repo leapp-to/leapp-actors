@@ -2,12 +2,15 @@ tags:
 - inspect_machine
 inputs:
 - name: source_host
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 - name: source_user_name
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 outputs:
 - name: source_ansible_setup
-  type: AnsibleSetupModuleFacts
+  type:
+    name: AnsibleSetupModuleFacts
 description: |
   Gather a source system information by using Ansible
 
@@ -16,12 +19,10 @@ description: |
     source_user_name     - username for a source system
   Outputs:
     source_ansible_setup - gathered Ansible Facts (source system information)
-executor:
-  host: '@source_host.value@'
-  module:
+execute:
+    executable: /usr/bin/python
+    script-file: ansible_setup.py
     arguments:
-    - gather_subset=!hardware,!virtual,!ohai,!facter
-    name: setup
-  output: source_ansible_setup
-  type: ansible-module
-  user: '@source_user_name.value@'
+        - host=source_host
+        - user=source_user_name
+        - output=source_ansible_setup

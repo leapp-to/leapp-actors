@@ -1,5 +1,6 @@
 import json
 import rpm
+import sys
 
 
 def format_version(app):
@@ -9,7 +10,8 @@ def format_version(app):
                                     r=app['release'])
 
 
-print json.dumps({
-    'rpm_packages': [{'name': app['name'],
+sys.stdout.write(json.dumps({
+    'rpm_packages': {
+        'packages': [{'name': app['name'],
                       'version': format_version(app)}
-                     for app in rpm.ts().dbMatch()]})
+                     for app in rpm.ts().dbMatch()]}}) + '\n')

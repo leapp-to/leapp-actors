@@ -3,7 +3,8 @@ tags:
 - depsolver
 outputs:
 - name: rsyncinfo
-  type: RSyncInfo
+  type:
+    name: RSyncInfo
 description: |
   Collect information about Rsync on a system
 
@@ -11,6 +12,6 @@ description: |
     None
   Outputs:
     rsyncinfo - collected information about Rsync
-executor:
+execute:
   script-file: rsync-info.py
-  type: python
+  executable: /usr/bin/python

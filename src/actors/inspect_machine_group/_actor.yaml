@@ -2,11 +2,14 @@ tags:
 - inspect_machine
 outputs:
 - name: osversion
-  type: OSVersion
+  type:
+    name: OSVersion
 - name: hostnameinfo
-  type: HostnameInfo
+  type:
+    name: HostnameInfo
 - name: ip_list
-  type: IPList
+  type:
+    name: IPList
 description: |
   Gather source system information like OS version, hostname and IP addresses
 
@@ -16,9 +19,7 @@ description: |
     osversion        - information about Operating System
     hostnameinfo     - hostname
     ip_list          - list of IP addresses
-executor:
-  actors:
-  - osversion
-  - hostname_info
-  - iplist
-  type: group
+group:
+- osversion
+- hostname_info
+- iplist

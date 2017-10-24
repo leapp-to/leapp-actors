@@ -1,7 +1,19 @@
 from json import load, dumps
 import sys
 
-inputs = load(sys.stdin)["string_list"]["value"]
+keys = {
+    "in": "string_list",
+    "out": "csv_string"
+}
+
+for arg in sys.argv[1:]:
+    try:
+        key, value = arg.split('=')
+        keys[key] = value
+    except ValueError:
+        pass
+
+inputs = load(sys.stdin)[keys["in"]]["value"]
 output_str = ""
 
 
@@ -10,4 +22,4 @@ for item in inputs:
         output_str += ", "
     output_str += str(item)
 
-print(dumps({"csv_string": {"value": output_str}}))
+print(dumps({keys["out"]: {"value": output_str}}))

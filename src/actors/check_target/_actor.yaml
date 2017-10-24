@@ -3,14 +3,18 @@ tags:
 - depsolver
 inputs:
 - name: rsyncinfo
-  type: RSyncInfo
+  type:
+    name: RSyncInfo
 - name: dockerinfo
-  type: DockerInfo
+  type:
+    name: DockerInfo
 - name: containerslist
-  type: ContainersList
+  type:
+    name: ContainersList
 outputs:
 - name: targetinfo
-  type: TargetInfo
+  type:
+    name: TargetInfo
 description: |
   Check the target system if it has sufficient tools and its statuses
 
@@ -20,6 +24,6 @@ description: |
     containerslist - list of containers
   Outputs:
     targetinfo     - result of the statuses of the tools on a target system
-executor:
+execute:
   script-file: check_target.py
-  type: python
+  executable: /usr/bin/python

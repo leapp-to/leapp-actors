@@ -2,9 +2,20 @@ import sys
 import os
 import json
 
+DEFAULT_SERVICES = '''
+cloud-config
+cloud-final
+cloud-init
+cloud-init-local
+ip6tables
+iptables
+lvm2-monitor
+network'''.strip().split()
+
 data = json.load(sys.stdin)
 container_dir = data["container_directory"]["value"]
-blacklist = data["upstart_service_blacklist"]["value"]
+blacklist = data.get("upstart_service_blacklist",
+                     {"value": DEFAULT_SERVICES})["value"]
 
 for level in range(0, 7):
     p = os.path.join(container_dir, 'etc', 'rc{}.d'.format(level))

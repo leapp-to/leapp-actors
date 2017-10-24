@@ -3,7 +3,8 @@ tags:
 - inspect_machine
 outputs:
 - name: rpm_packages
-  type: RPMPackages
+  type:
+    name: RPMPackages
 description: |
   List RPM packages
 
@@ -11,6 +12,6 @@ description: |
     None
   Outputs:
     rpm_packages - list of the packages
-executor:
+execute:
   script-file: rpm_list.py
-  type: python
+  executable: /usr/bin/python

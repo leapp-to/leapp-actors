@@ -1,9 +1,11 @@
 inputs:
 - name: string_list
-  type: TypeStringList
+  type:
+    name: TypeStringList
 outputs:
 - name: csv_string
-  type: BaseTypeString
+  type:
+    name: BaseTypeString
 description: |
   Convert array of strings to the CSV
 
@@ -11,6 +13,9 @@ description: |
     string_list - Array of strings
   Outputs:
     csv_string  - CSV record
-executor:
+execute:
   script-file: array_to_csv.py
-  type: python
+  executable: /usr/bin/python
+  arguments:
+      - in=string_list
+      - out=csv_string
