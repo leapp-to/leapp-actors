@@ -8,7 +8,8 @@ class TestSchemaAvailability(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestSchemaAvailability, self).__init__(*args, **kwargs)
 
-        self.root_path = "src"
+        current_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.root_path = os.path.join(current_path, "src")
         self.actors_path = os.path.join(self.root_path, "actors")
         self.schema_path = os.path.join(self.root_path, "schema")
 
@@ -25,7 +26,8 @@ class TestSchemaAvailability(unittest.TestCase):
                       .format(type_name, actor_name, direction))
             failed = True
         except Exception as e:
-            print(str(e))
+            import traceback
+            traceback.print_exc()
             failed = True
 
         self.assertEqual(False, failed)

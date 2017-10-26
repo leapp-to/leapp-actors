@@ -1,6 +1,8 @@
 import jsl
+from snactor.registry.schemas import registered_schema
 
 
+@registered_schema('1.0')
 class AugeasLensProperties(jsl.Document):
     class Options(object):
         definition_id = 'AugeasLensProperties'
@@ -9,6 +11,7 @@ class AugeasLensProperties(jsl.Document):
     properties = jsl.ArrayField(jsl.DocumentField(jsl.RECURSIVE_REFERENCE_CONSTANT))
 
 
+@registered_schema('1.0')
 class AugeasLensResult(jsl.Document):
     class Options(object):
         definition_id = 'AugeasLensResult'
