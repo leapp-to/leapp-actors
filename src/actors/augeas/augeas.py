@@ -135,10 +135,10 @@ def process_augeas_data(lens_data):
                 lens = find_lens(curpath, lens_data)
                 name = 'aug_' + lens.name.lower()
                 if name in data:
-                    data[name].append(_rec_props(n))
+                    data[name]['results'].append(_rec_props(n))
                 else:
-                    data[name] = [_rec_props(n)]
-                data[name][-1]['absolute_path'] = curpath
+                    data[name] = {'results': [_rec_props(n)]}
+                data[name]['results'][-1]['absolute_path'] = curpath
 
             else:
                 for c in n:
