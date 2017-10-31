@@ -3,610 +3,610 @@ inputs:
 outputs:
 - name: aug_libvirtd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_virtlogd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_virtlockd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_libvirtd_libxl
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_libreport
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_libvirtd_lxc
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_libvirt_lockd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_libvirtd_qemu
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_abrt
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_pylonspaste
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_syslog
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_rsyslog
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cobblermodules
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_yum
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_krb5
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_activemq_conf
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_iproute2
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_iscsid
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_passwd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_shadow
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_interfaces
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_bootconf
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_lightdm
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_pagekite
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_dns_zone
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_xorg
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_inittab
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_subversion
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cpanel
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_networkmanager
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cachefilesd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_dnsmasq
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_hostname
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_xymon_alerting
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_lokkit
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_rmt
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_shellvars
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_authorized_keys
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_modprobe
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_updatedb
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_mdadm_conf
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_debctrl
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_qpid
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_aptconf
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_splunk
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_host_conf
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_dovecot
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_netmasks
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_dput
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_securetty
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_xml
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_stunnel
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cron
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cron_user
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_group
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_grub
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_vsftpd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_simplelines
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_puppet
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_rabbitmq
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_inetd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_tmpfiles
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_openvpn
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_bbhosts
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_puppet_auth
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_gdm
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_ethers
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_nagioscfg
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cgrules
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_monit
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_mongodbserver
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_vmware_config
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_mailscanner_rules
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_sssd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_sshd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_gshadow
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_rhsm
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_thttpd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_simplevars
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_sysctl
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_sip_conf
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_pbuilder
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_modules_conf
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_access
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_automaster
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_postgresql
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_xymon
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_logrotate
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_pg_hba
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_httpd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_openshift_http
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_nagiosobjects
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_avahi
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_odbc
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_dhclient
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_schroot
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_koji
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_shellvars_list
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_keepalived
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_aptpreferences
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_slapd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_fonts
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_nsswitch
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_fstab
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_pythonpaste
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_postfix_master
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_nrpe
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_xinetd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_ldif
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_apt_update_manager
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_clamav
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_kdump
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_sysconfig_route
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_aptsources
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_mcollective
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_mysql
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_squid
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_ntp
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_soma
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_logwatch
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cyrus_imapd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_darkice
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_postfix_passwordmap
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_samba
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_activemq_xml
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_memcached
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_collectd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_iptables
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_postfix_transport
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_php
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_mailscanner
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cobblersettings
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_lvm
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_jmxpassword
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_trapperkeeper
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_shells
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_protocols
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_limits
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_ntpd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_star
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_webmin
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_postfix_virtual
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_fuse
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_inputrc
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_nginx
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_jmxaccess
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_exports
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_approx
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_multipath
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_aptcacherngsecurity
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_opendkim
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_smbusers
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_radicale
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_hosts_access
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_crypttab
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_vfstab
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_tuned
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_pgbouncer
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_afs_cellalias
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_anacron
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_hosts
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_aliases
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_jettyrealm
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_spacevars
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_services
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cgconfig
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_networks
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_xendconfsxp
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_redis
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_device_map
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_chrony
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_postfix_access
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_automounter
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_openshift_config
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_pam
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_ssh
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_systemd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_sudoers
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_cups
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_mke2fs
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_ldso
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_resolv
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_carbon
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_postfix_main
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_jaas
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_gtkbookmarks
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_dpkg
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_rsyncd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_known_hosts
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_up2date
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_phpvars
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_pamconf
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_dhcpd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_login_defs
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_openshift_quickstarts
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_puppetfileserver
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_masterpasswd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_backuppchosts
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_postfix_sasl_smtpd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_modules
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_solaris_system
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 - name: aug_htpasswd
   type:
-    name: AugeasLensResults
+    name: AugeasLensResult
 description: |
   Augeas actor runs Augeas lenses against the system
   to obtain interesting metadata about applicatins running there

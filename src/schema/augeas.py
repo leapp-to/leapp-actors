@@ -18,10 +18,3 @@ class AugeasLensResult(jsl.Document):
     name = jsl.StringField(required=True)
     absolute_path = jsl.StringField(required=True)
     properties = jsl.ArrayField(jsl.DocumentField(AugeasLensProperties))
-
-
-@registered_schema('1.0')
-class AugeasLensResults(jsl.Document):
-    class Options(object):
-        definition_id = 'AugeasLensResults'
-    results = jsl.ArrayField(jsl.DocumentField(AugeasLensResult))
