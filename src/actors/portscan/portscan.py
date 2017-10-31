@@ -69,12 +69,12 @@ if __name__ == '__main__':
             pass
 
     # Required
-    host = inputs[keys["host"]].get("value")
-    inputs.setdefault(keys["options"], {})
+    host = inputs[keys["host"]][0].get("value")
+    options = inputs.setdefault(keys["options"], [{}])[0]
     # Optional
-    shallow = inputs[keys["options"]].get("shallow_scan", True)
-    force_nmap = inputs[keys["options"]].get("force_nmap", False)
-    port_range = inputs[keys["options"]].get("port_range", None)
+    shallow = options.get("shallow_scan", True)
+    force_nmap = options.get("force_nmap", False)
+    port_range = options.get("port_range", None)
 
     # Set port_range to None if it is empty string or null in input JSON
     if not port_range:
@@ -87,4 +87,4 @@ if __name__ == '__main__':
             remove = [key for key in item.keys() if key not in ("name", "product")]
             for key in remove:
                 del item[key]
-    print(json.dumps({keys["output"]: result}))
+    print(json.dumps({keys["output"]: [result]}))

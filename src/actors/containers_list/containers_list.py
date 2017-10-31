@@ -24,4 +24,4 @@ if os.path.isdir(macrocontainers):
     containerslist['containers'].extend(directories)
 
 containerslist['containers'] = list(set(containerslist['containers']))
-print(json.dumps({'containerslist': containerslist}))
+print(json.dumps({'containerslist': [containerslist]}))

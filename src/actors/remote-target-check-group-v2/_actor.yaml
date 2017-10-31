@@ -1,0 +1,34 @@
+inputs:
+- name: check_target_service_status
+  type:
+    name: BaseTypeBool
+- name: target_host
+  type:
+    name: BaseTypeString
+- name: target_user_name
+  type:
+    name: BaseTypeString
+outputs:
+- name: rsyncinfo
+  type:
+    name: RSyncInfo
+- name: dockerinfo
+  type:
+    name: DockerInfo
+- name: containerslist
+  type:
+    name: ContainersList
+description: |
+  Group actor that checks services (like Docker, Rsync) on a target system
+  and send the result information about the services to a socket
+
+  Inputs:
+    check_target_service_status - status of services
+    target_host                 - target system hostname
+    target_user_name            - username on target system
+  Outputs:
+    rsyncinfo                   - collected information about Rsync
+    dockerinfo                  - collected information about Docker
+    containerslist              - list of the container on a target system
+group:
+- remote-target-check

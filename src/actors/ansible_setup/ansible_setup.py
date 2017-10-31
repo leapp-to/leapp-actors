@@ -20,16 +20,18 @@ for arg in sys.argv:
 
 inputs = {}
 if not sys.stdin.isatty():
-    inputs = json.load(sys.stdin)
+    input_data = sys.stdin.read()
+    if input_data:
+        inputs = json.loads(input_data)
 
 
 host = 'localhost'
 if keys['host'] in inputs:
-    host = inputs[keys['host']]['value'] or host
+    host = inputs[keys['host']][0]['value'] or host
 
 user = 'root'
 if keys['user'] in inputs:
-    user = inputs[keys['user']]['value'] or user
+    user = inputs[keys['user']][0]['value'] or user
 
 mode = 'local' if host in ('127.0.0.1', 'localhost') else 'ssh'
 
@@ -43,5 +45,5 @@ out, err = p.communicate()
 
 if not p.returncode:
     sys.stdout.write(json.dumps({
-        keys['output']: json.loads(out.split("=>")[1])}))
+        keys['output']: [json.loads(out.split("=>")[1])]}))
 sys.exit(p.returncode)

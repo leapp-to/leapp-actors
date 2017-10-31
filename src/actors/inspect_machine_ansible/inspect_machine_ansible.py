@@ -3,12 +3,12 @@ import sys
 
 data = json.load(sys.stdin)
 
-machineinfo = {'osversion': data['osversion'],
-               'hostnameinfo': data['hostnameinfo'],
-               'iplist': data['ip_list'],
+machineinfo = {'osversion': data['osversion'][0],
+               'hostnameinfo': data['hostnameinfo'][0],
+               'iplist': data['ip_list'][0],
                'rpm_packages': {"packages": []}}
 
 if 'rpm_packages' in data:
-    machineinfo['rpm_packages'] = data['rpm_packages']
+    machineinfo['rpm_packages'] = data['rpm_packages'][0]
 
-print(json.dumps({"machineinfo": machineinfo}))
+print(json.dumps({"machineinfo": [machineinfo]}))

@@ -13,9 +13,9 @@ lvm2-monitor
 network'''.strip().split()
 
 data = json.load(sys.stdin)
-container_dir = data["container_directory"]["value"]
+container_dir = data["container_directory"][0]["value"]
 blacklist = data.get("upstart_service_blacklist",
-                     {"value": DEFAULT_SERVICES})["value"]
+                     [{"value": DEFAULT_SERVICES}])[0]["value"]
 
 for level in range(0, 7):
     p = os.path.join(container_dir, 'etc', 'rc{}.d'.format(level))

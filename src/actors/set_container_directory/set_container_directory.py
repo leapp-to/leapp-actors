@@ -10,8 +10,8 @@ if __name__ == "__main__":
     inputs = json.load(sys.stdin)
 
     print(json.dumps({
-        'container_directory': {
+        'container_directory': [{
             'value': os.path.join(DEFAULT_MACROCONTAINERS_PATH,
-                                  inputs['container_name']['value'])
-        }
+                                  inputs['container_name'][0]['value'])
+        }]
     }))

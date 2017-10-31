@@ -18,4 +18,4 @@ for check, cmd in checks.items():
     else:
         info[check] = (proc.returncode, out.strip())
 
-print(json.dumps({'dockerinfo': info}))
+print(json.dumps({'dockerinfo': [info]}))

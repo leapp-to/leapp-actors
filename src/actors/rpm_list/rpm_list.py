@@ -10,8 +10,8 @@ def format_version(app):
                                     r=app['release'])
 
 
-sys.stdout.write(json.dumps({
-    'rpm_packages': {
-        'packages': [{'name': app['name'],
-                      'version': format_version(app)}
-                     for app in rpm.ts().dbMatch()]}}) + '\n')
+sys.stdout.write(
+    json.dumps({
+        'rpm_packages': [{
+            'packages': [{'name': app['name'], 'version': format_version(app)} for app in rpm.ts().dbMatch()]}
+        ]}) + '\n')

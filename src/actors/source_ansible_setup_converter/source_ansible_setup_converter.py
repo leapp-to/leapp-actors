@@ -3,7 +3,7 @@ import sys
 import re
 
 
-facts = json.load(sys.stdin)["source_ansible_setup"]["ansible_facts"]
+facts = json.load(sys.stdin)["source_ansible_setup"][0]["ansible_facts"]
 interface_pattern = re.compile('^ansible_(wl|e(th|n|m))')
 ips = []
 for interface in facts.keys():
@@ -16,9 +16,9 @@ for interface in facts.keys():
             if ip:
                 ips.append(ip)
 result = {
-    "ip_list": {"ips": ips},
-    "hostnameinfo": {"hostname": facts["ansible_hostname"]},
-    "osversion": {
+    "ip_list": [{"ips": ips}],
+    "hostnameinfo": [{"hostname": facts["ansible_hostname"]}],
+    "osversion": [{
         "name": facts["ansible_distribution"],
-        "version": facts["ansible_distribution_version"]}}
+        "version": facts["ansible_distribution_version"]}]}
 sys.stdout.write(json.dumps(result))

@@ -13,7 +13,7 @@ for arg in sys.argv[1:]:
     except ValueError:
         pass
 
-inputs = load(sys.stdin)[keys["in"]]["value"]
+inputs = load(sys.stdin)[keys["in"]][0]["value"]
 output_str = ""
 
 
@@ -22,4 +22,4 @@ for item in inputs:
         output_str += ", "
     output_str += str(item)
 
-print(dumps({keys["out"]: {"value": output_str}}))
+print(dumps({keys["out"]: [{"value": output_str}]}))

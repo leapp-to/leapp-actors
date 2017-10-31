@@ -16,4 +16,4 @@ for check, cmd in checks.items():
     else:
         info[check] = (proc.returncode, out.strip())
 
-print(json.dumps({'rsyncinfo': info}))
+print(json.dumps({'rsyncinfo': [info]}))

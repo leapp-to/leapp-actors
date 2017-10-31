@@ -4,7 +4,7 @@ import sys
 import json
 
 data = json.load(sys.stdin)
-container_dir = data["container_directory"]["value"]
+container_dir = data["container_directory"][0]["value"]
 try:
     os.makedirs(container_dir)
 except OSError as exc:
