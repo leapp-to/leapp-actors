@@ -2,13 +2,12 @@ import os
 import re
 import json
 import shlex
-from subprocess import Popen, PIPE
+import subprocess
 
 
 def _execute(cmd):
-    proc = Popen(shlex.split(cmd), stdout=PIPE, stderr=PIPE)
-    out, _ = proc.communicate()
-    return out
+    out = subprocess.check_output(shlex.split(cmd))
+    return out.strip()
 
 
 def get_version():

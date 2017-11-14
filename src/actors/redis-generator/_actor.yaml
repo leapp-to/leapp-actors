@@ -25,3 +25,4 @@ description: |
 execute:
   script-file: redis-generator.py
   executable: /usr/bin/python
+...

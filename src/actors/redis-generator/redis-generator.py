@@ -1,20 +1,23 @@
+import os
 import sys
 import json
 import shlex
+import subprocess
 
-from subprocess import Popen, PIPE
+
+BUILDAH = os.path.abspath('buildah')
 
 
 def _execute(cmd):
-    proc = Popen(shlex.split(cmd), stdout=PIPE, stderr=PIPE)
-    out, _ = proc.communicate()
-    if proc.returncode != 0:
-        raise Exception("Command failed")
+    out = subprocess.check_output(shlex.split(cmd))
     return out.strip()
 
 
 def _create_redis_container(redis):
-    cname = _execute('buildah from redis:{0}-alpine'.format(redis['version']))
+    cname = _execute('{buildah} from redis:{version}-alpine'.format(
+        buildah=BUILDAH,
+        version=redis['version'])
+    )
     if not cname:
         raise Exception('Error creating container')
     return cname
@@ -22,11 +25,16 @@ def _create_redis_container(redis):
 
 def _copy_to_container(cname, src, dst):
     if cname and src and dst:
-        _execute('buildah copy {0} {1} {2}'.format(cname, src, dst))
+        _execute('{buildah} copy {cname} {src} {dst}'.format(
+            buildah=BUILDAH,
+            cname=cname,
+            src=src,
+            dst=dst
+        ))
 
 
 def _get_container_id(cname):
-    cntrs = json.loads(_execute('buildah containers --json'))
+    cntrs = json.loads(_execute('{buildah} containers --json'.format(buildah=BUILDAH)))
     ids = (x['id'].strip() for x in cntrs if x['containername'] == cname)
     try:
         cntr_id = next(ids)
@@ -56,7 +64,8 @@ if __name__ == "__main__":
     uri = _join_docker_uri(registry, cname)
 
     # Create image out of the container and push it to the registry
-    _execute('buildah commit --creds {user}:{password} {container_id} {uri}'.format(
+    _execute('{buildah} commit --creds {user}:{password} {container_id} {uri}'.format(
+        buildah=BUILDAH,
         user=registry['user'],
         password=registry['password'],
         container_id=cntr_id,
