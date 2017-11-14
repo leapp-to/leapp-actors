@@ -1,0 +1,14 @@
+tags: process_list
+inputs:
+- name: filter
+  type:
+    name: BaseTypeString
+outputs:
+- name: process_list
+  type:
+    name: ProcessList
+description: |
+  Get info about all processes running on the system
+execute:
+  script-file: process_list.py
+  executable: /usr/bin/python
