@@ -1,0 +1,10 @@
+tags: tornado_generator
+inputs:
+- name: tornado_apps
+  type:
+    name: TornadoApps
+description: |
+  Get all tornado apps and move them to containers
+execute:
+  script-file: tornado_generator.py
+  executable: /usr/bin/python

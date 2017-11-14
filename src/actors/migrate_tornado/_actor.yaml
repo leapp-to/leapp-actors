@@ -1,0 +1,10 @@
+inputs:
+- name: filter
+  type:
+    name: BaseTypeString
+description: |
+    Test    
+group:
+- process_list
+- tornado_scanner
+- tornado_generator

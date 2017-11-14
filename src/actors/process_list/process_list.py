@@ -2,13 +2,15 @@ import os
 import sys
 import json
 
-
 def readlink(path, filename):
     return os.readlink(os.path.join(path, filename))
 
-output = {'list_processes': {}}
+output = {'process_list': [
+    {'processes': []}
+]}
+
 root = '/proc'
-pid = os.getpid()
+pid = str(os.getpid())
 
 params = {}
 if not sys.stdin.isatty():
@@ -17,7 +19,7 @@ if not sys.stdin.isatty():
 for directory in os.listdir(root):
     if not directory.isdigit():
         continue
-    if int(directory) == pid:
+    if directory == pid:
         continue
 
     proc_dir = os.path.join(root, directory)
@@ -36,14 +38,13 @@ for directory in os.listdir(root):
         if params is not None and not str(params.get('filter', '')) in cmdline:
             continue
 
-        output['list_processes'][directory] = {
-            "cwd": readlink(proc_dir, "cwd"),  # check cwd
+        output['process_list'][0]['processes'].append({
+            "cwd": readlink(proc_dir, "cwd"),
             "exe": readlink(proc_dir, "exe"),
             "environ": environ_output,
             "cmdline": cmdline
-        }
+        })
     except (OSError, IOError) as exc:
         sys.stderr.write(str(exc) + "\n")
-
 
 sys.stdout.write(json.dumps(output))
