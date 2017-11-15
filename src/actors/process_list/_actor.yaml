@@ -11,10 +11,10 @@ description: |
   Get info about all processes running on the system
 
   Inputs:
-      filter        - filter results by word contained in /proc/<pid>/cmdline
+      process_list_filter        - filter results by word contained in /proc/<pid>/cmdline
 
   Outputs:
-      process_list  - list information (cwd, cmdline, environ, exe) about all processes found in /proc
+      process_list               - list information (cwd, cmdline, environ, exe) about all processes found in /proc
 
 execute:
   script-file: process_list.py
