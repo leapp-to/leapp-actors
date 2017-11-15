@@ -1,0 +1,25 @@
+inputs:
+- name: host
+  type:
+    name: BaseTypeString
+- name: user
+  type:
+    name: BaseTypeString
+
+outputs:
+- name: app_satellite_detection 
+  type:
+    name: AppSatelliteDetectionResult
+
+description: |
+  Detect whether there is satellite installed on the host 
+
+  Inputs:
+    host: remote host address
+    user: remote user name
+  Outputs:
+    app_satellite_detection - a structure containing information about detected satellite 
+
+execute:
+  script-file: satellite_detector_actor.py
+  executable: /usr/bin/python
