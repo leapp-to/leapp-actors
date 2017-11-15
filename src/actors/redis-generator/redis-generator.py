@@ -39,7 +39,7 @@ def _get_container_id(cname):
     try:
         cntr_id = next(ids)
     except StopIteration:
-        raise Exception('There is more than one container with the same cname')
+        raise Exception('There is more than one container with the same name')
     else:
         return cntr_id.strip()
 
