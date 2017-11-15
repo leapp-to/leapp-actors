@@ -1,6 +1,6 @@
 tags: process_list
 inputs:
-- name: filter
+- name: process_list_filter
   type:
     name: BaseTypeString
 outputs:
