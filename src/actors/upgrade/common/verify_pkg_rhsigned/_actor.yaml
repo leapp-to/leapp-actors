@@ -1,0 +1,16 @@
+inputs:
+- name: context
+  type:
+    name: String
+- name: pkg
+  type:
+    name: StringList
+outputs:
+- name: error
+  type:
+    name: ErrorList
+description: |
+  Based on RPM package list provided as input list those not signed by Red Hat
+execute:
+  script-file: verify_pkg_rhsigned.py
+  executable: /usr/bin/python
