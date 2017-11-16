@@ -8,9 +8,9 @@ def readlink(path, filename):
 
 
 def get_environ(pid):
-    output = {}
     try:
         with open(os.path.join(pid, 'environ'), 'rb') as f:
+            output = {}
             environ = f.read().split("\x00")
             for env in environ:
                 if env:
