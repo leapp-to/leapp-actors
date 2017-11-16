@@ -73,7 +73,7 @@ if __name__ == '__main__':
             continue
 
         # get python exec
-        app_metadata["python_exec"] = get_python_exec(process['cmdline'], process['virtual_env_path'])
+        app_metadata["python_exec"] = get_python_exec(process['cmdline'], app_metadata['virtual_env_path'])
         if app_metadata["python_exec"] is None:
             continue
 
