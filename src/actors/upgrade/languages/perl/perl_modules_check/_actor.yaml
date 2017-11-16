@@ -1,0 +1,11 @@
+outputs:
+- name: error
+  type:
+    name: ErrorList
+description: |
+  Check if all Perl modules are installed as part of a RPM package
+group:
+- list_perl_path
+- list_path_content
+- list_content_pkg
+- verify_pkg_rhsigned
