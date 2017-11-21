@@ -1,0 +1,21 @@
+tags: process_list
+inputs:
+- name: process_list_filter
+  type:
+    name: BaseTypeString
+outputs:
+- name: process_list
+  type:
+    name: ProcessList
+description: |
+  Get info about all processes running on the system
+
+  Inputs:
+      process_list_filter        - filter results by word contained in /proc/<pid>/cmdline
+
+  Outputs:
+      process_list               - list information (cwd, cmdline, environ, exe) about all processes found in /proc
+
+execute:
+  script-file: process_list.py
+  executable: /usr/bin/python
