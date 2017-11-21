@@ -19,6 +19,7 @@ def get_environ(pid):
             return output
     except EnvironmentError as exc:
         sys.stderr.write(str(exc) + "\n")
+        return None
 
 
 def get_cmdline(pid):
@@ -27,6 +28,7 @@ def get_cmdline(pid):
             return f.read().replace("\x00", " ").strip()
     except EnvironmentError as exc:
         sys.stderr.write(str(exc) + "\n")
+        return None
 
 
 def extract_filter_param(params):
@@ -34,7 +36,7 @@ def extract_filter_param(params):
         try:
             return str(params['process_list_filter'][0]['value'])
         except LookupError:
-            sys.stderr.write("Invalid filter param structure, continue without filtering...")
+            sys.stderr.write("Invalid filter param structure, continue without filtering...\n")
     return ''
 
 
