@@ -3,9 +3,21 @@ import sys
 import json
 import shlex
 import subprocess
+from distutils.spawn import find_executable
 
 
-BUILDAH = os.path.abspath('buildah')
+def find_buildah():
+    def _is_valid(path):
+        return path and os.path.isfile(path) and os.access(path, os.X_OK)
+    path = os.path.abspath('buildah')
+    if not _is_valid(path):
+        path = find_executable('buildah')
+    if not _is_valid(path):
+        raise Exception('Could not find a valid buildah binary: {0}'.format(path))
+    return path
+
+
+BUILDAH = find_buildah()
 
 
 def _execute(cmd):
@@ -14,6 +26,7 @@ def _execute(cmd):
 
 
 def _create_redis_container(redis):
+    # TODO: use a RHEL/CentOS-based image
     cname = _execute('{buildah} from redis:{version}-alpine'.format(
         buildah=BUILDAH,
         version=redis['version'])
