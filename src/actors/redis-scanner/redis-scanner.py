@@ -23,7 +23,7 @@ def get_db_path():
     try:
         parsed_dir = out_dir.split()[1]
         parsed_file = out_file.split()[1]
-    except (TypeError, IndexError):
+    except IndexError:
         return None
 
     return os.path.join(parsed_dir, parsed_file)
