@@ -35,6 +35,7 @@ def extract_processes_param(params):
         return params['process_list'][0]['processes']
     except LookupError:
         sys.stderr.write("Could not find processes to check")
+        return None
 
 
 def check_if_files_exist(path, files):
@@ -58,7 +59,7 @@ if __name__ == '__main__':
         app_metadata = {
             "project_path": None,
             "virtual_env_path": process['environ'].get('VIRTUAL_ENV'),
-            "main_file_name": None,
+            "main_file": None,
             "python_exec": None
         }
 
@@ -66,7 +67,7 @@ if __name__ == '__main__':
         main_file_path = get_main_file_path(process['cmdline'], process['cwd'])
         if main_file_path is None:
             continue
-        app_metadata['project_path'], app_metadata['main_file_name'] = main_file_path.rsplit('/', 1)
+        app_metadata['project_path'], app_metadata['main_file'] = main_file_path.rsplit('/', 1)
 
         # check if main file contains tornado import
         if not is_tornado_package(main_file_path):

@@ -3,7 +3,11 @@ inputs:
   type:
     name: BaseTypeString
 description: |
-    Test    
+    Migrate tornado applications found on the source system
+
+    Inputs:
+        process_list_filter        - filter results by word contained in /proc/<pid>/cmdline
+
 group:
 - process_list
 - tornado_scanner
