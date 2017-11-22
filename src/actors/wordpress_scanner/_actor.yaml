@@ -1,0 +1,23 @@
+---
+outputs:
+  - name: wp_version
+    type:
+      name: Version
+
+  - name: wp_root_directory
+    type:
+      name: RootDirectory
+
+  - name: database_host
+    type:
+      name: DatabaseHost
+description: |
+  Wordpress scanner actor.
+
+  Outputs:
+    wp_version        - version of wordpress
+    wp_root_directory - path to directory containing wordpress files
+    database_host     - IP address of database used by wordpress
+execute:
+  executable: /usr/bin/python
+  script-file: wordpress_scanner.py
