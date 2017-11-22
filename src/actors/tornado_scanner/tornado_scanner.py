@@ -21,8 +21,8 @@ def get_python_exec(proc_cmdline, virtual_env_path=None):
         v_python_exec = os.path.join(app_metadata['virtual_env_path'], 'bin/python')
         return os.readlink(v_python_exec) if os.path.islink(v_python_exec) else 'python'
 
-    python_exec = re.search("python([0-9]\.?[0-9]?(d|m|u)?)?", process['cmdline'])
-    return python_exec.group() if python_exec is not None else None
+    python_exec = re.match("(^[^ ]*)((python)([0-9]\.?[0-9]?(d|m|u)?)?)", process['cmdline'])
+    return python_exec.group(2) if python_exec is not None else None
 
 
 def get_main_file_path(cmdline, cwd):
