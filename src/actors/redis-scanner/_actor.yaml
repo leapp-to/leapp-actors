@@ -1,0 +1,16 @@
+---
+outputs:
+  - name: redis
+    type:
+      name: RedisInstallation
+
+description: |
+  Redis scanner actor.
+
+  Outputs:
+    redis             - Redis installation data
+
+execute:
+  script-file: redis-scanner.py
+  executable: /usr/bin/python
+...

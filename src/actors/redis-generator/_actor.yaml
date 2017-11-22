@@ -1,0 +1,28 @@
+---
+inputs:
+  - name: redis
+    type:
+      name: RedisInstallation
+  - name: registry
+    type:
+      name: ContainerRegistry
+
+outputs:
+  - name: generated_redis_image_uri
+    type:
+      name: BaseTypeString
+
+description: |
+  Redis container generator actor.
+
+  Inputs:
+    redis                             - Redis installation data
+    registry                          - Registry access data to upload the container generated
+
+  Outputs:
+    generated_redis_image_uri         - URI of the image generated
+
+execute:
+  script-file: redis-generator.py
+  executable: /usr/bin/python
+...
