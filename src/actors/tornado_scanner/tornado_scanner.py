@@ -41,7 +41,7 @@ def extract_processes_param(params):
 def check_if_files_exist(path, files):
     result = {}
     for f in files:
-        result[f] = os.path.exists(os.path.join(path, f))
+        result[f] = os.path.isfile(os.path.join(path, f))
     return result
 
 
