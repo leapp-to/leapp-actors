@@ -10,16 +10,17 @@ def readlink(path, filename):
 def get_environ(pid):
     try:
         with open(os.path.join(pid, 'environ'), 'rb') as f:
-            output = {}
             environ = f.read().split("\x00")
-            for env in environ:
-                if env:
-                    name, val = env.split('=', 1)
-                    output[name] = val
-            return output
     except EnvironmentError as exc:
         sys.stderr.write(str(exc) + "\n")
         return None
+
+    output = {}
+    for env in environ:
+        if env:
+            name, val = env.split('=', 1)
+            output[name] = val
+    return output
 
 
 def get_cmdline(pid):
@@ -31,19 +32,7 @@ def get_cmdline(pid):
         return None
 
 
-def extract_filter_param(params):
-    if params:
-        try:
-            return str(params['process_list_filter'][0]['value'])
-        except LookupError:
-            sys.stderr.write("Invalid filter param structure, continue without filtering...\n")
-    return ''
-
-
 if __name__ == '__main__':
-    params = {} if sys.stdin.isatty() else json.load(sys.stdin)
-    filter_param = extract_filter_param(params)
-
     actor_output = {'process_list': [
         {'processes': []}
     ]}
@@ -61,9 +50,6 @@ if __name__ == '__main__':
         environ = get_environ(pid)
 
         if cmdline is None or environ is None:
-            continue
-
-        if filter_param not in cmdline:
             continue
 
         actor_output['process_list'][0]['processes'].append({
