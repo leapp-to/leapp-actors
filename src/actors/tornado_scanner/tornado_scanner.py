@@ -9,10 +9,11 @@ def is_tornado_package(main_file_path):
     with open(main_file_path, 'r') as f:
         tree = ast.parse(f.read())
         for node in ast.walk(tree):
-            if isinstance(node, (ast.Import, ast.ImportFrom)):
-                for elem in node.names:
-                    if 'tornado' in elem.name:
-                        return True
+            if not isinstance(node, (ast.Import, ast.ImportFrom)):
+                continue
+            for elem in node.names:
+                if 'tornado' in elem.name:
+                    return True
     return False
 
 
