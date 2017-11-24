@@ -1,0 +1,15 @@
+tags:
+- apache
+outputs:
+- name: apache_scanner
+  type:
+    name: ApacheScanner
+
+description: |
+  Group actor for apache scanning.
+  Augeas actor provides data gathering and apache_scanner filters this data and
+  outputs relevant bits and pieces.
+
+group:
+- augeas
+- apache_scanner
