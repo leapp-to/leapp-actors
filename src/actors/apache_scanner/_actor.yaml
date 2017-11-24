@@ -1,0 +1,17 @@
+tags: apache
+inputs:
+- name: aug_httpd
+  type:
+    name: AugeasLensResult
+outputs:
+- name: apache_scanner
+  type:
+    name: ApacheScanner
+
+description: |
+  Apache scanner actor. Gets input from Augeas actor and extracts
+  information from the httpd lense.
+
+execute:
+  script-file: apache_scanner.py
+  executable: /usr/bin/python
