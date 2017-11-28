@@ -1,10 +1,10 @@
 outputs:
 - name: context 
   type:
-    name: String
+    name: BaseTypeString
 - name: path
   type:
-    name: StringList
+    name: TypeStringList
 description: |
   List path(s) where Perl modules can be installed
 execute:
