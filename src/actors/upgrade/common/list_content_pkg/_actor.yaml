@@ -1,14 +1,14 @@
 inputs:
 - name: context
   type:
-    name: String
+    name: BaseTypeString
 - name: content
   type:
-    name: StringList
+    name: TypeStringList
 outputs:
 - name: pkg
   type:
-    name: StringList
+    name: TypeStringList
 - name: error
   type:
     name: ErrorList

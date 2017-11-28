@@ -11,7 +11,7 @@ class TestSchemaAvailability(unittest.TestCase):
         current_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.root_path = os.path.join(current_path, "src")
         self.actors_path = os.path.join(self.root_path, "actors")
-        self.schema_path = os.path.join(self.root_path, "schema")
+        self.schema_path = os.path.join(self.root_path, "schemas")
 
     def test_actors_and_schemas(self):
         failed = False

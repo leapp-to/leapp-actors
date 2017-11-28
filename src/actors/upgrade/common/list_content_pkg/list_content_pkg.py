@@ -27,7 +27,7 @@ context = ','.join(ctx_list)
 
 tmpl = "rpm -qf {content}"
 
-pkg = []
+pkgs = []
 error = []
 if keys['in_content'] in inputs:
     for contents in inputs[keys['in_content']]:
@@ -39,14 +39,16 @@ if keys['in_content'] in inputs:
             p = Popen(cmd, shell=True, stdout=PIPE)
             out, _ = p.communicate()
             if p.returncode == 0:
-                pkg.append(out.rstrip())
+                pkg = out.rstrip()
+                if pkg not in pkgs:
+                    pkgs.append(pkg)
             else:
                 error.append({keys['err_ctx']: context,
                               keys['err_value']: out.rstrip()})
 
 out = {}
-if pkg:
-    out.update({keys['out']: [{'value': pkg}]})
+if pkgs:
+    out.update({keys['out']: [{'value': pkgs}]})
 if error:
     out.update({keys['err_out']: [{'value': error}]})
 
