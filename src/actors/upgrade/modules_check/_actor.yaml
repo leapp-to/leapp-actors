@@ -1,0 +1,10 @@
+outputs:
+- name: error
+  type:
+    name: ErrorList
+description: |
+  Check if modules are installed as part of a RPM package
+group:
+- python_modules_check
+- ruby_modules_check
+- perl_modules_check

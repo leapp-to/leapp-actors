@@ -1,0 +1,12 @@
+outputs:
+- name: context 
+  type:
+    name: String
+- name: path
+  type:
+    name: StringList
+description: |
+  List path(s) where Perl modules can be installed
+execute:
+  script-file: list_perl_path.py
+  executable: /usr/bin/python
