@@ -1,5 +1,5 @@
 ---
-outputs:
+inputs:
   - name: wp_version
     type:
       name: Version
@@ -11,13 +11,15 @@ outputs:
   - name: database_host
     type:
       name: DatabaseHost
-description: |
-  Wordpress scanner actor.
 
-  Outputs:
+description: |
+  Wordpress generator actor.
+
+  Inputs:
     wp_version        - version of wordpress
     wp_root_directory - path to directory containing wordpress files
     database_host     - IP address of database used by wordpress
+
 execute:
   executable: /usr/bin/python
-  script-file: wordpress_scanner.py
+  script: wordpress_generator.py
