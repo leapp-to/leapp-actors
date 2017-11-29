@@ -1,1 +1,1 @@
-../post_configure_upstart/post_configure_upstart.py
+../../misc/post_configure_upstart/post_configure_upstart.py

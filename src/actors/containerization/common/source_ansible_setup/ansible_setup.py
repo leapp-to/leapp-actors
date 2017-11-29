@@ -1,1 +1,1 @@
-../ansible_setup/ansible_setup.py
+../../../common/ansible_setup/ansible_setup.py
