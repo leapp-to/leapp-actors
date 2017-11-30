@@ -1,0 +1,24 @@
+---
+inputs:
+  - name: registry
+    type:
+      name: ContainerRegistry
+
+outputs:
+  - name: generated_redis_image_uri
+    type:
+      name: BaseTypeString
+
+description: |
+  Main group actor that provides workflow to migrate a Redis installation.
+
+  Inputs:
+    registry                          - Registry access data to upload the container generated
+
+  Outputs:
+    generated_redis_image_uri         - URI of the image generated
+
+group:
+- redis-scanner
+- redis-generator
+...

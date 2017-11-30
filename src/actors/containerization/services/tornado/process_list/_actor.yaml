@@ -1,0 +1,14 @@
+tags: process_list
+outputs:
+- name: process_list
+  type:
+    name: ProcessList
+description: |
+  Get info about all processes running on the system
+
+  Outputs:
+      process_list               - list information (cwd, cmdline, environ, exe) about all processes found in /proc
+
+execute:
+  script-file: process_list.py
+  executable: /usr/bin/python

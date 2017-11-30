@@ -1,0 +1,21 @@
+tags: tornado_scanner
+inputs:
+- name: process_list
+  type:
+    name: ProcessList
+outputs:
+- name: tornado_apps
+  type:
+    name: TornadoApps
+description: |
+  Get all python processes and check if those are tornado apps
+
+  Inputs:
+      process_list      - all python processes found on the system
+
+  Output:
+      tornado_apps      - list of all tornado apps found on the system
+
+execute:
+  script-file: tornado_scanner.py
+  executable: /usr/bin/python

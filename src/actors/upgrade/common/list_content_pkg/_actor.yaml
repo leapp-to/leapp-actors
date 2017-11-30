@@ -1,0 +1,19 @@
+inputs:
+- name: context
+  type:
+    name: String
+- name: content
+  type:
+    name: StringList
+outputs:
+- name: pkg
+  type:
+    name: StringList
+- name: error
+  type:
+    name: ErrorList
+description: |
+  List which RPM package provides content provided as input or add an error message
+execute:
+  script-file: list_content_pkg.py
+  executable: /usr/bin/python
