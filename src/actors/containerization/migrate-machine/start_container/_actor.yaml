@@ -4,13 +4,13 @@ inputs:
     name: ContainerName
 - name: start_container
   type:
-    name: BaseTypeBool
+    name: Bool
 - name: target_host
   type:
-    name: BaseTypeString
+    name: String
 - name: target_user_name
   type:
-    name: BaseTypeString
+    name: String
 description: |
   Start container with given name
 

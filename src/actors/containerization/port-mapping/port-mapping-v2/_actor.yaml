@@ -1,10 +1,10 @@
 inputs:
 - name: source_host
   type:
-    name: BaseTypeString
+    name: String
 - name: target_host
   type:
-    name: BaseTypeString
+    name: String
 - name: tcp_ports_user_mapping
   type:
     name: ExposedPorts
@@ -13,7 +13,7 @@ inputs:
     name: TypePortScan
 - name: use_default_port_map
   type:
-    name: BaseTypeBool
+    name: Bool
 outputs:
 - name: exposed_ports
   type:

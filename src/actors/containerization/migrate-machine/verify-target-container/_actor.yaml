@@ -1,13 +1,13 @@
 inputs:
 - name: force_create
   type:
-    name: BaseTypeBool
+    name: Bool
 - name: containerslist
   type:
     name: ContainersList
 - name: container_name
   type:
-    name: BaseTypeString
+    name: String
 description: |
   Check if the target container is not already running
 

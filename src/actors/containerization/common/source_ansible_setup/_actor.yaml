@@ -3,10 +3,10 @@ tags:
 inputs:
 - name: source_host
   type:
-    name: BaseTypeString
+    name: String
 - name: source_user_name
   type:
-    name: BaseTypeString
+    name: String
 outputs:
 - name: source_ansible_setup
   type:

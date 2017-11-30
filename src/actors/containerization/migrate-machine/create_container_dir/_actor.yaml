@@ -1,7 +1,7 @@
 inputs:
 - name: container_directory
   type:
-    name: BaseTypeString
+    name: String
 description: |
   Create container directory
 

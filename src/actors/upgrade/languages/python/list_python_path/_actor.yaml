@@ -1,10 +1,10 @@
 outputs:
 - name: context 
   type:
-    name: BaseTypeString
+    name: String
 - name: path
   type:
-    name: TypeStringList
+    name: StringList
 description: |
   List path(s) where Python modules can be installed
 execute:

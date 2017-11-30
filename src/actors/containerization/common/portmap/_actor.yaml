@@ -13,7 +13,7 @@ inputs:
     name: TypePortScan
 - name: use_default_port_map
   type:
-    name: BaseTypeBool
+    name: Bool
 outputs:
 - name: exposed_ports
   type:

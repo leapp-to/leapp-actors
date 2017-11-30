@@ -1,11 +1,11 @@
 inputs:
 - name: path
   type:
-    name: TypeStringList
+    name: StringList
 outputs:
 - name: content
   type:
-    name: TypeStringList
+    name: StringList
 description: |
   List all existing directories under input path(s)
 execute:

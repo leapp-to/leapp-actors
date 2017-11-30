@@ -1,22 +1,22 @@
 inputs:
 - name: source_host
   type:
-    name: BaseTypeString
+    name: String
 - name: source_user_name
   type:
-    name: BaseTypeString
+    name: String
 - name: target_host
   type:
-    name: BaseTypeString
+    name: String
 - name: target_user_name
   type:
-    name: BaseTypeString
+    name: String
 - name: container_directory
   type:
-    name: BaseTypeString
+    name: String
 - name: csv_excluded_paths
   type:
-    name: BaseTypeString
+    name: String
 description: |
   Copy the files from a source to a target host by using Rsync
 
