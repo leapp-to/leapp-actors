@@ -25,7 +25,7 @@ import json
 # Search elements are usually apache config directives, but search function
 # will also try to search non-directives.
 #
-# Tuple elements and then unpacked as function arguments to the search
+# Tuple elements are then unpacked as function arguments to the search
 # function inside extract function.
 # Check extract/search function for more info.
 SEARCHES = (
