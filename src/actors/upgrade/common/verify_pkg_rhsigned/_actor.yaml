@@ -1,10 +1,10 @@
 inputs:
 - name: context
   type:
-    name: BaseTypeString
+    name: String
 - name: pkg
   type:
-    name: TypeStringList
+    name: StringList
 outputs:
 - name: error
   type:

@@ -1,7 +1,7 @@
 inputs:
 - name: process_list_filter
   type:
-    name: BaseTypeString
+    name: String
 description: |
     Migrate tornado applications found on the source system
 

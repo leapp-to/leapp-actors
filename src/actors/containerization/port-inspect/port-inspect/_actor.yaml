@@ -1,7 +1,7 @@
 inputs:
 - name: host
   type:
-    name: BaseTypeString
+    name: String
 - name: scan_options
   type:
     name: TypePortScanOptions
