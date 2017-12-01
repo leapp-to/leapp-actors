@@ -22,7 +22,7 @@ def extract_tornado_apps(params):
 
 
 def get_img_path(python_exec):
-    res = re.match("\d\.?\d?$", tornado_app['python_exec'])
+    res = re.search("\d\.?\d?$", tornado_app['python_exec'])
     py_version = 2 if res is None else int(res.group())
 
     if py_version < 3:
