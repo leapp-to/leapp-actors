@@ -4,11 +4,11 @@ from snactor.registry.schemas import registered_schema
 
 
 @registered_schema('1.0')
-class Error(Document):
+class CheckEntry(Document):
     context = StringField()
     value = StringField()
 
 
 @registered_schema('1.0')
-class ErrorList(Document):
-    value = ArrayField(items=DocumentField(Error, as_ref=True), additional_items=False)
+class CheckOutput(Document):
+    value = ArrayField(items=DocumentField(CheckEntry, as_ref=True), additional_items=False)

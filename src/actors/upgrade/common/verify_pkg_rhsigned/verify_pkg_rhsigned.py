@@ -7,9 +7,9 @@ import sys
 keys = {
     'in_ctx': 'context',
     'in_pkg': 'pkg',
-    'out': 'error',
-    'err_ctx': 'context',
-    'err_value': 'value'
+    'check_out': 'check_output',
+    'check_ctx': 'context',
+    'check_value': 'value'
 }
 
 rhsign = ["199e2f91fd431d51",
@@ -47,11 +47,11 @@ if keys['in_pkg'] in inputs:
                 if sign in out:
                     break
             else:
-                error.append({keys['err_ctx']: context,
-                              keys['err_value']: "{} is not signed by Red Hat".format(pkg)})
+                error.append({keys['check_ctx']: context,
+                              keys['check_value']: "{} is not signed by Red Hat".format(pkg)})
 
 out = {}
 if error:
-    out.update({keys['out']: [{'value': error}]})
+    out.update({keys['check_out']: [{'value': error}]})
 
 print(json.dumps(out))

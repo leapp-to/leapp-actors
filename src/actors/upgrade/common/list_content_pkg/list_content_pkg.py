@@ -8,9 +8,9 @@ keys = {
     'in_ctx': 'context',
     'in_content': 'content',
     'out': 'pkg',
-    'err_out': 'error',
-    'err_ctx': 'context',
-    'err_value': 'value'
+    'check_out': 'check_output',
+    'check_ctx': 'context',
+    'check_value': 'value'
 }
 
 inputs = {}
@@ -28,7 +28,7 @@ context = ','.join(ctx_list)
 tmpl = "rpm -qf {content}"
 
 pkgs = []
-error = []
+report = []
 if keys['in_content'] in inputs:
     for contents in inputs[keys['in_content']]:
         for content in contents['value']:
@@ -43,13 +43,13 @@ if keys['in_content'] in inputs:
                 if pkg not in pkgs:
                     pkgs.append(pkg)
             else:
-                error.append({keys['err_ctx']: context,
-                              keys['err_value']: out.rstrip()})
+                report.append({keys['check_ctx']: context,
+                               keys['check_value']: out.rstrip()})
 
 out = {}
 if pkgs:
     out.update({keys['out']: [{'value': pkgs}]})
-if error:
-    out.update({keys['err_out']: [{'value': error}]})
+if report:
+    out.update({keys['check_out']: [{'value': report}]})
 
 print(json.dumps(out))

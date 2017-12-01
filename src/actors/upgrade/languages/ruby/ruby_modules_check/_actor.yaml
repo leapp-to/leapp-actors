@@ -1,7 +1,7 @@
 outputs:
-- name: error
+- name: check_output
   type:
-    name: ErrorList
+    name: CheckOutput
 description: |
   Check if all Ruby modules are installed as part of a RPM package
 group:
