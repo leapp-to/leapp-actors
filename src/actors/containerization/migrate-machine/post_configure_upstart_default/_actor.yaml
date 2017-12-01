@@ -1,7 +1,9 @@
+tags:
+- migrate-machine
 inputs:
 - name: container_directory
   type:
-    name: BaseTypeString
+    name: String
 description: |
   Blacklist some of upstart services in container directory by default
   - cloud-config

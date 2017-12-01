@@ -3,7 +3,7 @@ tags:
 inputs:
 - name: check_target_service_status
   type:
-    name: BaseTypeBool
+    name: Bool
 - name: containerslist
   type:
     name: ContainersList

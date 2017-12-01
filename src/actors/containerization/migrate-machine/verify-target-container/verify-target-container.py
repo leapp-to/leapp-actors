@@ -4,11 +4,11 @@ import sys
 import json
 
 '''- name: force_create
-type: BaseTypeBool
+type: Bool
 - name: containerslist
 type: ContainersList
 - name: container_name
-type: BaseTypeString'''
+type: String'''
 
 inputs = json.load(sys.stdin)
 

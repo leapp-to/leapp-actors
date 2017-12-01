@@ -10,7 +10,7 @@ inputs:
 outputs:
   - name: generated_redis_image_uri
     type:
-      name: BaseTypeString
+      name: String
 
 description: |
   Redis container generator actor.

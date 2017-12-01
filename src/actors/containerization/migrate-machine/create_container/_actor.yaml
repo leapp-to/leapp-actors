@@ -1,7 +1,9 @@
+tags:
+- migrate-machine
 inputs:
 - name: container_directory
   type:
-    name: BaseTypeString
+    name: String
 - name: container_name
   type:
     name: ContainerName
@@ -13,20 +15,20 @@ inputs:
     name: ExposedPorts
 - name: force_create
   type:
-    name: BaseTypeBool
+    name: Bool
 - name: target_host
   type:
-    name: BaseTypeString
+    name: String
 - name: target_user_name
   type:
-    name: BaseTypeString
+    name: String
 outputs:
 - name: container_id
   type:
-    name: BaseTypeString
+    name: String
 - name: error
   type:
-    name: BaseTypeString
+    name: String
 description: |
   Create a new container (but has not started yet) based on an image
 

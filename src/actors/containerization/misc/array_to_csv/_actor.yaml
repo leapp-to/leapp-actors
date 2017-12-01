@@ -1,11 +1,11 @@
 inputs:
 - name: string_list
   type:
-    name: TypeStringList
+    name: StringList
 outputs:
 - name: csv_string
   type:
-    name: BaseTypeString
+    name: String
 description: |
   Convert array of strings to the CSV
 
