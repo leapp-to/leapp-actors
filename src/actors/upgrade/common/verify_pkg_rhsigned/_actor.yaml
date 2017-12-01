@@ -6,9 +6,9 @@ inputs:
   type:
     name: StringList
 outputs:
-- name: error
+- name: check_output
   type:
-    name: ErrorList
+    name: CheckOutput
 description: |
   Based on RPM package list provided as input list those not signed by Red Hat
 execute:
