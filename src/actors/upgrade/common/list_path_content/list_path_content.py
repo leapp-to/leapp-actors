@@ -17,13 +17,15 @@ if not sys.stdin.isatty():
 
 tmpl = "find -P {path} -maxdepth 0 -type d 2> /dev/null"
 
-content = []
+contents = []
 if keys['in'] in inputs:
     for paths in inputs[keys['in']]:
         for path in paths['value']:
             cmd = tmpl.format(path=path)
             p = Popen(cmd, shell=True, stdout=PIPE)
             out, _ = p.communicate()
-            content.extend(out.rstrip().split('\n'))
+            for content in out.rstrip().split('\n'):
+                if content not in contents:
+                    contents.append(content)
 
-print(json.dumps({keys['out']: [{'value': content}]}))
+print(json.dumps({keys['out']: [{'value': contents}]}))

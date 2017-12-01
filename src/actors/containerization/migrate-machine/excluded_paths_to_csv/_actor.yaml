@@ -1,11 +1,13 @@
+tags:
+- migrate-machine
 inputs:
 - name: excluded_paths
   type:
-    name: TypeStringList
+    name: StringList
 outputs:
 - name: csv_excluded_paths
   type:
-    name: BaseTypeString
+    name: String
 description: |
   Defines excluded paths for array_to_csv
 

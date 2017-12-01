@@ -1,7 +1,9 @@
+tags:
+- migrate-machine
 inputs:
 - name: source_host
   type:
-    name: BaseTypeString
+    name: String
 outputs:
 - name: source_system_ports
   type:

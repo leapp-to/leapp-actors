@@ -1,13 +1,13 @@
 inputs:
 - name: check_target_service_status
   type:
-    name: BaseTypeBool
+    name: Bool
 - name: target_host
   type:
-    name: BaseTypeString
+    name: String
 - name: target_user_name
   type:
-    name: BaseTypeString
+    name: String
 outputs:
 - name: rsyncinfo
   type:

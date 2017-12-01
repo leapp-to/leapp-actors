@@ -1,1 +1,1 @@
-../portscan/portscan.py
+../../port-inspect/portscan/portscan.py

@@ -4,5 +4,5 @@ from snactor.registry.schemas import registered_schema
 
 
 @registered_schema('1.0')
-class TypeStringList(Document):
+class StringList(Document):
     value = ArrayField(items=StringField(), unique_items=True, additional_items=False)

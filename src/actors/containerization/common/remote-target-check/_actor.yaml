@@ -1,10 +1,12 @@
+tags:
+- migrate-machine
 inputs:
 - name: target_host
   type:
-    name: BaseTypeString
+    name: String
 - name: target_user_name
   type:
-    name: BaseTypeString
+    name: String
 outputs:
 - name: containerslist
   type:
