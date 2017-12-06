@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Template
+metadata:
+  labels:
+    description: memcached is a high-performance, distributed memory object caching system, generic in nature, but intended for use in speeding up dynamic web applications by alleviating database load.
+    tags: memcached
+    template: docker.io/modularitycontainers/memcached
+  name: memcached
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    name: memcached
+  spec:
+      dockerImageRepository: docker.io/modularitycontainers/memcached
+  tags:
+  - name: latest
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: memcached
+  spec:
+    dockerImageRepository: docker.io/modularitycontainers/memcached
+    replicas: 1
+    strategy:
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          name: memcached
+      spec:
+        containers:
+        - env:
+          image: ' '
+          name: memcached
+          ports:
+          - containerPort: 11211
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - memcached
+        from:
+          kind: ImageStreamTag
+          name: memcached:latest
+      type: ImageChange
