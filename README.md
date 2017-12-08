@@ -15,10 +15,12 @@ two unrelated previously unrelated names.
 ---
 inputs:
   - name: input_channel_name
-    type: schema_name_reference
+    type:
+      name: schema_name_reference
 outputs:
   name: output_channel_name
-  type: schema_name_reference
+  type:
+    name: schema_name_reference
 description: |
   Text field to describe what this actor is doing and a potential place
   for documenting the inputs and outputs
@@ -33,10 +35,12 @@ executor:
 ---
 inputs:
   - name: input_channel_name
-    type: schema_name_reference
+    type:
+      name: schema_name_reference
 outputs:
   name: output_channel_name
-  type: schema_name_reference
+  type:
+    name: schema_name_reference
 description: |
   Text field to describe what this actor is doing and a potential place
   for documenting the inputs and outputs
