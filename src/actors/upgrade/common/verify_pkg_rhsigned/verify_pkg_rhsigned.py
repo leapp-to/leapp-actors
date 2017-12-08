@@ -8,8 +8,6 @@ keys = {
     'in_ctx': 'context',
     'in_pkg': 'pkg',
     'check_out': 'check_output',
-    'check_ctx': 'context',
-    'check_value': 'value'
 }
 
 rhsign = ["199e2f91fd431d51",
@@ -32,7 +30,7 @@ context = ','.join(ctx_list)
 
 tmpl = "rpm -q --qf '%{{SIGPGP:pgpsig}}\n' {pkg}"
 
-error = []
+not_signed = []
 if keys['in_pkg'] in inputs:
     for pkgs in inputs[keys['in_pkg']]:
         for pkg in pkgs['value']:
@@ -47,11 +45,17 @@ if keys['in_pkg'] in inputs:
                 if sign in out:
                     break
             else:
-                error.append({keys['check_ctx']: context,
-                              keys['check_value']: "{} is not signed by Red Hat".format(pkg)})
+                not_signed.append(pkg)
 
-out = {}
-if error:
-    out.update({keys['check_out']: [{'value': error}]})
+if not_signed:
+    check_result = [{
+        'check_id': context,
+        'status': 'FAIL',
+        'summary': 'Package is not signed by Red Hat',
+        'params': not_signed
+    }]
+    check_out = [{'checks': check_result}]
+    print(json.dumps({keys['check_out']: check_out}))
 
-print(json.dumps(out))
+else:
+    print(json.dumps({}))
