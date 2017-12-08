@@ -8,9 +8,7 @@ keys = {
     'in_ctx': 'context',
     'in_content': 'content',
     'out': 'pkg',
-    'check_out': 'check_output',
-    'check_ctx': 'context',
-    'check_value': 'value'
+    'check_out': 'check_output'
 }
 
 inputs = {}
@@ -28,7 +26,7 @@ context = ','.join(ctx_list)
 tmpl = "rpm -qf {content}"
 
 pkgs = []
-report = []
+not_packaged = []
 if keys['in_content'] in inputs:
     for contents in inputs[keys['in_content']]:
         for content in contents['value']:
@@ -43,13 +41,20 @@ if keys['in_content'] in inputs:
                 if pkg not in pkgs:
                     pkgs.append(pkg)
             else:
-                report.append({keys['check_ctx']: context,
-                               keys['check_value']: out.rstrip()})
+                not_packaged.append(content)
 
 out = {}
 if pkgs:
     out.update({keys['out']: [{'value': pkgs}]})
-if report:
-    out.update({keys['check_out']: [{'value': report}]})
+
+if not_packaged:
+    check_result = [{
+        'check_id': context,
+        'status': 'FAIL',
+        'summary': 'Path is not owned by any package',
+        'params': not_packaged
+    }]
+    check_out = [{'checks': check_result}]
+    out.update({keys['check_out']: check_out})
 
 print(json.dumps(out))
