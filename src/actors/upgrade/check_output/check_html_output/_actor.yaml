@@ -1,0 +1,13 @@
+inputs:
+- name: check_output
+  type:
+    name: CheckOutput
+outputs:
+- name: html_output
+  type:
+    name: String
+description: |
+  Use a HTML template to format check results output
+execute:
+  script-file: check_html_output.py
+  executable: /usr/bin/python
