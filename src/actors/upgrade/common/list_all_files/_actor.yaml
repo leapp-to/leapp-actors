@@ -1,0 +1,9 @@
+outputs:
+- name: all_local_files
+  type:
+    name: StringList
+description: |
+  List all local files.
+execute:
+  script-file: check
+  executable: /usr/bin/python
