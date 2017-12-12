@@ -1,0 +1,28 @@
+inputs:
+- name: all_local_files
+  type:
+    name: StringList
+
+outputs:
+- name: vcs_repo_git
+  type:
+    name: StringList
+- name: vcs_repo_svn
+  type:
+    name: StringList
+- name: vcs_repo_cvs
+  type:
+    name: StringList
+- name: vcs_repo_bzr
+  type:
+    name: StringList
+- name: vcs_repo_hg
+  type:
+    name: StringList
+
+description: |
+  Find all VCS rpositories including Git, SVN, CVS, BZR and HG.
+execute:
+  script-file: check
+  executable: /usr/bin/python
+...
