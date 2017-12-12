@@ -1,0 +1,87 @@
+#!/usr/bin/env python
+
+import sys
+import json
+
+
+# API_CANDIDATE
+def load_inputs():
+    "Load all inputs and return dictionary with all input channels."
+    # TODO: create class for work with input API
+    return json.load(sys.stdin) if not sys.stdin.isatty() else {}
+
+
+# API_CANDIDATE
+class OutputBuilder(object):
+    """
+    Provide functionality for work with expected output of actor.
+    """
+
+    def __init__(self):
+        self.channel = {}
+
+    def store_output(self, channel, data):
+        "Store the data into the expected channel"
+        # TODO: Of course, this particular function works just for StringList
+        # now. we should think about more generic solution for use in API.
+        # Or maybe have prepared methods to store specific type of channels:
+        # -- store_stringlist(self, channel, data)
+        # -- store_string(self, channel, data)
+        # -- store_report(self, data)  # in this case, channel is constant!
+        # ....
+        self.channel[channel] = [{"value": data}]
+
+    def dump_output(self):
+        "Generate JSON object."
+        # NOTE: this could be probably removed in future or it can be used
+        # just for debug purposes.
+        return json.dumps(self.channel)
+
+    def print_output(self):
+        "Print generated JSON output on stdout."
+        print(self.dump_output())
+
+
+# API_CANDIDATE
+def log_error(msg):
+    "Log error on stderr."
+    sys.stderr.write("Error: %s\n" % msg)
+
+
+def detect_repo(fname):
+    """
+    Check whether we found VCS repository or not.
+
+    In case we detected repository, return repository type (string). Otherwise
+    return None object.
+    """
+    for repo, suffix in vcs_map.items():
+        if fname.endswith("/%s" % suffix):
+            return repo
+    return None
+
+
+if __name__ == '__main__':
+    IN_LOCAL_FILES = "all_local_files"
+    vcs_map = {"bzr": ".bzr/branch/branch.conf",
+               "hg": ".hg/config",
+               "git": ".git/config",
+               "svn": ".svn/entries",
+               "cvs": "CVS/Root"}
+    inputs = load_inputs()
+    output = OutputBuilder()
+    vcs = {repo: [] for repo in ("bzr", "hg", "git", "svn", "cvs")}
+
+    if IN_LOCAL_FILES not in inputs:
+        log_error("The expected input channel was not found '%s'." % IN_LOCAL_FILES)
+        sys.exit(1)
+
+    for fname in inputs[IN_LOCAL_FILES][0]["value"]:
+        repo = detect_repo(fname)
+        if repo:
+            vcs[repo].append(fname)
+
+    for repo, data in vcs.items():
+        output.store_output("vcs_repo_%s" % repo, data)
+
+    output.print_output()
