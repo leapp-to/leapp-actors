@@ -5,6 +5,7 @@ import json
 import sys
 
 keys = {
+    'name': 'verify_pkg_rhsigned',
     'in_ctx': 'context',
     'in_pkg': 'pkg',
     'check_out': 'check_output',
@@ -49,7 +50,8 @@ if keys['in_pkg'] in inputs:
 
 if not_signed:
     check_result = [{
-        'check_id': context,
+        'check_actor': keys['name'],
+        'check_action': context,
         'status': 'FAIL',
         'summary': 'Package is not signed by Red Hat',
         'params': not_signed
