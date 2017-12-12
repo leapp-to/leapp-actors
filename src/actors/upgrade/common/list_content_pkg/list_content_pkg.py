@@ -5,6 +5,7 @@ import json
 import sys
 
 keys = {
+    'name': 'list_content_pkg',
     'in_ctx': 'context',
     'in_content': 'content',
     'out': 'pkg',
@@ -49,7 +50,8 @@ if pkgs:
 
 if not_packaged:
     check_result = [{
-        'check_id': context,
+        'check_actor': keys['name'],
+        'check_action': context,
         'status': 'FAIL',
         'summary': 'Path is not owned by any package',
         'params': not_packaged

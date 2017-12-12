@@ -13,7 +13,8 @@ HTML_TMPL = """
       {% for check in checks['checks'] %}
         {% for param in check['params'] %}
           <tr>
-            <td>{{ check['check_id'] }}</td>
+            <td>{{ check['check_actor'] }}</td>
+            <td>{{ check['check_action'] }}</td>
             <td><font color="red"><b>{{ check['status'] }}</b></font></td>
             <td>{{ check['summary'] }}: {{ param  }}</td>
           </tr>
