@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+
+import sys
+import json
+
+
+# API_CANDIDATE
+def load_inputs():
+    "Load all inputs and return dictionary with all input channels."
+    # TODO: create class for work with input API
+    return json.load(sys.stdin) if not sys.stdin.isatty() else {}
+
+
+def check_repo(repo_list, repo_type):
+    """
+    Check whether system contains specific VCS repository.
+
+    In case that repo_list is empty, return CheckEntry with status PASS.
+    Otherwise the status is FAIL and append the list of detected repositories
+    as 'params'.
+    """
+    if repo_list:
+        return {
+            'check_actor': 'vcs_report',
+            'check_action': repo_type,
+            'status': 'FAIL',
+            'summary': 'Some %s repositories have been detected.' % repo_type,
+            'params': repo_list
+        }
+    else:
+        return {
+            'check_actor': 'vcs_report',
+            'check_action': repo_type,
+            'status': 'PASS',
+            'summary': 'No %s repository was detected' % repo_type
+        }
+
+
+if __name__ == '__main__':
+    inputs = load_inputs()
+    check_results = []
+    for repo_type in ['bzr', 'hg', 'git', 'svn', 'cvs']:
+        repo_list = inputs['vcs_repo_%s' % repo_type][0]['value']
+        check_results.append(check_repo(repo_list, repo_type))
+
+    # TODO: API...
+    outputs = {'check_output': [{'checks': check_results}]}
+    print(json.dumps(outputs))
