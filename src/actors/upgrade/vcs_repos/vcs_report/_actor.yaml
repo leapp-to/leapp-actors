@@ -1,0 +1,27 @@
+tags: informational
+inputs:
+- name: vcs_repo_git
+  type:
+    name: StringList
+- name: vcs_repo_svn
+  type:
+    name: StringList
+- name: vcs_repo_cvs
+  type:
+    name: StringList
+- name: vcs_repo_bzr
+  type:
+    name: StringList
+- name: vcs_repo_hg
+  type:
+    name: StringList
+outputs:
+- name: check_output
+  type:
+    name: CheckOutput
+description: |
+  Report found repositories.
+execute:
+  script-file: check
+  executable: /usr/bin/python
+...
