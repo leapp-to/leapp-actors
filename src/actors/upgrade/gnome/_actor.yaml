@@ -1,0 +1,10 @@
+outputs:
+- name: check_output
+  type:
+    name: CheckOutput
+description: |
+  This actor detects whether GNOME is installed and informs that GNOME upgrade
+  is not supported.
+execute:
+  script-file: gnome.py
+  executable: /usr/bin/python
