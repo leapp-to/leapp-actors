@@ -4,13 +4,6 @@ from subprocess import Popen, PIPE
 import json
 import sys
 
-keys = {
-    'name': 'verify_pkg_rhsigned',
-    'in_ctx': 'context',
-    'in_pkg': 'pkg',
-    'check_out': 'check_output',
-}
-
 rhsign = ["199e2f91fd431d51",
           "5326810137017186",
           "938a80caf21541eb",
@@ -23,41 +16,32 @@ if not sys.stdin.isatty():
     if input_data:
         inputs = json.loads(input_data)
 
-ctx_list = []
-if keys['in_ctx'] in inputs:
-    for ctx in inputs[keys['in_ctx']]:
-        ctx_list.append(ctx['value'])
-context = ','.join(ctx_list)
-
 tmpl = "rpm -q --qf '%{{SIGPGP:pgpsig}}\n' {pkg}"
 
+context = ','.join(x['value'] for x in inputs.get('context', []))
+pkgs_list = [x['value'] for x in inputs.get('pkg', [])]
+
 not_signed = []
-if keys['in_pkg'] in inputs:
-    for pkgs in inputs[keys['in_pkg']]:
-        for pkg in pkgs['value']:
-            if not pkg:
-                continue
+for pkgs in pkgs_list:
+    for pkg in pkgs:
+        cmd = tmpl.format(pkg=pkg)
+        out, _ = Popen(cmd, shell=True, stdout=PIPE).communicate()
 
-            cmd = tmpl.format(pkg=pkg)
-            p = Popen(cmd, shell=True, stdout=PIPE)
-            out, _ = p.communicate()
-
-            for sign in rhsign:
-                if sign in out:
-                    break
-            else:
-                not_signed.append(pkg)
+        for sign in rhsign:
+            if sign in out:
+                break
+        else:
+            not_signed.append(pkg)
 
 if not_signed:
     check_result = [{
-        'check_actor': keys['name'],
+        'check_actor': 'verify_pkg_rhsigned',
         'check_action': context,
         'status': 'FAIL',
         'summary': 'Package is not signed by Red Hat',
         'params': not_signed
     }]
-    check_out = [{'checks': check_result}]
-    print(json.dumps({keys['check_out']: check_out}))
+    print(json.dumps({'check_output': [{'checks': check_result}]}))
 
 else:
     print(json.dumps({}))

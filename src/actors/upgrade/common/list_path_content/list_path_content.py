@@ -4,11 +4,6 @@ from subprocess import Popen, PIPE
 import json
 import sys
 
-keys = {
-    'in': 'path',
-    'out': 'content'
-}
-
 inputs = {}
 if not sys.stdin.isatty():
     input_data = sys.stdin.read()
@@ -17,15 +12,15 @@ if not sys.stdin.isatty():
 
 tmpl = "find -P {path} -maxdepth 0 -type d 2> /dev/null"
 
-contents = []
-if keys['in'] in inputs:
-    for paths in inputs[keys['in']]:
-        for path in paths['value']:
-            cmd = tmpl.format(path=path)
-            p = Popen(cmd, shell=True, stdout=PIPE)
-            out, _ = p.communicate()
-            for content in out.rstrip().split('\n'):
-                if content not in contents:
-                    contents.append(content)
+path_list = [x['value'] for x in inputs.get('path', [])]
 
-print(json.dumps({keys['out']: [{'value': contents}]}))
+contents = []
+for paths in path_list:
+    for path in paths:
+        cmd = tmpl.format(path=path)
+        out, _ = Popen(cmd, shell=True, stdout=PIPE).communicate()
+        for content in out.rstrip().split('\n'):
+            if content not in contents:
+                contents.append(content)
+
+print(json.dumps({'content': [{'value': contents}]}))
