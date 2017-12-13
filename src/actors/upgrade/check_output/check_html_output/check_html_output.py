@@ -11,12 +11,16 @@ HTML_TMPL = """
   <table style="width:100%">
     {% for checks in check_output %}
       {% for check in checks['checks'] %}
-        {% for param in check['params'] %}
+        {% for param in check.get('params', [""]) %}
           <tr>
             <td>{{ check['check_actor'] }}</td>
             <td>{{ check['check_action'] }}</td>
             <td><font color="red"><b>{{ check['status'] }}</b></font></td>
-            <td>{{ check['summary'] }}: {{ param  }}</td>
+            {% if param %}
+            <td>{{ check['summary'] }}: {{ param }}</td>
+            {% else %}
+            <td>{{ check['summary'] }}</td>
+            {% endif %}
           </tr>
         {% endfor %}
       {% endfor %}
@@ -26,11 +30,6 @@ HTML_TMPL = """
 </html>
 """
 
-keys = {
-    'in': 'check_output',
-    'out': 'html_output'
-}
-
 template = Template(HTML_TMPL)
 
 inputs = {}
@@ -39,9 +38,6 @@ if not sys.stdin.isatty():
     if input_data:
         inputs = json.loads(input_data)
 
-check_output = []
-if keys['in'] in inputs:
-    check_output = inputs[keys['in']]
-
+check_output = inputs.get('check_output', [])
 html = template.render(check_output=check_output)
-print(json.dumps({keys['out']: [{'value': html}]}))
+print(json.dumps({'html_output': [{'value': html}]}))
