@@ -1,10 +1,10 @@
 ---
 inputs:
-  - name: wp_version
+  - name: wordpress_version
     type:
       name: Version
 
-  - name: wp_root_directory
+  - name: wordpress_root_directory
     type:
       name: RootDirectory
 
@@ -16,8 +16,8 @@ description: |
   Wordpress generator actor.
 
   Inputs:
-    wp_version        - version of wordpress
-    wp_root_directory - path to directory containing wordpress files
+    wordpress_version        - version of wordpress
+    wordpress_root_directory - path to directory containing wordpress files
     database_host     - IP address of database used by wordpress
 
 execute:
