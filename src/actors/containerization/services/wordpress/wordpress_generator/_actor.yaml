@@ -22,4 +22,4 @@ description: |
 
 execute:
   executable: /usr/bin/python
-  script: wordpress_generator.py
+  script-file: wordpress_generator.py
