@@ -1,0 +1,19 @@
+description: |
+    Scan the system and detect postgresql installation 
+
+outputs:
+- name: postgresql_scanner
+  type:
+    name: TypePostgreSQLDetectionResult
+    version: 1.0
+
+description: |
+  Scan PostgreSQL installation. Currently, the only supported input
+  is from Augeas actor.
+
+  Outputs:
+    postgresql_scanner - contains list of detected instances
+
+group:
+- augeas
+- postgresql-scan
