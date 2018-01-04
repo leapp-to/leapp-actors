@@ -5,15 +5,13 @@ import re
 
 def get_version(root_dir):
     pattern = '\d(.\d){1,2}'
-    version = ''
 
     with open(os.path.join(root_dir, 'wp-includes/version.php')) as f:
         for line in f:
-            if line.startswith('$wp_version'):
-                version = re.search(pattern, line).group(0)
-                break
+            if line.strip().startswith('$wp_version'):
+                return re.search(pattern, line).group(0)
 
-    return version
+    return 'latest'
 
 
 def get_db_host(root_dir):
@@ -35,25 +33,22 @@ def get_db_host(root_dir):
     if not db_host:
         raise Exception("Unable to find address of database host")
     else:
-        if db_host == 'localhost':
-            db_host = '127.0.0.1'
         return db_host
 
 
 def get_root_dir():
-    root_dir = ''
+    paths = ['/var/www/html', '/srv/wordpress']
+
+    for p in paths:
+        if os.path.exists(os.path.join(p, 'wp-config.php')):
+            return p
+
     for root, dirs, files in os.walk('/'):
         for name in files:
             if name == 'wp-config.php':
-                root_dir = os.path.abspath(root)
-                break
-        if root_dir:
-            break
+                return os.path.abspath(root)
 
-    if not root_dir:
-        raise Exception("Unable to locate wordpress root directory")
-
-    return root_dir
+    raise Exception("Unable to locate wordpress root directory")
 
 
 if __name__ == "__main__":

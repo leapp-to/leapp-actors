@@ -14,13 +14,13 @@ def _execute(cmd, **kwargs):
 
 
 def build_base_image(version):
-    path = os.path.dirname(os.path.realpath(__file__)) + '/'
+    path = os.path.dirname(os.path.realpath(__file__))
 
-    with open(path+'Dockerfile.j2', 'r') as f:
+    with open(os.path.join(path, 'Dockerfile.j2'), 'r') as f:
         template = Template(f.read())
 
     dockerfile = template.render(version=version)
-    with open(path+'Dockerfile', 'w') as f:
+    with open(os.path.join(path, 'Dockerfile'), 'w') as f:
         f.write(dockerfile)
 
     cmd = 'docker build -t wp-base ' + path
@@ -45,8 +45,8 @@ if __name__ == "__main__":
     root_directory = inputs["wordpress_root_directory"][0]["value"]
     db_host = inputs["database_host"][0]["value"]
 
-    if db_host == '127.0.0.1':
-        raise NotImplementedError
+    if db_host in ['127.0.0.1', 'localhost']:
+        raise Exception('Wordpress with DB on localhost is not supported')
 
     build_base_image(version)
     container_name = build_container(root_directory, version)
@@ -54,4 +54,3 @@ if __name__ == "__main__":
         run_container(container_name)
     else:
         raise Exception('Failed to create container')
-
