@@ -1,0 +1,12 @@
+outputs:
+- name: vendor
+  type:
+    name: String
+- name: check_output 
+  type:
+    name: CheckOutput
+description: |
+  Prints hypervisor vendor.
+execute:
+  script-file: check_hyperv.py
+  executable: /usr/bin/python
