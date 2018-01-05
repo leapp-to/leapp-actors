@@ -2,7 +2,6 @@ import json
 import sys
 import os
 from subprocess import check_output, CalledProcessError
-from jinja2 import Template
 
 
 def _execute(cmd, **kwargs):
@@ -16,14 +15,15 @@ def _execute(cmd, **kwargs):
 def build_base_image(version):
     path = os.path.dirname(os.path.realpath(__file__))
 
-    with open(os.path.join(path, 'Dockerfile.j2'), 'r') as f:
-        template = Template(f.read())
+    header = "FROM centos/php-56-centos7:latest\n\nENV WORDPRESS_VERSION {}\n".format(version)
 
-    dockerfile = template.render(version=version)
     with open(os.path.join(path, 'Dockerfile'), 'w') as f:
-        f.write(dockerfile)
+        f.write(header)
+        with open(os.path.join(path, 'Dockerfile.template')) as t:
+            dockerfile = t.read()
+            f.write(dockerfile)
 
-    cmd = 'docker build -t wp-base ' + path
+    cmd = 'docker build -t wp-base {}'.format(path)
     _execute(cmd)
 
 

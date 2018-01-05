@@ -1,6 +1,3 @@
-FROM centos/php-56-centos7:latest
-
-ENV WORDPRESS_VERSION {{ version }}
 VOLUME /opt/app-root/wp-content
 
 # Install wordpress and backup the base image S2I scripts
