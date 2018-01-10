@@ -1,0 +1,11 @@
+outputs:
+- name: check_output
+  type:
+    name: CheckOutput
+description: |
+  Just temporary group actor that links the set of actors providing
+  report message about vcs repositories together.
+group:
+- list_all_files
+- vcs_detection
+- vcs_report
