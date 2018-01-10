@@ -1,5 +1,6 @@
 # coding: utf-8
 
+
 import json
 import os
 import subprocess
@@ -7,21 +8,26 @@ import xml.etree.ElementTree as ET
 import fnmatch
 from collections import namedtuple, OrderedDict
 
+"""
+Note: We include additional non-default lenses from the "lenses" directory
+      using the --include directive.
+      These lenses may override the default augeas lenses.
+"""
 
 Lens = namedtuple("Lens", "name included excluded")
 
 
 def get_lenses():
     ''' Load information about lenses from Augease's `/augeas` sub-key
-    
+
         This information represents:
         1) Lens name
         2) Included paths
-           We use these to find which path corresponds to whichh lens   
+           We use these to find which path corresponds to whichh lens
         3) Excluded paths
            Currently unused
     '''
-    augeas = subprocess.check_output(["augtool", "dump-xml", "/augeas"])
+    augeas = subprocess.check_output(["augtool", "--include=lenses", "dump-xml", "/augeas"])
     root = ET.fromstring(augeas)
     loaded = []
 
@@ -51,7 +57,7 @@ def find_lens(path, lens_data):
 
 
 def process_augeas_data(lens_data):
-    ''' The function starts by iterating first level of data nodes, but 
+    ''' The function starts by iterating first level of data nodes, but
         it's important to first understand how Augeas representes information
         about files.
 
@@ -82,9 +88,9 @@ def process_augeas_data(lens_data):
                 which returns the whole property tree
          2.b) Non-File Path
               Intermediary component of the path i.e. directory - recurse using `_rec` until we hit 2.a)
-        3) All data are accumulated in `data` variable 
+        3) All data are accumulated in `data` variable
     '''
-    data = subprocess.check_output(["augtool", "dump-xml", "/files"])
+    data = subprocess.check_output(["augtool", "--include=lenses", "dump-xml", "/files"])
     root = ET.fromstring(data)
 
     def walk_nodes(root):
@@ -115,7 +121,7 @@ def process_augeas_data(lens_data):
             if value is not None:
                 props['value'] = value.text
 
-    
+
             sub = [v for v in (_rec_props(node) for node in n.findall('node')) if v]
 
             if sub:
