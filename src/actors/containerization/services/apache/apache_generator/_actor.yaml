@@ -1,0 +1,23 @@
+tags: apache
+
+inputs:
+- name: apache_scanner
+  type:
+    name: ApacheScanner
+- name: registry
+  type:
+    name: RegistryEntry
+
+outputs:
+- name: apache_generator
+  type:
+    name: ApacheGenerator
+
+
+description: |
+  Apache generator actor. Gets input from Apache scanner actor and creates
+  docker image and pushes that image into specified registry.
+
+execute:
+  script-file: apache_generator.py
+  executable: /usr/bin/python

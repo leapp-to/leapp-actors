@@ -1,0 +1,32 @@
+tags:
+- apache
+
+inputs:
+- name: registry
+  type:
+    name: RegistryEntry
+
+outputs:
+- name: apache_generator
+  type:
+    name: ApacheGenerator
+
+description: |
+  Group actor for apache migration.
+
+  Inputs:
+    registry    - address, user name and password for registry
+
+  Expample of running this actor and pushing final image to the hub.docker.com
+
+  $ snactor_runner apache_migrate <<< '{"registry": [{"user": "DOCKER_USER_ID",
+                                                      "password": "DOCKER_USER_PW",
+                                                      "address": "docker.io"}]}'
+
+  Outputs:
+    apache_generator    - final image name, image destination and httpd port
+
+group:
+- augeas
+- apache_scanner
+- apache_generator
