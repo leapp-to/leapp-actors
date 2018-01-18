@@ -12,7 +12,7 @@ Running the container:
 
 - after pulling image from registry, run:
 
-$ docker run -dit -p HOST_PORT:CONTAINER_PORT IMAGE_ID
+$ docker run -dt -p HOST_PORT:CONTAINER_PORT IMAGE_ID
 
 
 Possible improvements:
