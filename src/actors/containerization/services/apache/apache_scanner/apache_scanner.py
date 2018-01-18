@@ -146,6 +146,5 @@ if __name__ == "__main__":
                        "actor output. Make sure augeas actor is producing " +
                        "data in the aug_httpd lens.",)
         raise
-    #from pprint import pprint as pp
-    #pp(extract(AUG_HTTPD))
+
     print(json.dumps(extract(AUG_HTTPD)))
