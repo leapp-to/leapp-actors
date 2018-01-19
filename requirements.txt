@@ -1,7 +1,8 @@
-flake8
-jsl == 0.2.4
-jsonschema
-PyYAML
-
-## GitHub links
-git+https://github.com/leapp-to/snactor.git
+### Install all requirements from snactor
+#-r https://raw.githubusercontent.com/leapp-to/snactor/master/requirements.txt
+#-r https://raw.githubusercontent.com/leapp-to/snactor/master/requirements-tests.txt
+#
+### GitHub links
+#git+https://github.com/leapp-to/snactor.git
+#
+### Additional requirements
