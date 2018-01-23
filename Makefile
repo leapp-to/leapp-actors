@@ -1,4 +1,4 @@
-ROOT_PATH=$(PREFIX)/usr/share/python-snactor
+ROOT_PATH=$(PREFIX)/usr/share/leapp
 
 SNACTOR_URL=https://github.com/leapp-to/snactor.git
 SNACTOR_BRANCH=master
