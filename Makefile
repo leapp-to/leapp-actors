@@ -14,6 +14,7 @@ build:
 
 install-deps:
 	pip install -r requirements.txt
+	rm -rf snactor
 	git clone $(SNACTOR_URL) snactor
 	cd snactor && git checkout $(SNACTOR_BRANCH) && make install-deps build install
 	rm -fr snactor
