@@ -21,7 +21,7 @@ install-deps:
 	rm -fr snactor
 
 install:
-	mkdir -p $(ROOT_PATH) 
+	install -m755 -d $(ROOT_PATH)
 	cp -r src/actors $(ROOT_PATH)
 	cp -r src/schemas $(ROOT_PATH)
 	install -m755 -d $(CONFIG_PATH)
