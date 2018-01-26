@@ -8,6 +8,8 @@ import xml.etree.ElementTree as ET
 import fnmatch
 from collections import namedtuple, OrderedDict
 
+import magic
+
 """
 Note: We include additional non-default lenses from the "lenses" directory
       using the --include directive.
@@ -27,7 +29,7 @@ def get_lenses():
         3) Excluded paths
            Currently unused
     '''
-    augeas = subprocess.check_output(["augtool", "--include=lenses", "dump-xml", "/augeas"])
+    augeas = subprocess.check_output(["augtool"] + magic.do_magic() + ["--include=lenses", "dump-xml", "/augeas"])
     root = ET.fromstring(augeas)
     loaded = []
 
@@ -90,7 +92,8 @@ def process_augeas_data(lens_data):
               Intermediary component of the path i.e. directory - recurse using `_rec` until we hit 2.a)
         3) All data are accumulated in `data` variable
     '''
-    data = subprocess.check_output(["augtool", "--include=lenses", "dump-xml", "/files"])
+    data = subprocess.check_output(["augtool"] + magic.do_magic() + ["--include=lenses", "dump-xml", "/files"])
+
     root = ET.fromstring(data)
 
     def walk_nodes(root):

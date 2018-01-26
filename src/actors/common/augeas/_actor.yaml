@@ -611,5 +611,5 @@ description: |
   Augeas actor runs Augeas lenses against the system
   to obtain interesting metadata about applicatins running there
 execute:
-  script-file: augeas.py
+  script-file: actor.py
   executable: /usr/bin/python
