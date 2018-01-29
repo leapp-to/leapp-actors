@@ -1,5 +1,8 @@
 tags: augeas
 inputs:
+ - name: aug_input
+   type:
+     name: AugeasInput
 outputs:
 - name: aug_libvirtd
   type:
