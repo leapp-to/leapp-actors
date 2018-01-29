@@ -38,7 +38,6 @@ def get_lenses():
         3) Excluded paths
            Currently unused
     '''
-    #augeas = subprocess.check_output(["augtool"] + ["-A"] + resolve.get_transformations() + ["--include=lenses", "dump-xml", "/augeas"])
     augeas = subprocess.check_output(["augtool"] + resolve.get_transformations() + ["--include=lenses", "dump-xml", "/augeas"])
 
     root = ET.fromstring(augeas)
@@ -103,7 +102,6 @@ def process_augeas_data(lens_data):
               Intermediary component of the path i.e. directory - recurse using `_rec` until we hit 2.a)
         3) All data are accumulated in `data` variable
     '''
-    #data = subprocess.check_output(["augtool"] + ["-A"] + resolve.get_transformations() + ["--include=lenses", "dump-xml", "/files"])
     data = subprocess.check_output(["augtool"] + resolve.get_transformations() + ["--include=lenses", "dump-xml", "/files"])
 
     root = ET.fromstring(data)
