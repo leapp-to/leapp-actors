@@ -78,8 +78,8 @@ def get_transformations():
             if path_value not in files_already_resolved:
                 files_to_resolve.add(path_value)
 
-    # We need at minimum lens name and list of directives.
-    if "directives" not in INPUT or "lens" not in INPUT:
+    # We need at minimum lens name"
+    if "lens" not in INPUT:
         return []
 
     # Augeas is case sensitive and people will forget.
@@ -94,7 +94,7 @@ def get_transformations():
     files_already_resolved = set()
     gather_files_for_resolution()
 
-    while len(files_to_resolve) > 0:
+    while len(files_to_resolve) > 0 and "directives" in INPUT:
         augeas_file_path = files_to_resolve.pop()
         files_already_resolved.add(augeas_file_path)
 
@@ -118,7 +118,7 @@ def get_transformations():
     for augeas_file_path in augeas_get_known_files():
         # Need to extract filesystem path from augeas tree.
         fs_file_path = augeas_file_path.split("/augeas/files")[1].split("/path")[0]
-        lens_and_file = "%s.lns incl %s" % (INPUT["lens"], fs_file_path)
+        lens_and_file = "{LENS}.lns incl {FS_FILE_PATH}".format(LENS=INPUT["lens"], FS_FILE_PATH=fs_file_path)
         transformations.append("-t" + lens_and_file)
 
     return transformations
