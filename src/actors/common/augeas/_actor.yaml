@@ -610,9 +610,39 @@ outputs:
 - name: aug_htpasswd
   type:
     name: AugeasLensResult
+
 description: |
   Augeas actor runs Augeas lenses against the system
   to obtain interesting metadata about applicatins running there
+
+  Inputs:
+    load_file           - list of file paths you want to load into augeas lens
+                          (this is useful when you want to process config files located
+                           in non-standard locations, otherwise augeas will not know about them)
+    directives          - list of directive names that will be processed for arguments
+    lens                - lens name that is used for directive/recursive processing
+    prefix_for_relative - path that We prepend to any relative file path found during processing
+
+
+    Example of running the augeas actor
+
+      snactor_runner augeas <<< '{"aug_input": [{"lens": "httpd",
+                                                 "directives": ["Include", "IncludeOptional"],
+                                                 "load_files": ["/opt/some_nonstandard_config.conf"],
+                                                 "prefix_for_relative": "/etc/httpd"}]}'
+
+    Which now tells augeas actor that is should
+
+      - take a closer look at httpd lens
+      - take all Include and IncludeOptional directives from configs and recursively process their arguments
+      - load into httpd lens /opt/some_nonstandard_config.conf file
+      - use prefix /etc/httpd for all file paths that are not absolute
+
+    If you want to only tell augeas to load some non-standard files and don't care
+    about processing directives and stuff, run it like this
+
+      snactor_runner augeas <<< '{"aug_input": [{"lens": "httpd", "load_files": ["/opt/test_httpd.conf"]}]}'
+
 execute:
   script-file: actor.py
   executable: /usr/bin/python
