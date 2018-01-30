@@ -616,6 +616,10 @@ description: |
   to obtain interesting metadata about applicatins running there
 
   Inputs:
+    These are optional. If you don't want to use recursive processing or tell
+    augeas about some non-standard config files you want to process, just
+    ignore this.
+
     load_file           - list of file paths you want to load into augeas lens
                           (this is useful when you want to process config files located
                            in non-standard locations, otherwise augeas will not know about them)
@@ -624,14 +628,14 @@ description: |
     prefix_for_relative - path that We prepend to any relative file path found during processing
 
 
-    Example of running the augeas actor
+    Example of running the augeas actor.
 
       snactor_runner augeas <<< '{"aug_input": [{"lens": "httpd",
                                                  "directives": ["Include", "IncludeOptional"],
                                                  "load_files": ["/opt/some_nonstandard_config.conf"],
                                                  "prefix_for_relative": "/etc/httpd"}]}'
 
-    Which now tells augeas actor that is should
+    Which now tells augeas actor that is should.
 
       - take a closer look at httpd lens
       - take all Include and IncludeOptional directives from configs and recursively process their arguments
@@ -639,7 +643,7 @@ description: |
       - use prefix /etc/httpd for all file paths that are not absolute
 
     If you want to only tell augeas to load some non-standard files and don't care
-    about processing directives and stuff, run it like this
+    about processing directives and stuff, run it like this.
 
       snactor_runner augeas <<< '{"aug_input": [{"lens": "httpd", "load_files": ["/opt/test_httpd.conf"]}]}'
 
