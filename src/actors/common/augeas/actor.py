@@ -18,7 +18,6 @@ import augeas
 Note: We include additional non-default lenses from the "lenses" directory
       using the --include directive.
       These lenses may override the default augeas lenses.
-      TODO: this could be probably removed after recursive processing support?
 
 
 TODO:
@@ -31,11 +30,6 @@ TODO:
 
 
 Possible Improvements:
-
-- Could We run augtool with -A/--noautoload? That way, only specific lens will
-  will be loaded (bacause we include it with -t/--transform). We will get the
-  gathered data much faster but will activate only one lens (probably
-  Probably could support non-required input flag that turns this on.
 
 - Providing prefix for directive argument paths could be automatized by running
   vanilla augeas actor before resolving directives. Then put output of augeas
@@ -50,18 +44,18 @@ Lens = namedtuple("Lens", "name included excluded")
 
 
 def augeas_get_known_files():
-    lens = INPUT["lens"]
-    return AUG.match("/augeas/files//path[../lens = \"@%s\" or ../lens = \"%s.lns\"]" % (lens, lens))
+    return AUG.match("/augeas/files//path[../lens = \"@{LENS}\" or ../lens = \"{LENS}.lns\"]".format(
+        LENS=INPUT["lens"]))
 
 
 def augeas_add_file_to_filter(file_path):
-    lens = INPUT["lens"]
-    AUG.set("/augeas/load/%s/incl[last()+1]" % lens, file_path)
+    AUG.set("/augeas/load/{LENS}/incl[last()+1]".format(LENS=INPUT["lens"]), file_path)
     AUG.load()
 
 
 def augeas_get_directive_argument(augeas_file_path, directive_name):
-    return AUG.match("%s/directive[. = \"%s\"]/arg" % (augeas_file_path, directive_name))
+    return AUG.match("{AUGEAS_FILE_PATH}/directive[. = \"{DIRECTIVE}\"]/arg".format(
+        AUGEAS_FILE_PATH=augeas_file_path, DIRECTIVE=directive_name))
 
 
 def augeas_get_path_value(augeas_path):
