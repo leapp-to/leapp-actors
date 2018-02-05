@@ -7,4 +7,5 @@
 #
 ### Additional requirements
 
+cffi # required for python-augeas
 python-augeas
