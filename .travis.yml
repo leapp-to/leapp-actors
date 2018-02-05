@@ -1,8 +1,13 @@
-language: python
-python:
-  - "2.7"
-  - "3.6"
-install:
-    - make install-deps build
+sudo: required
 
-script: make test
+services:
+ - docker
+
+before_install:
+ - sudo docker pull centos:6
+
+script:
+ - sudo docker run --rm=true -v `pwd`:/src/:z centos:6 bash -c "yum install -y augeas augeas-libs && cd /src && make install-deps build && make test"
+
+notifications:
+  email: false
