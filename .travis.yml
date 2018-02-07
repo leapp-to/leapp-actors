@@ -4,10 +4,10 @@ services:
  - docker
 
 before_install:
- - sudo docker pull centos:7
+ - sudo docker pull centos:6
 
 script:
- - sudo docker run --rm=true -v $PWD:/src/:z centos:7 bash -c "yum install -y epel-release && yum install -y python-pip augeas augeas-libs gcc make && cd /src && make install-deps build && make test"
+ - sudo docker run --rm=true -v $PWD:/src/:z centos:6 bash -c "yum install -y epel-release && yum install -y python-pip augeas augeas-libs gcc python-devel && cd /src && make install-deps build && make test"
 
 notifications:
   email: false
