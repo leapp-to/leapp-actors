@@ -38,18 +38,24 @@ Possible Improvements:
 """
 
 
-INPUT = json.load(sys.stdin)["aug_input"][0]
+INPUT = json.load(sys.stdin)
+
+# aug_input (recursive directive processing capability) is optional
+AUG_INPUT = INPUT.get("aug_input", None)
+if AUG_INPUT:
+    AUG_INPUT = AUG_INPUT[0]
+
 AUG = augeas.Augeas()
 Lens = namedtuple("Lens", "name included excluded")
 
 
 def augeas_get_known_files():
     return AUG.match("/augeas/files//path[../lens = \"@{LENS}\" or ../lens = \"{LENS}.lns\"]".format(
-        LENS=INPUT["lens"]))
+        LENS=AUG_INPUT["lens"]))
 
 
 def augeas_add_file_to_filter(file_path):
-    AUG.set("/augeas/load/{LENS}/incl[last()+1]".format(LENS=INPUT["lens"]), file_path)
+    AUG.set("/augeas/load/{LENS}/incl[last()+1]".format(LENS=AUG_INPUT["lens"]), file_path)
     AUG.load()
 
 
@@ -96,27 +102,32 @@ def get_transformations():
             if path_value not in files_already_resolved:
                 files_to_resolve.add(path_value)
 
+    # User did not supply input
+    # (probably do not want to use recirsive directive processing capability)
+    if AUG_INPUT is None:
+        return []
+
     # We need at minimum lens name"
-    if "lens" not in INPUT:
+    if "lens" not in AUG_INPUT:
         return []
 
     # Augeas is case sensitive and people will forget.
-    INPUT["lens"] = INPUT["lens"].capitalize()
+    AUG_INPUT["lens"] = AUG_INPUT["lens"].capitalize()
 
     # Basically the same thing as adding file path directly to the lens filter.
-    if "load_files" in INPUT:
-        for file_path in INPUT["load_files"]:
+    if "load_files" in AUG_INPUT:
+        for file_path in AUG_INPUT["load_files"]:
             augeas_add_file_to_filter(file_path)
 
     files_to_resolve = set()
     files_already_resolved = set()
     gather_files_for_resolution()
 
-    while len(files_to_resolve) > 0 and "directives" in INPUT:
+    while len(files_to_resolve) > 0 and "directives" in AUG_INPUT:
         augeas_file_path = files_to_resolve.pop()
         files_already_resolved.add(augeas_file_path)
 
-        for directive in INPUT["directives"]:
+        for directive in AUG_INPUT["directives"]:
             # Locate all directive keywords in config and get its location in augeas tree.
             directive_arg_paths = augeas_get_directive_argument(augeas_file_path, directive)
 
@@ -126,8 +137,8 @@ def get_transformations():
 
                 # If there is relative path in config file, We need to prepend
                 # supplied prefix.
-                if not directive_arg.startswith('/') and "prefix_for_relative" in INPUT:
-                    directive_arg = INPUT["prefix_for_relative"] + '/' + directive_arg
+                if not directive_arg.startswith('/') and "prefix_for_relative" in AUG_INPUT:
+                    directive_arg = AUG_INPUT["prefix_for_relative"] + '/' + directive_arg
 
                 augeas_add_file_to_filter(directive_arg)
                 gather_files_for_resolution()
@@ -136,7 +147,7 @@ def get_transformations():
     for augeas_file_path in augeas_get_known_files():
         # Need to extract filesystem path from augeas tree.
         fs_file_path = augeas_file_path.split("/augeas/files")[1].split("/path")[0]
-        lens_and_file = "{LENS}.lns incl {FS_FILE_PATH}".format(LENS=INPUT["lens"], FS_FILE_PATH=fs_file_path)
+        lens_and_file = "{LENS}.lns incl {FS_FILE_PATH}".format(LENS=AUG_INPUT["lens"], FS_FILE_PATH=fs_file_path)
         transformations.append("-t" + lens_and_file)
 
     return transformations
