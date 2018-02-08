@@ -1,8 +1,13 @@
-language: python
-python:
-  - "2.7"
-  - "3.6"
-install:
-    - make install-deps build
+sudo: required
 
-script: make test
+services:
+ - docker
+
+before_install:
+ - sudo docker pull centos:7
+
+script:
+ - sudo docker run --rm=true -v $PWD:/src/:z centos:7 bash -c "yum install -y epel-release && yum install -y git python-pip augeas augeas-libs gcc python-devel libffi-devel make && cd /src && make install-deps build && make test"
+
+notifications:
+  email: false
