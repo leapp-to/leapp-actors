@@ -20,11 +20,11 @@ install-deps:
 	rm -fr snactor
 
 install:
-	mkdir -p $(ROOT_PATH) 
+	mkdir -p $(ROOT_PATH)
 	cp -r src/actors $(ROOT_PATH)
 	cp -r src/schemas $(ROOT_PATH)
 
 test:
-	py.test tests/*.py 
+	py.test
 
 .PHONY: clean install test install-deps build
