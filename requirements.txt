@@ -6,5 +6,3 @@
 #git+https://github.com/leapp-to/snactor.git
 #
 ### Additional requirements
-
-python-augeas

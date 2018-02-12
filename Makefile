@@ -18,6 +18,7 @@ install-deps:
 	git clone $(SNACTOR_URL) snactor
 	cd snactor && git checkout $(SNACTOR_BRANCH) && make install-deps build install
 	rm -fr snactor
+	for i in $$(find src -name 'Makefile'); do make -f $$i install-deps; done
 
 install:
 	mkdir -p $(ROOT_PATH)
