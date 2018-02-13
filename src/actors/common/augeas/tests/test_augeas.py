@@ -1,2 +1,6 @@
+from snactor import loader
+
 def test_augeas():
-    assert True
+    data = {}
+    loader.get_actor("augeas").execute(data)
+    assert bool(data) == True
