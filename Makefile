@@ -26,6 +26,13 @@ install:
 	cp -r src/schemas $(ROOT_PATH)
 
 test:
-	py.test
+ifeq ($(ACTOR), )
+	# run all tests when ACTOR is unspecified
+	pytest
+else
+	# run test_schema and tests with $(ACTOR) string in name
+	# e.g. $ make test ACTOR=augeas
+	pytest -k "test_schema or $(ACTOR)"
+endif
 
 .PHONY: clean install test install-deps build
