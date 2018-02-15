@@ -1,4 +1,5 @@
 ROOT_PATH=$(PREFIX)/usr/share/leapp
+CONFIG_PATH=/etc/leapp/
 
 SNACTOR_URL=https://github.com/leapp-to/snactor.git
 SNACTOR_BRANCH=master
@@ -20,9 +21,11 @@ install-deps:
 	rm -fr snactor
 
 install:
-	mkdir -p $(ROOT_PATH) 
+	install -m755 -d $(ROOT_PATH)
 	cp -r src/actors $(ROOT_PATH)
 	cp -r src/schemas $(ROOT_PATH)
+	install -m755 -d $(CONFIG_PATH)
+	install -m644 snactor.cfg $(CONFIG_PATH)
 
 test:
 	py.test tests/*.py 
