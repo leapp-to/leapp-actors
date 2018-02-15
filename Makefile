@@ -28,11 +28,21 @@ install:
 test:
 ifeq ($(ACTOR), )
 	# run all tests when ACTOR is unspecified
-	pytest
 else
 	# run test_schema and tests with $(ACTOR) string in name
 	# e.g. $ make test ACTOR=augeas
-	pytest -k "test_schema or $(ACTOR)"
+	$(eval actor := $(shell echo "-k 'test_schema or $(ACTOR)'"))
 endif
+
+ifeq ($(REPORT), )
+	# no junit-xml styple report
+else
+	# run pytest with --junit-xml=$(REPORT), saves junit-like xml report to $(REPORT)
+	# e.g. $ make test REPORT=report.xml
+	$(eval report := $(shell echo "--junit-xml=$(REPORT)"))
+endif
+
+	pytest $(report) $(actor)
+
 
 .PHONY: clean install test install-deps build
