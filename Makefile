@@ -29,19 +29,21 @@ test:
 ifeq ($(ACTOR), )
 	# run all tests when ACTOR is unspecified
 else
+	# TODO: add warning/error if user wants to run potentially non-existent file
+	#       or actor is missing tests
+	#
 	# run test_schema and tests with $(ACTOR) string in name
 	# e.g. $ make test ACTOR=augeas
 	$(eval actor := $(shell echo "-k 'test_schema or $(ACTOR)'"))
 endif
 
 ifeq ($(REPORT), )
-	# no junit-xml styple report
+	# no junit-xml style report
 else
 	# run pytest with --junit-xml=$(REPORT), saves junit-like xml report to $(REPORT)
 	# e.g. $ make test REPORT=report.xml
 	$(eval report := $(shell echo "--junit-xml=$(REPORT)"))
 endif
-
 	pytest $(report) $(actor)
 
 
