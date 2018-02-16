@@ -1,9 +1,12 @@
 import os
 import unittest
 
+import pytest
+
 from snactor import loader
 
 
+@pytest.mark.first
 class TestSchemaAvailability(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestSchemaAvailability, self).__init__(*args, **kwargs)
