@@ -44,7 +44,9 @@ else
 	# e.g. $ make test REPORT=report.xml
 	$(eval report := $(shell echo "--junit-xml=$(REPORT)"))
 endif
-	pytest $(report) $(actor)
+
+	#pytest $(report) $(actor)
+	python tests/detection.py ACTOR=$(ACTOR) REPORT=$(REPORT)
 
 
 .PHONY: clean install test install-deps build
