@@ -55,12 +55,11 @@ if __name__ == "__main__":
     print('ACTOR=', actor_value)
     print('REPORT=', report_value)
 
-    passed, status = find_actor_tests(actor_value)
-    print_pretty(status)
-    if not passed:
-        sys.exit(1)
-
     if actor_value != '':
+        passed, status = find_actor_tests(actor_value)
+        print_pretty(status)
+        if not passed:
+            sys.exit(1)
         pytest_cmd += ["-k", "test_schema or {ACTOR}".format(ACTOR=actor_value)]
 
     if report_value != '':
