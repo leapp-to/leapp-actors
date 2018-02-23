@@ -1,17 +1,17 @@
 import json
 import sys
 import os
-from subprocess import check_output, CalledProcessError
+from subprocess import check_call, CalledProcessError
 
 
 def _execute(cmd, **kwargs):
     try:
-        check_output(cmd, shell=True, **kwargs)
+        rc = check_call(cmd, shell=True, **kwargs)
     except CalledProcessError as e:
         sys.stderr.write(str(e)+'\n')
-        return None
+        rc = e.returncode
 
-    return True
+    return rc
 
 
 def build_base_image(version):
@@ -33,7 +33,7 @@ def build_container(directory, version):
     name = 'wp-'+version
     cmd = 's2i build {directory} wp-base {name}'.format(directory=directory, name=name)
     ret = _execute(cmd)
-    return name if ret else None
+    return name if not ret else None
 
 
 def run_container(name):
