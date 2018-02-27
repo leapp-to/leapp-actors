@@ -26,7 +26,7 @@ install:
 	cp -r src/schemas $(ROOT_PATH)
 
 test:
-	python tests/run_pytest.py ACTOR=$(ACTOR) REPORT=$(REPORT)
+	python tests/run_pytest.py --actor=$(ACTOR) --report=$(REPORT)
 
 
 

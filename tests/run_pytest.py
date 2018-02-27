@@ -17,6 +17,7 @@ Particularly, solves the following situation:
   - and foobar actor/test file does not even exist, we also report this with error.
 """
 
+import argparse
 import os
 import sys
 import subprocess
@@ -44,26 +45,22 @@ def print_pretty(msg):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Error: Need ACTOR= and REPORT= values! This should not happen!")
-        sys.exit(1)
-
     pytest_cmd = ["pytest", "-v"]
-    actor_value = sys.argv[1].split('=')[1]
-    report_value = sys.argv[2].split('=')[1]
 
-    print('ACTOR=', actor_value)
-    print('REPORT=', report_value)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--actor", help="name of the actor for which to run tests")
+    parser.add_argument("--report", help="filepath where to save report")
+    args = parser.parse_args()
 
-    if actor_value != '':
-        passed, status = find_actor_tests(actor_value)
+    if args.actor:
+        passed, status = find_actor_tests(args.actor)
         print_pretty(status)
         if not passed:
             sys.exit(1)
-        pytest_cmd += ["-k", "test_schema or {ACTOR}".format(ACTOR=actor_value)]
+        pytest_cmd += ["-k", "test_schema or {ACTOR}".format(ACTOR=args.actor)]
 
-    if report_value != '':
-        pytest_cmd += ["--junit-xml={REPORT}".format(REPORT=report_value)]
+    if args.report != '':
+        pytest_cmd += ["--junit-xml={REPORT}".format(REPORT=args.report)]
 
     print(pytest_cmd)
     subprocess.call(pytest_cmd)
