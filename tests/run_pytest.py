@@ -59,7 +59,7 @@ if __name__ == "__main__":
             sys.exit(1)
         pytest_cmd += ["-k", "test_schema or {ACTOR}".format(ACTOR=args.actor)]
 
-    if args.report != '':
+    if args.report:
         pytest_cmd += ["--junit-xml={REPORT}".format(REPORT=args.report)]
 
     print(pytest_cmd)
