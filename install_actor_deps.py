@@ -1,5 +1,14 @@
 #!/usr/bin/python
 
+"""
+Script for installing dependencies for specific actor.
+It is called from Makefile install-deps target if actor is specified.
+If given actor does not exists or does not have Makefile,
+this is reported and script exits with return code 1.
+
+usage: python install_actor_deps.py ACTOR
+"""
+
 import sys
 import os
 from subprocess import check_call, CalledProcessError
