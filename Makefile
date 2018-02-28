@@ -21,7 +21,7 @@ install-deps:
 ifeq ($(ACTOR), )
 	for i in $$(find src -type f -name 'Makefile'); do make -f $$i install-deps; done
 else
-	python install_actor_deps.py $(ACTOR)
+	python utils/install_actor_deps.py $(ACTOR)
 endif
 
 install:
@@ -30,7 +30,7 @@ install:
 	cp -r src/schemas $(ROOT_PATH)
 
 test:
-	python tests/run_pytest.py --actor=$(ACTOR) --report=$(REPORT)
+	python utils/run_pytest.py --actor=$(ACTOR) --report=$(REPORT)
 
 
 
