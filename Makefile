@@ -18,11 +18,7 @@ install-deps:
 	git clone $(SNACTOR_URL) snactor
 	cd snactor && git checkout $(SNACTOR_BRANCH) && make install-deps build install
 	rm -fr snactor
-ifeq ($(ACTOR), )
-	for i in $$(find src -type f -name 'Makefile'); do make -f $$i install-deps; done
-else
-	python utils/install_actor_deps.py $(ACTOR)
-endif
+	python utils/install_actor_deps.py --actor=$(ACTOR)
 
 install:
 	mkdir -p $(ROOT_PATH)
