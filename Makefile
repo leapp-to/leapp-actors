@@ -18,7 +18,7 @@ install-deps:
 	git clone $(SNACTOR_URL) snactor
 	cd snactor && git checkout $(SNACTOR_BRANCH) && make install-deps build install
 	rm -fr snactor
-	for i in $$(find src -name 'Makefile'); do make -f $$i install-deps; done
+	python utils/install_actor_deps.py --actor=$(ACTOR)
 
 install:
 	mkdir -p $(ROOT_PATH)
@@ -26,7 +26,7 @@ install:
 	cp -r src/schemas $(ROOT_PATH)
 
 test:
-	python tests/run_pytest.py --actor=$(ACTOR) --report=$(REPORT)
+	python utils/run_pytest.py --actor=$(ACTOR) --report=$(REPORT)
 
 
 
