@@ -1,3 +1,6 @@
+## THIS CHANGE IS JUST FOR CI TESTING
+
+
 ### Install all requirements from snactor
 #-r https://raw.githubusercontent.com/leapp-to/snactor/master/requirements.txt
 #-r https://raw.githubusercontent.com/leapp-to/snactor/master/requirements-tests.txt
