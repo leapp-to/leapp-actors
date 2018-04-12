@@ -28,6 +28,9 @@ install:
 test:
 	python utils/run_pytest.py --actor=$(ACTOR) --report=$(REPORT)
 
+test_new:
+	python utils/run_new_pytest.py --actor=$(ACTOR) --report=$(REPORT)
+
 
 
 .PHONY: clean install test install-deps build
