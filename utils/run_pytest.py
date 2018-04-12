@@ -45,7 +45,7 @@ def print_pretty(msg):
 
 
 if __name__ == "__main__":
-    pytest_cmd = ["pytest", "-v"]
+    pytest_cmd = ["pytest", "-v", "src", "utils"]
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--actor", help="name of the actor for which to run tests")
