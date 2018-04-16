@@ -24,10 +24,10 @@ Repositories for leapp
 make build
 
 %install
-install -m 0775 -d %{buildroot}%{repositorydir}
+install -m 0755 -d %{buildroot}%{repositorydir}
 cp -r repos/* %{buildroot}%{repositorydir}/
 
-install -m 0775 -d %{buildroot}%{_sysconfdir}/leapp/repos.d/
+install -m 0755 -d %{buildroot}%{_sysconfdir}/leapp/repos.d/
 ln -s  %{repositorydir}/common  %{buildroot}%{_sysconfdir}/leapp/repos.d/common
 ln -s  %{repositorydir}/upgrade  %{buildroot}%{_sysconfdir}/leapp/repos.d/upgrade
 
