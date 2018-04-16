@@ -33,4 +33,4 @@ test_new:
 
 
 
-.PHONY: clean install test install-deps build
+.PHONY: clean install test test_new install-deps build
