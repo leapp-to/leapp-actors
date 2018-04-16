@@ -38,7 +38,7 @@ fi
 
 echo LEAPP_BUILD_TAG=$LEAPP_BUILD_TAG
 export toplevel=$(git rev-parse --show-toplevel)
-git archive --remote "$toplevel" --prefix $REPONAME-master/ HEAD > leapp-$VERSION.tar
+git archive --remote "$toplevel" --prefix $REPONAME-master/ HEAD > $REPONAME-$VERSION.tar
 tar --delete $REPONAME-master/$SPECNAME.spec --file $REPONAME-$VERSION.tar
 mkdir -p $REPONAME-master
 /bin/cp $toplevel/$SPECNAME.spec $REPONAME-master/$SPECNAME.spec
