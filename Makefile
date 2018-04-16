@@ -40,4 +40,4 @@ test-new:
 	python utils/run_new_pytest.py --actor=$(ACTOR) --report=$(REPORT)
 
 
-.PHONY: clean install test test_new install-deps build
+.PHONY: clean install test test-new install-deps install-deps-new build
