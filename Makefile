@@ -28,9 +28,16 @@ install:
 test:
 	python utils/run_pytest.py --actor=$(ACTOR) --report=$(REPORT)
 
-test_new:
-	python utils/run_new_pytest.py --actor=$(ACTOR) --report=$(REPORT)
+# dependencies for the new framework
+install-deps-new:
+	virtualenv -p /usr/bin/python2.7 tut; \
+	. tut/bin/activate; \
+	pip install -r requirements_new.txt
 
+# runs tests using new framework
+test-new:
+	. tut/bin/activate; \
+	python utils/run_new_pytest.py --actor=$(ACTOR) --report=$(REPORT)
 
 
 .PHONY: clean install test test_new install-deps build

@@ -1,0 +1,4 @@
+### Additional requirements
+pytest
+pytest-ordering
+git+https://github.com/leapp-to/leapp
