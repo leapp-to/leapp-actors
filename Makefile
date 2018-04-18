@@ -32,6 +32,7 @@ test:
 install-deps-new:
 	virtualenv -p /usr/bin/python2.7 tut; \
 	. tut/bin/activate; \
+	pip install --upgrade setuptools; \
 	pip install -r requirements_new.txt
 
 # runs tests using new framework
