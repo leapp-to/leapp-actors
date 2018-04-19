@@ -1,11 +1,11 @@
 import jsl
 from snactor.registry.schemas import registered_schema
 
+
 @registered_schema('1.0')
 class ApacheScanner(jsl.Document):
     class Options(object):
         definition_id = 'ApacheScanner'
-
     IncludeOptional = jsl.ArrayField(jsl.StringField(required=True), required=False)
     User = jsl.ArrayField(jsl.StringField(required=True), required=False)
     Group = jsl.ArrayField(jsl.StringField(required=True), required=False)
@@ -26,3 +26,13 @@ class ApacheScanner(jsl.Document):
     DocumentRoot = jsl.ArrayField(jsl.StringField(required=True), required=False)
     absolute_path = jsl.ArrayField(jsl.StringField(required=True), required=False)
     LoadModule = jsl.ArrayField(jsl.StringField(required=True), required=False)
+
+
+@registered_schema('1.0')
+class ApacheGenerator(jsl.Document):
+    class Options(object):
+        definition_id = 'ApacheGenerator'
+    image = jsl.StringField(required=False)
+    uri = jsl.StringField(required=False)
+    port = jsl.StringField(required=False)
+

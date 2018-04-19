@@ -9,11 +9,11 @@ outputs:
 - name: pkg
   type:
     name: StringList
-- name: error
+- name: check_output
   type:
-    name: ErrorList
+    name: CheckOutput
 description: |
-  List which RPM package provides content provided as input or add an error message
+  List which RPM package provides content provided as input or add any found issue to check_output message channel
 execute:
   script-file: list_content_pkg.py
   executable: /usr/bin/python

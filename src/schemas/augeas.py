@@ -18,3 +18,12 @@ class AugeasLensResult(jsl.Document):
     name = jsl.StringField(required=True)
     absolute_path = jsl.StringField(required=True)
     properties = jsl.ArrayField(jsl.DocumentField(AugeasLensProperties))
+
+@registered_schema('1.0')
+class AugeasInput(jsl.Document):
+    class Options(object):
+        definition_id = 'AugeasInput'
+    load_files = jsl.ArrayField(jsl.StringField(required=False), required=False)
+    directives = jsl.ArrayField(jsl.StringField(required=False), required=False)
+    lens = jsl.StringField(required=False)
+    prefix_for_relative = jsl.StringField(required=False)

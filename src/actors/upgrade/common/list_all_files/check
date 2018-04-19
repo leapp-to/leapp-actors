@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+from subprocess import Popen, PIPE
+import json
+import sys
+
+
+def log_error(errmsg):
+    """Log error on stderr."""
+    sys.stderr.write("%s\n" % errmsg)
+
+
+if __name__ == '__main__':
+    # NOTE: expected dirs without whitespaces
+    cmd_local_mnt = "df --local -P | sed 1d | awk '{print $NF}'"
+    cmd_file_list = "find $i -xdev -print"
+    cmd = "for i in $(%s);do %s; done |sort |uniq" % (cmd_local_mnt, cmd_file_list)
+
+    p = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
+    p_out, p_err = p.communicate()
+    if p.returncode != 0:
+        log_error("Error during generating of file list: %s" % p_err)
+        sys.exit(p.returncode)
+
+    files = p_out.splitlines()
+    out = {"all_local_files": [{"value": files}]}
+    print(json.dumps(out))

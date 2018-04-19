@@ -4,52 +4,46 @@ from subprocess import Popen, PIPE
 import json
 import sys
 
-keys = {
-    'in_ctx': 'context',
-    'in_content': 'content',
-    'out': 'pkg',
-    'err_out': 'error',
-    'err_ctx': 'context',
-    'err_value': 'value'
-}
-
 inputs = {}
 if not sys.stdin.isatty():
     input_data = sys.stdin.read()
     if input_data:
         inputs = json.loads(input_data)
 
-ctx_list = []
-if keys['in_ctx'] in inputs:
-    for ctx in inputs[keys['in_ctx']]:
-        ctx_list.append(ctx['value'])
-context = ','.join(ctx_list)
-
 tmpl = "rpm -qf {content}"
 
-pkgs = []
-error = []
-if keys['in_content'] in inputs:
-    for contents in inputs[keys['in_content']]:
-        for content in contents['value']:
-            if not content:
-                continue
+context = ','.join(x['value'] for x in inputs.get('context', []))
+content_list = [x['value'] for x in inputs.get('content', [])]
 
-            cmd = tmpl.format(content=content)
-            p = Popen(cmd, shell=True, stdout=PIPE)
-            out, _ = p.communicate()
-            if p.returncode == 0:
-                pkg = out.rstrip()
-                if pkg not in pkgs:
-                    pkgs.append(pkg)
-            else:
-                error.append({keys['err_ctx']: context,
-                              keys['err_value']: out.rstrip()})
+pkgs = []
+not_packaged = []
+for contents in content_list:
+    for content in contents:
+        if not content:
+            continue
+
+        cmd = tmpl.format(content=content)
+        p = Popen(cmd, shell=True, stdout=PIPE)
+        out, _ = p.communicate()
+        if p.returncode == 0:
+            pkg = out.rstrip()
+            if pkg not in pkgs:
+                pkgs.append(pkg)
+        else:
+            not_packaged.append(content)
 
 out = {}
 if pkgs:
-    out.update({keys['out']: [{'value': pkgs}]})
-if error:
-    out.update({keys['err_out']: [{'value': error}]})
+    out.update({'pkg': [{'value': pkgs}]})
+
+if not_packaged:
+    check_result = [{
+        'check_actor': 'list_content_pkg',
+        'check_action': context,
+        'status': 'FAIL',
+        'summary': 'Path is not owned by any package',
+        'params': not_packaged
+    }]
+    out.update({'check_output': [{'checks': check_result}]})
 
 print(json.dumps(out))

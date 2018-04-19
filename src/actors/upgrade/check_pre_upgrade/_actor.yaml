@@ -1,9 +1,9 @@
 outputs:
-- name: error
+- name: check_output
   type:
-    name: ErrorList
+    name: CheckOutput
 description: |
-  Check if modules are installed as part of a RPM package
+  Group all Pre Upgrade Modules and return problems found
 group:
 - python_modules_check
 - ruby_modules_check
