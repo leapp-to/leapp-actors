@@ -1,4 +1,5 @@
 ### Additional requirements
 pytest
 pytest-ordering
+funcsigs
 git+https://github.com/leapp-to/leapp
