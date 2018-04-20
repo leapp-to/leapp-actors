@@ -3,6 +3,7 @@
 %global dist %{nil}
 
 %global repositorydir %{_datadir}/leapp-repository/repositories
+%global custom_repositorydir %{_datadir}/leapp-repository/custom-repositories
 
 Name:       leapp-repository
 Version:    0.3
@@ -24,6 +25,7 @@ Repositories for leapp
 make build
 
 %install
+install -m 0755 -d %{buildroot}%{custom_repositorydir}
 install -m 0755 -d %{buildroot}%{repositorydir}
 cp -r repos/* %{buildroot}%{repositorydir}/
 
@@ -39,6 +41,7 @@ ln -s  %{repositorydir}/upgrade  %{buildroot}%{_sysconfdir}/leapp/repos.d/upgrad
 %{_sysconfdir}/leapp/repos.d/upgrade
 %{_sysconfdir}/leapp/repos.d/common
 %{repositorydir}/*
+%dir %{custom_repositorydir}
 
 
 %changelog
