@@ -1,10 +1,9 @@
 from leapp.workflows import Workflow
 from leapp.workflows.phases import Phase
 from leapp.workflows.flags import Flags
-from leapp.workflows.filters import Filter
 from leapp.workflows.tagfilters import TagFilter
 from leapp.workflows.policies import Policies
-from leapp.tags import IPUTag, FactsTag, ChecksTag, ChecksTag, AttachPackageReposTag, PlanningTag, DownloadTag,\
+from leapp.tags import IPUTag, FactsTag, ChecksTag, AttachPackageReposTag, PlanningTag, DownloadTag,\
     InterimPreparationTag, InitRamStartTag, NetworkTag, StorageTag, LateTestsTag, PreparationTag, RPMUpgradeTag, \
     ApplicationsTag, ThirdPartyApplicationsTag, FinalizationTag, FirstBootTag, ReportTag
 
@@ -45,7 +44,7 @@ class IPUWorkflow(Workflow):
 
     class PlanningPhase(Phase):
         name = 'Planning'
-        filter = TagFilter(PlanningTag)                 
+        filter = TagFilter(PlanningTag)
         policies = Policies(Policies.Errors.FailPhase,
                             Policies.Retry.Phase)
         flags = Flags()
@@ -62,7 +61,7 @@ class IPUWorkflow(Workflow):
         filter = TagFilter(InterimPreparationTag)
         policies = Policies(Policies.Errors.FailPhase,
                             Policies.Retry.Phase)
-        flags = Flags()
+        flags = Flags(restart_after_phase=True)
 
     class InitRamStartPhase(Phase):
         name = 'InitRamStart'
@@ -125,7 +124,7 @@ class IPUWorkflow(Workflow):
         filter = TagFilter(FinalizationTag)
         policies = Policies(Policies.Errors.FailPhase,
                             Policies.Retry.Phase)
-        flags = Flags()
+        flags = Flags(restart_after_phase=True)
 
     class FirstBootPhase(Phase):
         name = 'FirstBoot'
