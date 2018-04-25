@@ -71,4 +71,4 @@ if __name__ == "__main__":
         pytest_cmd += ["--junit-xml={REPORT}".format(REPORT=args.report)]
 
     print(pytest_cmd)
-    subprocess.call(pytest_cmd)
+    exit(subprocess.call(pytest_cmd))
