@@ -20,29 +20,16 @@ See augeas example here: https://github.com/leapp-to/leapp-actors/blob/master/sr
 
 ## Naming conventions
 
-Put tests inside `tests` directory in your actor directory.
+Put tests inside `tests` directory in your actor directory, as stated in the
+[directory layout](https://leapp.readthedocs.io/en/latest/best-practises.html#repository-directory-layout).
 
-Tests should adhere to the following naming convention:
-- **You have to name your test scripts/files/functions/methods/whatever with the "test_" prefix.
-e.g. for augeas: tests/test_augeas.py which contains test_augeas() function.**
+In order to have the tests discovered bnd carried out by
+[pytest framework](https://pytest.org), you have to follow these rules:
+- All tests has to reside in `test_*.py` or `*_test.py` files
+- Test functions outside of class has to be `test_` prefixed
+- Test methods with `test_` prefix has to reside in `Test` prefixed classes
 
-Testing framework (pytest) is collecting tests based on this particular naming, so if you name your test file `check_my_actor.py`, your test will not be collected.
-Also, if you have file `test_augeas.py` with `check_augeas()` test function, your test will not be collected.
-
-Example here: https://github.com/leapp-to/leapp-actors/tree/master/src/actors/common/augeas
-
-
-## Running actors from the test code
-
-`tests/test_schema.py` is always running first, which ensures that actors/schemas are registered.
-Test writer should not care about this, this is done by the framework.
-Therefore, do not load actors/schemas from your test code (you will get `actor already registered/loaded` exception when you do).
-All you need to do in your test code is to use `snactor.loader`, get the actor and execute.
-
-See example here: https://github.com/leapp-to/leapp-actors/blob/master/src/actors/common/augeas/tests/test_augeas.py
-
-In the future, we are planning to implement some set of helper/utility functions that should make testing easier (e.g. comparing expected vs actual actor outputs).
-
+More on that in [pytest documentation](https://docs.pytest.org/en/latest/goodpractices.html#conventions-for-python-test-discovery).
 
 ## Running tests locally
 
