@@ -9,16 +9,14 @@ clean:
 build:
 	true
 
-# dependencies for the new framework
-install-deps-new:
+install-deps:
 	virtualenv -p /usr/bin/python2.7 tut; \
 	. tut/bin/activate; \
 	pip install --upgrade setuptools; \
-	pip install -r requirements_new.txt
+	pip install -r requirements.txt
 
-# runs tests using new framework
-test-new:
+test:
 	. tut/bin/activate; \
-	python utils/run_new_pytest.py --actor=$(ACTOR) --report=$(REPORT)
+	python utils/run_pytest.py --actor=$(ACTOR) --report=$(REPORT)
 
-.PHONY: clean test-new install-deps-new build
+.PHONY: clean test install-deps build
