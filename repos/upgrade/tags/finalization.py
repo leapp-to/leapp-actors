@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class FinalizationTag(Tag):
+class FinalizationPhaseTag(Tag):
     name = 'finalization'

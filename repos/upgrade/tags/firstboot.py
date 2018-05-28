@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class FirstBootTag(Tag):
+class FirstBootPhaseTag(Tag):
     name = 'first_boot'

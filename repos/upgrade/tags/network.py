@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class NetworkTag(Tag):
+class NetworkPhaseTag(Tag):
     name = 'network'

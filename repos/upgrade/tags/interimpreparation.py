@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class InterimPreparationTag(Tag):
+class InterimPreparationPhaseTag(Tag):
     name = 'interim_preparation'

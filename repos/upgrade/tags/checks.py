@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class ChecksTag(Tag):
+class ChecksPhaseTag(Tag):
     name = 'checks'

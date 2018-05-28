@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class AttachPackageReposTag(Tag):
+class AttachPackageReposPhaseTag(Tag):
     name = 'attach_package_repos'

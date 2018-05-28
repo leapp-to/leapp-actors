@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class FactsTag(Tag):
+class FactsPhaseTag(Tag):
     name = 'facts'

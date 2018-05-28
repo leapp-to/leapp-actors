@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class StorageTag(Tag):
+class StoragePhaseTag(Tag):
     name = 'storage'

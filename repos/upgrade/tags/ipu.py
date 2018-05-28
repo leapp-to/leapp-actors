@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class IPUTag(Tag):
+class IPUWorkflowTag(Tag):
     name = 'ipu'

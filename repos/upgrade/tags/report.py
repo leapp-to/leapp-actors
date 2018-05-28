@@ -1,5 +1,5 @@
 from leapp.tags import Tag
 
 
-class ReportTag(Tag):
+class ReportPhaseTag(Tag):
     name = 'report'
