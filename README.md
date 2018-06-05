@@ -1,5 +1,5 @@
 # Tutorial
-Checkout the [leapp actor tutorials](https://leapp.readthedocs.io/en/latest/first-actor.html)
+Checkout the tutorial for [creating first actor](https://leapp.readthedocs.io/en/latest/first-actor.html)
 
 ---
 
@@ -9,10 +9,23 @@ Here are some key points to read before you start to write tests:
 
 ## Actor dependencies
 
-Each actor can now have its own Makefile with `install-deps` target. This takes care of installing any dependencies of your actor.
-So, if your actor has any dependency, put it there.
+Each actor can now have its own Makefile with `install-deps` target. This
+takes care of installing any dependencies of your actor. So, if your actor has
+any dependency, put it there.
 
-See augeas example here: https://github.com/leapp-to/leapp-actors/blob/master/src/actors/common/augeas/Makefile
+See testing actor's examle [here](repos/common/actors/testactor/Makefile).
+
+To install dependencies for all actors, run:
+
+``` bash
+$ make install-deps
+```
+
+Or for just one specific actor:
+
+``` bash
+$ make install-deps ACTOR=testactor
+```
 
 ## Naming conventions
 
@@ -39,10 +52,10 @@ $ make test
 You can also do:
 
 ``` bash
-$ make test ACTOR=augeas
+$ make test ACTOR=testactor
 ```
 
-which runs all test files with the `augeas` substring in the name. This is
+which runs all test files with the `testactor` substring in the name. This is
 useful if you want to test only one specific actor.
 
 It is also possible to generate report in JUnit XML format:
