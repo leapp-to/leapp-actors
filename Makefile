@@ -14,6 +14,7 @@ install-deps:
 	. tut/bin/activate; \
 	pip install --upgrade setuptools; \
 	pip install -r requirements.txt
+	python utils/install_actor_deps.py --actor=$(ACTOR)
 
 test:
 	. tut/bin/activate; \
