@@ -1,66 +1,64 @@
 # Tutorial
-Checkout the [leapp actor tutorials](https://leapp.readthedocs.io/en/latest/tutorials.html)
-
+See the tutorial for [creating the first actor](https://leapp.readthedocs.io/en/latest/first-actor.html).
 
 ---
-
 
 # How to write actor tests
 
 Here are some key points to read before you start to write tests:
 
-
 ## Actor dependencies
 
-Each actor can now have its own Makefile with `install-deps` target. This takes care of installing any dependencies of your actor.
-So, if your actor has any dependency, put it there.
+Each actor can now have its own Makefile with the `install-deps` target. This
+takes care of installing any dependencies of your actor. If your actor has
+any dependencies, put them there.
 
-See augeas example here: https://github.com/leapp-to/leapp-actors/blob/master/src/actors/common/augeas/Makefile
+See the testing actor's example [here](repos/common/actors/testactor/Makefile).
 
+To install dependencies for all actors, run:
+
+``` bash
+$ make install-deps
+```
+
+Or, for just one specific actor, run:
+
+``` bash
+$ make install-deps ACTOR=testactor
+```
 
 ## Naming conventions
 
-Put tests inside `tests` directory in your actor directory.
+Put tests inside the `tests` directory in your actor directory, as stated in the
+[directory layout](https://leapp.readthedocs.io/en/latest/best-practises.html#repository-directory-layout).
 
-Tests should adhere to the following naming convention:
-- **You have to name your test scripts/files/functions/methods/whatever with the "test_" prefix.
-e.g. for augeas: tests/test_augeas.py which contains test_augeas() function.**
+In order to have the tests found and carried out by
+[pytest framework](https://pytest.org), follow these rules:
+- All tests have to reside in the `test_*.py` or `*_test.py` files.
+- Test functions outside of the class have to be  prefixed by `test_`.
+- Test methods with the `test_` prefix have to reside in the `Test` prefixed classes.
 
-Testing framework (pytest) is collecting tests based on this particular naming, so if you name your test file `check_my_actor.py`, your test will not be collected.
-Also, if you have file `test_augeas.py` with `check_augeas()` test function, your test will not be collected.
-
-Example here: https://github.com/leapp-to/leapp-actors/tree/master/src/actors/common/augeas
-
-
-## Running actors from the test code
-
-`tests/test_schema.py` is always running first, which ensures that actors/schemas are registered.
-Test writer should not care about this, this is done by the framework.
-Therefore, do not load actors/schemas from your test code (you will get `actor already registered/loaded` exception when you do).
-All you need to do in your test code is to use `snactor.loader`, get the actor and execute.
-
-See example here: https://github.com/leapp-to/leapp-actors/blob/master/src/actors/common/augeas/tests/test_augeas.py
-
-In the future, we are planning to implement some set of helper/utility functions that should make testing easier (e.g. comparing expected vs actual actor outputs).
-
+More on that in the [pytest documentation](https://docs.pytest.org/en/latest/goodpractices.html#conventions-for-python-test-discovery).
 
 ## Running tests locally
 
-If you want to run all tests from leapp-actors, run the following from the leapp-actors directory:
+If you want to run all tests from leapp-actors, run the following code from
+the leapp-actors directory:
 
 ``` bash
 $ make test
 ```
 
-You can also do:
+You can also use:
 
 ``` bash
-$ make test ACTOR=augeas
+$ make test ACTOR=testactor
 ```
 
-which runs all test files with the `augeas` substring in the name. This is nice if you want to run only tests from one specific actor.
+which runs all test files with the `testactor` substring in the name. This is
+useful if you want to test only one specific actor.
 
-It is also possible to generate junit-like xml report and save it into file:
+It is also possible to generate a report in a JUnit XML format:
 
 ``` bash
 $ make test REPORT=report.xml
