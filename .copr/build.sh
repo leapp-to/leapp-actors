@@ -22,7 +22,7 @@ if ! git status 2>&1 > /dev/null; then
 fi
 
 BRANCH=master
-LEAPP_PATCHES_SINCE_RELEASE="$(git log `git describe  --abbrev=0`..HEAD --format=oneline | wc -l)"
+LEAPP_PATCHES_SINCE_RELEASE="$(git log `git describe  --abbrev=0`..HEAD --format=oneline | wc -l)$LEAPP_PATCHES_SINCE_RELEASE_EXTERNAL"
 echo LEAPP_PATCHES_SINCE_RELEASE=$LEAPP_PATCHES_SINCE_RELEASE$LEAPP_PATCHES_SINCE_RELEASE_EXTERNAL
 
 VERSION=$(git describe  --abbrev=0|cut -d- -f 2)
