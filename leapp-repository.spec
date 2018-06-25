@@ -30,16 +30,19 @@ install -m 0755 -d %{buildroot}%{repositorydir}
 cp -r repos/* %{buildroot}%{repositorydir}/
 
 install -m 0755 -d %{buildroot}%{_sysconfdir}/leapp/repos.d/
-ln -s  %{repositorydir}/common  %{buildroot}%{_sysconfdir}/leapp/repos.d/common
-ln -s  %{repositorydir}/upgrade  %{buildroot}%{_sysconfdir}/leapp/repos.d/upgrade
+for DIRECTORY in $(find  repos/  -mindepth 1 -maxdepth 1 -type d);
+do
+    REPOSITORY=$(basename $DIRECTORY)
+    echo "Enabling repository $REPOSITORY"
+    ln -s  %{repositorydir}/$REPOSITORY  %{buildroot}%{_sysconfdir}/leapp/repos.d/$REPOSITORY
+done;
 
 
 %files
 %defattr(-,root,root,-)
 %doc README.md
 %license LICENSE
-%{_sysconfdir}/leapp/repos.d/upgrade
-%{_sysconfdir}/leapp/repos.d/common
+%{_sysconfdir}/leapp/repos.d/*
 %{repositorydir}/*
 %dir %{custom_repositorydir}
 

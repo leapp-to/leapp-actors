@@ -9,14 +9,13 @@ if [ -n "$1" ]; then
     OUTDIR="$(realpath $1)"
 fi
 
-dnf -y install which
+command -v which > /dev/null || dnf -y install which
 
-export
 if [ -z "$(which git)" ]; then
     dnf -y install git-core
 fi
 
-if ! git status 2&>1 > /dev/null; then
+if ! git status 2>&1 > /dev/null; then
     rm -rf leapp
     git clone https://github.com/leapp-to/$REPONAME
     POPD=`pushd leapp`
@@ -24,7 +23,7 @@ fi
 
 BRANCH=master
 LEAPP_PATCHES_SINCE_RELEASE="$(git log `git describe  --abbrev=0`..HEAD --format=oneline | wc -l)"
-echo LEAPP_PATCHES_SINCE_RELEASE=$LEAPP_PATCHES_SINCE_RELEASE
+echo LEAPP_PATCHES_SINCE_RELEASE=$LEAPP_PATCHES_SINCE_RELEASE$LEAPP_PATCHES_SINCE_RELEASE_EXTERNAL
 
 VERSION=$(git describe  --abbrev=0|cut -d- -f 2)
 DIST=$(git describe  --abbrev=0|cut -d- -f 3)
