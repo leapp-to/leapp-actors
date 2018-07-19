@@ -1,11 +1,12 @@
-# Tutorial
+# How to write actor
+
 See the tutorial for [creating the first actor](https://leapp.readthedocs.io/en/latest/first-actor.html).
 
 ---
 
 # How to write actor tests
 
-Here are some key points to read before you start to write tests:
+Please read documentation about [how to unit test actors](https://leapp.readthedocs.io/en/latest/unit-testing.html).
 
 ## Actor dependencies
 
