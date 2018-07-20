@@ -1,4 +1,4 @@
-# How to write actor
+# How to write actors
 
 See the tutorial for [creating the first actor](https://leapp.readthedocs.io/en/latest/first-actor.html).
 
