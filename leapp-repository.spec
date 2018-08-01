@@ -15,6 +15,7 @@ URL:        https://leapp-to.github.io
 Source0:    https://github.com/leapp-to/leapp-actors/archive/%{gittag}/leapp-actors-%{version}.tar.gz
 BuildArch:  noarch
 Requires:   dnf >= 2.7.5
+Requires:   systemd-container
 %description
 Repositories for leapp
 
