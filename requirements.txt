@@ -1,5 +1,5 @@
 ### Additional requirements
-pytest
+pytest==3.6.4
 pytest-ordering
 funcsigs
 git+https://github.com/leapp-to/leapp
