@@ -22,13 +22,13 @@ What is happening
 
  1. Checks cmd line arguments. There can be ACTOR and REPORT.
 
- 2. Finds and registers all leapp repos in the BASE_REPO path.
-
- 3. Checks if there are actor tests present.
-
- 4. Copies BASE_REPO to TMP_BASE_REPO. Renames all tests in TMP_BASE_REPO
+ 2. Copies BASE_REPO to TMP_BASE_REPO. Renames all tests in TMP_BASE_REPO
     so they have unique names (by appending IDs). This is needed in order
     to avoid name mismatch for pytest.
+
+ 3. Finds and registers all leapp repos in the TMP_BASE_REPO path.
+
+ 4. Checks if there are actor tests present.
 
  5. Runs pytest on the TMP_BASE_REPO.
 
@@ -43,7 +43,6 @@ import subprocess
 import sys
 
 from leapp.exceptions import LeappError
-from leapp.utils.repository import find_repository_basedir
 from leapp.repository.scan import find_and_scan_repositories
 
 logging.basicConfig(level=logging.INFO)
@@ -82,36 +81,8 @@ if __name__ == "__main__":
     if args.report:
         pytest_cmd += ["--junit-xml={REPORT}".format(REPORT=args.report)]
 
-    # Register repos. This may take a while.
-    snactor_register(BASE_REPO)
-
-    # Find and collect leapp repositories.
-    repos = {}
-    for root, dirs, files in os.walk(BASE_REPO):
-        if ".leapp" in dirs:
-            # For more info:
-            # https://github.com/leapp-to/leapp/blob/master/leapp/snactor/commands/discover.py#L89
-            base_dir = find_repository_basedir(root)
-            repository = find_and_scan_repositories(base_dir, include_locals=True)
-            try:
-                repository.load()
-            except LeappError as exc:
-                sys.stderr.write(exc.message)
-                sys.exit(2)
-            repos[repository] = base_dir
-
-    # Scan repositories for tests and print status.
-    actors_without_tests = {}
-    logger.info(" = Scanning Leapp repositories for tests")
-    for repo, repo_path in repos.items():
-        for actor in repo.actors:
-            if not actor.tests:
-                actors_without_tests[actor.full_path] = actor
-                status = " Tests MISSING: {ACTOR} | class={CLASS}"
-                status = status.format(ACTOR=actor.name, CLASS=actor.class_name)
-                logger.critical(status)
-
-    # Make sure there is no conflict between test names.
+    # Copy repository to tmp directory & make sure there is no conflict between
+    # test names. NOTE: from now on, we are working with TMP_BASE_REPO.
     shutil.rmtree(TMP_BASE_REPO, ignore_errors=True)
     shutil.copytree(BASE_REPO, TMP_BASE_REPO)
     actor_id = 0
@@ -123,6 +94,32 @@ if __name__ == "__main__":
                     new_item = old_item.replace(".", "_" + str(actor_id) + ".")
                     shutil.move(old_item, new_item)
                     actor_id += 1
+
+    # Register repos. This may take a while.
+    snactor_register(TMP_BASE_REPO)
+
+    # Find and collect leapp repositories.
+    repos = {}
+    for root, dirs, files in os.walk(BASE_REPO):
+        if ".leapp" in dirs:
+            repository = find_and_scan_repositories(root, include_locals=True)
+            try:
+                repository.load()
+            except LeappError as exc:
+                sys.stderr.write(exc.message)
+                sys.exit(2)
+            repos[repository] = root
+
+    # Scan repositories for tests and print status.
+    actors_without_tests = {}
+    logger.info(" = Scanning Leapp repositories for tests")
+    for repo, repo_path in repos.items():
+        for actor in repo.actors:
+            if not actor.tests:
+                actors_without_tests[actor.full_path] = actor
+                status = " Tests MISSING: {ACTOR} | class={CLASS}"
+                status = status.format(ACTOR=actor.name, CLASS=actor.class_name)
+                logger.critical(status)
 
     # Run pytest.
     logger.info("Running pytest with: {PYTEST_CMD}".format(PYTEST_CMD=pytest_cmd))
