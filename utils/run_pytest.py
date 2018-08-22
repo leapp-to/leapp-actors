@@ -24,7 +24,8 @@ What is happening
 
  2. Copies BASE_REPO to TMP_BASE_REPO. Renames all tests in TMP_BASE_REPO
     so they have unique names (by appending IDs). This is needed in order
-    to avoid name mismatch for pytest.
+    to avoid name mismatch for pytest. For more info, see pytest documentation:
+    https://docs.pytest.org/en/latest/goodpractices.html#tests-outside-application-code
 
  3. Finds and registers all leapp repos in the TMP_BASE_REPO path.
 
