@@ -58,6 +58,7 @@ def snactor_register(path):
     """
     cmd = "snactor repo find --path {PATH}".format(PATH=path)
     try:
+        logger.info(" Registering leapp repositories. This may take a while.")
         return subprocess.check_output(cmd, shell=True)
     except OSError as exc:
         sys.stderr.write(str(exc) + '\n')
