@@ -122,7 +122,7 @@ if __name__ == "__main__":
                 logger.critical(status)
 
     # Run pytest.
-    logger.info("Running pytest with: {PYTEST_CMD}".format(PYTEST_CMD=pytest_cmd))
+    logger.info(" Running pytest with: {PYTEST_CMD}".format(PYTEST_CMD=pytest_cmd))
     pytest_status = subprocess.call(pytest_cmd)
 
     # Cleanup.
