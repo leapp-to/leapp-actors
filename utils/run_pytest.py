@@ -113,12 +113,10 @@ if __name__ == "__main__":
             repos[repository] = root
 
     # Scan repositories for tests and print status.
-    actors_without_tests = {}
     logger.info(" = Scanning Leapp repositories for tests")
     for repo, repo_path in repos.items():
         for actor in repo.actors:
             if not actor.tests:
-                actors_without_tests[actor.full_path] = actor
                 status = " Tests MISSING: {ACTOR} | class={CLASS}"
                 status = status.format(ACTOR=actor.name, CLASS=actor.class_name)
                 logger.critical(status)
