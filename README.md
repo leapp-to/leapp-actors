@@ -2,8 +2,6 @@
 
 See the tutorial for [creating the first actor](https://leapp.readthedocs.io/en/latest/first-actor.html).
 
----
-
 # How to write actor tests
 
 Please read documentation about [how to unit test actors](https://leapp.readthedocs.io/en/latest/unit-testing.html).
