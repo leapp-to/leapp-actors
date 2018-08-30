@@ -1,8 +1,0 @@
----
-description: |
-  Main group actor that provides workflow for migration of WordPress
-
-group:
-- wordpress_scanner
-- wordpress_generator
-
