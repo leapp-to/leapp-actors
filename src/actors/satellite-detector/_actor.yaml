@@ -1,0 +1,15 @@
+outputs:
+- name: app_satellite_detection 
+  type:
+    name: AppSatelliteDetectionResult
+    version: 1.0
+
+description: |
+  Detect whether there is satellite installed on the host 
+
+  Outputs:
+    app_satellite_detection - a structure containing information about detected satellite 
+
+execute:
+  script-file: satellite_detector_actor.py
+  executable: /usr/bin/python
