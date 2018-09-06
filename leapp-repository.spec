@@ -18,6 +18,14 @@ Requires:   dnf >= 2.7.5
 %if 0%{?fedora} || 0%{?rhel} > 7
 Requires:   systemd-container
 %endif
+
+Requires:   augeas
+%if 0%{?rhel} && 0%{?rhel} == 7
+Requires:   python-augeas
+%else
+Requires:   python3-augeas
+%endif
+
 %description
 Repositories for leapp
 
