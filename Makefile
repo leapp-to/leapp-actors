@@ -6,8 +6,10 @@ clean:
 	@find . -name '*.pyc' -exec rm -f {} +
 	@find . -name '*.pyo' -exec rm -f {} +
 
-build:
-	true
+register:
+# Before doing anything, it is good idea to register repos to ensure everything
+# is in order inside ~/.config/leapp/repos.json
+	snactor repo find --path repos
 
 install-deps:
 	virtualenv -p /usr/bin/python2.7 tut; \
