@@ -109,6 +109,7 @@ if __name__ == "__main__":
                 repository.load()
             except LeappError as exc:
                 sys.stderr.write(exc.message)
+                shutil.rmtree(TMP_BASE_REPO, ignore_errors=True)
                 sys.exit(2)
             repos[repository] = root
 
