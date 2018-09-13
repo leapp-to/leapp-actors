@@ -86,7 +86,7 @@ if __name__ == "__main__":
     # Copy repository to tmp directory & make sure there is no conflict between
     # test names. NOTE: from now on, we are working with TMP_BASE_REPO.
     shutil.rmtree(TMP_BASE_REPO, ignore_errors=True)
-    shutil.copytree(BASE_REPO, TMP_BASE_REPO)
+    shutil.copytree(BASE_REPO, TMP_BASE_REPO, ignore=shutil.ignore_patterns('*.pyc'))
     actor_id = 0
     for root, dirs, files in os.walk(TMP_BASE_REPO):
         if "tests" in root and "tests/" not in root:
@@ -102,13 +102,14 @@ if __name__ == "__main__":
 
     # Find and collect leapp repositories.
     repos = {}
-    for root, dirs, files in os.walk(BASE_REPO):
+    for root, dirs, files in os.walk(TMP_BASE_REPO):
         if ".leapp" in dirs:
             repository = find_and_scan_repositories(root, include_locals=True)
             try:
                 repository.load()
             except LeappError as exc:
                 sys.stderr.write(exc.message)
+                shutil.rmtree(TMP_BASE_REPO, ignore_errors=True)
                 sys.exit(2)
             repos[repository] = root
 
