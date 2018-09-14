@@ -56,7 +56,9 @@ or run discover feature
 $ snactor discover
 ```
 
-it is good idea to register everything in `repos` to avoid possible errors:
+it is good idea to register everything in `repos` to avoid possible errors
+with parsing repository metadata (**NOTE:** these errors can be sometimes
+cryptic, but may look like: `missing attribute name in .leapp/info`, etc.)
 
 ```bash
 $ make register
