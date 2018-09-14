@@ -20,12 +20,6 @@ To install dependencies for all actors, run:
 $ make install-deps
 ```
 
-For just one specific actor, run:
-
-``` bash
-$ make install-deps ACTOR=testactor
-```
-
 ## Running tests locally
 
 To run all tests from leapp-actors, run the following code from
