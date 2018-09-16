@@ -1,3 +1,8 @@
+**Before doing anything, please read
+[Leapp framework documentation](https://leapp.readthedocs.io/).**
+
+---
+
 # How to write actors
 
 See the tutorial for [creating the first actor](https://leapp.readthedocs.io/en/latest/first-actor.html).
@@ -6,7 +11,9 @@ See the tutorial for [creating the first actor](https://leapp.readthedocs.io/en/
 
 Please read documentation about [how to unit test actors](https://leapp.readthedocs.io/en/latest/unit-testing.html).
 
-## Actor dependencies
+# How to install dependencies, run tests & execute actors
+
+## Installing actor dependencies
 
 Each actor can now have its own Makefile with the `install-deps` target. This
 takes care of installing any dependencies of your actor. If your actor has
@@ -18,12 +25,6 @@ To install dependencies for all actors, run:
 
 ``` bash
 $ make install-deps
-```
-
-For just one specific actor, run:
-
-``` bash
-$ make install-deps ACTOR=testactor
 ```
 
 ## Running tests locally
@@ -40,3 +41,29 @@ It is also possible to generate a report in a JUnit XML format:
 ``` bash
 $ make test REPORT=report.xml
 ```
+
+## Registering Leapp repositories and executing actors
+
+When you want to execute actor with
+
+``` bash
+$ snactor run my_actor
+```
+
+or run discover feature
+
+``` bash
+$ snactor discover
+```
+
+it is good idea to register everything in `repos` to avoid possible errors
+with parsing repository metadata (**NOTE:** these errors can be sometimes
+cryptic, but may look like: `missing attribute name in .leapp/info`, etc.)
+
+```bash
+$ make register
+```
+where `register` target will run `snactor repo find --path repos`
+(you can verify if your repositories are registered in
+`~/.config/leapp/repos.json`).
+
