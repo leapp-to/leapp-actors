@@ -56,8 +56,10 @@ class NetIfaceScanner(Actor):
         ethinf = subprocess.Popen(('ethtool', '-P', iface),
                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         ethinf, err = ethinf.communicate()
-        hwaddr = ethinf.split()[2]
-        return hwaddr
+        if not err:
+            # return "Permanent address"
+            return ethinf.split()[2]
+        return "None"
 
     def return_ifs_info(self):
         if_paths = self.get_ifaces_names()
