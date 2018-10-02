@@ -100,3 +100,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# All kinds of vim stuff
+**/*~
+*.sw[a-z]
