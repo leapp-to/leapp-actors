@@ -6,9 +6,10 @@ clean:
 	@find . -name '*.pyc' -exec rm -f {} +
 	@find . -name '*.pyo' -exec rm -f {} +
 
-register:
 # Before doing anything, it is good idea to register repos to ensure everything
 # is in order inside ~/.config/leapp/repos.json
+register:
+	. tut/bin/activate; \
 	snactor repo find --path repos
 
 install-deps:
