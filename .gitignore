@@ -1,3 +1,5 @@
+repos/*/.leapp/leapp.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -98,3 +100,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# All kinds of vim stuff
+**/*~
+*.sw[a-z]
