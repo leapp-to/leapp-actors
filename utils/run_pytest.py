@@ -35,20 +35,21 @@ What is happening
 """
 
 import argparse
+from glob import glob
 import logging
 import os
 import shutil
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 
-from leapp.exceptions import LeappError
 from leapp.repository.scan import find_and_scan_repositories
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("run_pytest.py")
 
 BASE_REPO = "repos"
-TMP_BASE_REPO = "tmp_" + BASE_REPO
+REPORT_DIR = "reports/"
 
 
 def snactor_register(path):
@@ -62,9 +63,31 @@ def snactor_register(path):
         sys.stderr.write(str(exc) + '\n')
         return None
 
+
+def combine_pytest_xmls(first, second):
+    first.attrib.update({
+        'errors': str(int(first.attrib['errors']) + int(second.attrib['errors'])),
+        'failures': str(int(first.attrib['failures']) + int(second.attrib['failures'])),
+        'skips': str(int(first.attrib['skips']) + int(second.attrib['skips'])),
+        'tests': str(int(first.attrib['tests']) + int(second.attrib['tests'])),
+        'time': str(float(first.attrib['time']) + float(second.attrib['time'])),
+    })
+    first.extend(second.findall('testcase'))
+
+
+def produce_report(reports_dir, path):
+    reports = (glob(reports_dir + '*.xml'))
+    trees = [ET.parse(f) for f in reports]
+    root = trees[0].getroot()
+    for tree in trees[1:]:
+        combine_pytest_xmls(root, tree.getroot())
+
+    trees[0].write(path, encoding='utf-8', xml_declaration=True)
+
+
 if __name__ == "__main__":
     pytest_cmd = ["pytest", "-v"]
-    pytest_cmd.append(TMP_BASE_REPO)
+    pytest_status = set()
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--actor", help="name of the actor for which to run tests")
@@ -77,53 +100,31 @@ if __name__ == "__main__":
         logger.critical(" ACTOR flag is currently disabled!")
         sys.exit(1)
 
-    # User wants to output xml report for junit.
-    if args.report:
-        pytest_cmd += ["--junit-xml={REPORT}".format(REPORT=args.report)]
-
-    # Copy repository to tmp directory & make sure there is no conflict between
-    # test names. NOTE: from now on, we are working with TMP_BASE_REPO.
-    shutil.rmtree(TMP_BASE_REPO, ignore_errors=True)
-    shutil.copytree(BASE_REPO, TMP_BASE_REPO, ignore=shutil.ignore_patterns('*.pyc'))
-    actor_id = 0
-    for root, dirs, files in os.walk(TMP_BASE_REPO):
-        if "tests" in root and "tests/" not in root:
-            for item in files:
-                if item.endswith(".py"):
-                    old_item = os.path.join(root, item)
-                    new_item = old_item.replace(".", "_" + str(actor_id) + ".")
-                    shutil.move(old_item, new_item)
-                    actor_id += 1
-
-    # Register repos. This may take a while.
-    snactor_register(TMP_BASE_REPO)
+    shutil.rmtree(REPORT_DIR, ignore_errors=True)
+    os.mkdir(REPORT_DIR)
 
     # Find and collect leapp repositories.
-    repos = {}
-    for root, dirs, files in os.walk(TMP_BASE_REPO):
-        if ".leapp" in dirs:
-            repository = find_and_scan_repositories(root, include_locals=True)
-            try:
-                repository.load()
-            except LeappError as exc:
-                sys.stderr.write(exc.message)
-                shutil.rmtree(TMP_BASE_REPO, ignore_errors=True)
-                sys.exit(2)
-            repos[repository] = root
+    repos = find_and_scan_repositories(BASE_REPO, include_locals=True)
+    repos.load()
 
-    # Scan repositories for tests and print status.
-    logger.info(" = Scanning Leapp repositories for tests")
-    for repo, repo_path in repos.items():
-        for actor in repo.actors:
-            if not actor.tests:
-                status = " Tests MISSING: {ACTOR} | class={CLASS}"
-                status = status.format(ACTOR=actor.name, CLASS=actor.class_name)
-                logger.critical(status)
+    for repo in repos.repos:
+        snactor_register(repo.repo_dir)
 
-    # Run pytest.
-    logger.info(" Running pytest with: {PYTEST_CMD}".format(PYTEST_CMD=pytest_cmd))
-    pytest_status = subprocess.call(pytest_cmd)
+    for i, actor in enumerate(repos.actors):
+        if not actor.tests:
+            status = " Tests MISSING: {ACTOR} | class={CLASS}"
+            status = status.format(ACTOR=actor.name, CLASS=actor.class_name)
+            logger.critical(status)
+        else:
+            cmd = pytest_cmd + [actor.full_path]
+            if args.report:
+                cmd += ['--junit-xml={REPORT}'.format(REPORT=REPORT_DIR + actor.name + str(i) + '.xml')]
+            # Run pytest.
+            logger.info(" Running pytest with: {PYTEST_CMD}".format(PYTEST_CMD=' '.join(cmd)))
+            pytest_status.add(subprocess.call(cmd))
 
+    if args.report:
+        produce_report(REPORT_DIR, args.report)
     # Cleanup.
-    shutil.rmtree(TMP_BASE_REPO)
-    sys.exit(pytest_status)
+    shutil.rmtree(REPORT_DIR)
+    sys.exit(max(pytest_status))
