@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """
 Script for installing dependencies for specific actor.
 It is called from Makefile install-deps target.

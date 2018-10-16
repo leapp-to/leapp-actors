@@ -51,7 +51,6 @@ done;
 
 
 %files
-%defattr(-,root,root,-)
 %doc README.md
 %license LICENSE
 %{_sysconfdir}/leapp/repos.d/*
