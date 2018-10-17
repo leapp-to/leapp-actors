@@ -20,18 +20,13 @@ What is happening
 
  1. Checks cmd line arguments. There can be ACTOR and REPORT.
 
- 2. Copies BASE_REPO to TMP_BASE_REPO. Renames all tests in TMP_BASE_REPO
-    so they have unique names (by appending IDs). This is needed in order
-    to avoid name mismatch for pytest. For more info, see pytest documentation:
-    https://docs.pytest.org/en/latest/goodpractices.html#tests-outside-application-code
+ 2. Finds and registers all leapp repos in the BASE_REPO path.
 
- 3. Finds and registers all leapp repos in the TMP_BASE_REPO path.
+ 3. Checks if there are actor tests present.
 
- 4. Checks if there are actor tests present.
+ 4. Runs pytest for each actor in BASE_REPO path.
 
- 5. Runs pytest on the TMP_BASE_REPO.
-
- 6. Removes TMP_BASE_REPO.
+ 5. Combines reports from pytest runs if requested by --report argument
 """
 
 import argparse
@@ -104,6 +99,7 @@ if __name__ == "__main__":
     shutil.rmtree(REPORT_DIR, ignore_errors=True)
     os.mkdir(REPORT_DIR)
 
+    # Register repos.
     snactor_register(BASE_REPO)
 
     # Find and collect leapp repositories.
@@ -111,6 +107,7 @@ if __name__ == "__main__":
     repos.load()
 
     for i, actor in enumerate(repos.actors):
+        # Run tests if actor has any.
         if not actor.tests:
             status = " Tests MISSING: {ACTOR} | class={CLASS}"
             status = status.format(ACTOR=actor.name, CLASS=actor.class_name)
