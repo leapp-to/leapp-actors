@@ -38,7 +38,6 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 
-from leapp.snactor.commands.repo import register_path
 from leapp.repository.scan import find_and_scan_repositories
 
 logging.basicConfig(level=logging.INFO)
