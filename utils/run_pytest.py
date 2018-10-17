@@ -53,6 +53,18 @@ BASE_REPO = "repos"
 REPORT_DIR = "reports/"
 
 
+def snactor_register(path):
+    """ Snactor registers all repos in @path.
+    """
+    cmd = "snactor repo find --path {PATH}".format(PATH=path)
+    try:
+        logger.info(" Registering leapp repositories. This may take a while.")
+        return subprocess.check_output(cmd, shell=True)
+    except OSError as exc:
+        sys.stderr.write(str(exc) + '\n')
+        return None
+
+
 def combine_pytest_xmls(first, second):
     first.attrib.update({
         'errors': str(int(first.attrib['errors']) + int(second.attrib['errors'])),
@@ -92,12 +104,11 @@ if __name__ == "__main__":
     shutil.rmtree(REPORT_DIR, ignore_errors=True)
     os.mkdir(REPORT_DIR)
 
+    snactor_register(BASE_REPO)
+
     # Find and collect leapp repositories.
     repos = find_and_scan_repositories(BASE_REPO, include_locals=True)
     repos.load()
-
-    for repo in repos.repos:
-        register_path(repo.repo_dir)
 
     for i, actor in enumerate(repos.actors):
         if not actor.tests:
