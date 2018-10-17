@@ -43,6 +43,7 @@ import subprocess
 import sys
 import xml.etree.ElementTree as ET
 
+from leapp.snactor.commands.repo import register_path
 from leapp.repository.scan import find_and_scan_repositories
 
 logging.basicConfig(level=logging.INFO)
@@ -50,18 +51,6 @@ logger = logging.getLogger("run_pytest.py")
 
 BASE_REPO = "repos"
 REPORT_DIR = "reports/"
-
-
-def snactor_register(path):
-    """ Snactor registers all repos in @path.
-    """
-    cmd = "snactor repo find --path {PATH}".format(PATH=path)
-    try:
-        logger.info(" Registering leapp repositories. This may take a while.")
-        return subprocess.check_output(cmd, shell=True)
-    except OSError as exc:
-        sys.stderr.write(str(exc) + '\n')
-        return None
 
 
 def combine_pytest_xmls(first, second):
@@ -108,7 +97,7 @@ if __name__ == "__main__":
     repos.load()
 
     for repo in repos.repos:
-        snactor_register(repo.repo_dir)
+        register_path(repo.repo_dir)
 
     for i, actor in enumerate(repos.actors):
         if not actor.tests:
@@ -116,6 +105,7 @@ if __name__ == "__main__":
             status = status.format(ACTOR=actor.name, CLASS=actor.class_name)
             logger.critical(status)
         else:
+            os.environ['LEAPP_TESTED_ACTOR'] = actor.full_path
             cmd = pytest_cmd + [actor.full_path]
             if args.report:
                 cmd += ['--junit-xml={REPORT}'.format(REPORT=REPORT_DIR + actor.name + str(i) + '.xml')]
