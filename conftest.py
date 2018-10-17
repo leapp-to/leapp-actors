@@ -4,7 +4,9 @@ from leapp.repository.scan import scan_repo
 
 
 def pytest_sessionstart(session):
-    actor_path = os.environ['LEAPP_TESTED_ACTOR']
+    actor_path = os.environ.get('LEAPP_TESTED_ACTOR', None)
+    if not actor_path:
+        return
     repo = scan_repo(('/'.join(actor_path.split('/')[:-2])))
     actor = None
     # find which actor is being tested
