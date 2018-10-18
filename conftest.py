@@ -8,6 +8,8 @@ def pytest_sessionstart(session):
     if not actor_path:
         return
     repo = scan_repo(('/'.join(actor_path.split('/')[:-2])))
+    repo.load()
+
     actor = None
     # find which actor is being tested
     for a in repo.actors:
