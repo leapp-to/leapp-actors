@@ -21,6 +21,6 @@ def pytest_sessionstart(session):
         return
 
     # load actor context so libraries can be imported on module level
-    session.leapp_repo = repo
+    session.leapp_repository = repo
     session.actor_context = actor.injected_context()
     session.actor_context.__enter__()
