@@ -13,7 +13,7 @@ register:
 	snactor repo find --path repos
 
 install-deps:
-	virtualenv -p /usr/bin/python2.7 tut; \
+	virtualenv -p /usr/bin/python2.7 tut --system-site-packages; \
 	. tut/bin/activate; \
 	pip install --upgrade setuptools; \
 	pip install -r requirements.txt
