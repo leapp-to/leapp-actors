@@ -40,8 +40,9 @@ make build
 install -m 0755 -d %{buildroot}%{custom_repositorydir}
 install -m 0755 -d %{buildroot}%{repositorydir}
 cp -r repos/* %{buildroot}%{repositorydir}/
-
 install -m 0755 -d %{buildroot}%{_sysconfdir}/leapp/repos.d/
+install -m 0755 -d %{buildroot}%{_sysconfdir}/leapp/transaction/
+install -m 0644 etc/leapp/transaction/* %{buildroot}%{_sysconfdir}/leapp/transaction
 for DIRECTORY in $(find  repos/  -mindepth 1 -maxdepth 1 -type d);
 do
     REPOSITORY=$(basename $DIRECTORY)
@@ -54,6 +55,7 @@ done;
 %doc README.md
 %license LICENSE
 %{_sysconfdir}/leapp/repos.d/*
+%{_sysconfdir}/leapp/transaction/*
 %{repositorydir}/*
 %dir %{custom_repositorydir}
 

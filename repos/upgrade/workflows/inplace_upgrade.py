@@ -62,7 +62,7 @@ class IPUWorkflow(Workflow):
         filter = TagFilter(InterimPreparationPhaseTag)
         policies = Policies(Policies.Errors.FailPhase,
                             Policies.Retry.Phase)
-        flags = Flags(restart_after_phase=True)
+        flags = Flags(request_restart_after_phase=True)
 
     class InitRamStartPhase(Phase):
         name = 'InitRamStart'
